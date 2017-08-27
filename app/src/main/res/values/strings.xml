@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Running in the Background Notification Snoozer</string>
+    <string name="action_settings">Settings</string>
+    <string name="service_name">System Notification Listener</string>
+</resources>
