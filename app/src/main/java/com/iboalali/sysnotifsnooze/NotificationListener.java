@@ -13,26 +13,6 @@ import android.util.Log;
  */
 
 public class NotificationListener extends NotificationListenerService {
-    Context context;
-    private NotificationReceiver notificationReceiver;
-
-    @Override
-    public void onCreate() {
-
-        super.onCreate();
-        context = getApplicationContext();
-        notificationReceiver = new NotificationReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE");
-        registerReceiver(notificationReceiver, filter);
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(notificationReceiver);
-    }
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
@@ -44,33 +24,19 @@ public class NotificationListener extends NotificationListenerService {
 
         if (sbn.getPackageName().equals("android")) {
             if (sbn.getNotification().extras.getString("android.title").contains("running in the background")) {
-                NotificationListener.this.snoozeNotification(sbn.getKey(), Long.MAX_VALUE);
+                NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
+                Log.d("My Notif (onPosted):", sbn.getPackageName() + " snoozed");
+
             }
-            //9223372036854775807
+            //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years
+            //10000000000000 = 317.09792 years
 
         }
 
     }
 
+    @Override
+    public void onNotificationRemoved(StatusBarNotification sbn) {
 
-    class NotificationReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            for(StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()){
-                Log.d("My Notif (onReceive):", sbn.getPackageName());
-
-                if (sbn.getPackageName().equals("android")) {
-                    if (sbn.getNotification().extras.getString("android.title").contains("running in the background")) {
-                        NotificationListener.this.snoozeNotification(sbn.getKey(), Long.MAX_VALUE);
-                    }
-                    //9223372036854775807 milliseconds = 292471209 years = 292 million years
-
-                }
-            }
-        }
     }
-
-
-
 }
