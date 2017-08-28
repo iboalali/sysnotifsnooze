@@ -36,13 +36,17 @@ public class NotificationListener extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+        if (sbn == null)
+            return;
+
+
         Log.d("My Notif (onPosted):", sbn.getPackageName());
-        Log.d("My Notif (onPosted)2:", sbn.getNotification().extras.getString("android.title"));
 
         if (sbn.getPackageName().equals("android")) {
             if (sbn.getNotification().extras.getString("android.title").contains("running in the background")) {
-                NotificationListener.this.snoozeNotification(sbn.getKey(), 3000);
+                NotificationListener.this.snoozeNotification(sbn.getKey(), Long.MAX_VALUE);
             }
+            //9223372036854775807
 
         }
 
@@ -55,7 +59,14 @@ public class NotificationListener extends NotificationListenerService {
         public void onReceive(Context context, Intent intent) {
             for(StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()){
                 Log.d("My Notif (onReceive):", sbn.getPackageName());
-                //sbn.getPackageName()
+
+                if (sbn.getPackageName().equals("android")) {
+                    if (sbn.getNotification().extras.getString("android.title").contains("running in the background")) {
+                        NotificationListener.this.snoozeNotification(sbn.getKey(), Long.MAX_VALUE);
+                    }
+                    //9223372036854775807 milliseconds = 292471209 years = 292 million years
+
+                }
             }
         }
     }
