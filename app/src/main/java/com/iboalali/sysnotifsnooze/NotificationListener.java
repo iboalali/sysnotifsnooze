@@ -14,6 +14,7 @@ import android.util.Log;
  */
 
 public class NotificationListener extends NotificationListenerService {
+    private static final String TAG = "NotificationListener";
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
@@ -21,12 +22,12 @@ public class NotificationListener extends NotificationListenerService {
             return;
 
 
-        Log.d("My Notif (onPosted):", sbn.getPackageName());
+        Log.d(TAG, sbn.getPackageName());
 
         if (sbn.getPackageName().equals("android")) {
             if (sbn.getNotification().extras.getString(getString(R.string.notification_intent_key)).contains(getString(R.string.notification_content))) {
                 NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
-                Log.d("My Notif (onPosted):", sbn.getPackageName() + " snoozed");
+                Log.d(TAG, sbn.getPackageName() + " snoozed");
 
             }
             //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
