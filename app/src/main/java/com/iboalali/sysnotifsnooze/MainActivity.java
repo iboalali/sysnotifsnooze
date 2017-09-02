@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            builder.show();
+            AlertDialog alertDialog = builder.create();
             //alertDialog.show();
 
         }else{
@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
             switch (preference.getKey()){
                 case KEY_NOTIFICATION_PERMISSION:
+                    startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                    /*
                     if (isNotificationAccessPermissionGranted){
                         startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                     }else{
@@ -121,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }
+
+                    */
                     break;
 
                 case KEY_SMALL_TIP:
