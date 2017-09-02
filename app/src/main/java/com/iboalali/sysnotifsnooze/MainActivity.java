@@ -1,40 +1,22 @@
 package com.iboalali.sysnotifsnooze;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService;
-import android.service.notification.StatusBarNotification;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static Context CONTEXT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +25,30 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        CONTEXT = this;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (!hasAccessGranted()) {
+        if (!Utils.hasAccessGranted()) {
             Log.d("MyActivity:", "No Notification Access");
 
-            Snackbar.make(findViewById(R.id.mainLayout), "You must allow This APP to read your notifications", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Allow", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                        }
-                    })
-                    .show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(CONTEXT.getApplicationContext());
+            builder.setMessage(R.string.permission_request_msg); //TODO: change this text
+            builder.setTitle(R.string.permission_request_title); // TODO: change this title, maybe?
+            builder.setCancelable(true);
+            builder.setPositiveButton(R.string.Allow, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                }
+            });
+
+            builder.show();
+            //alertDialog.show();
+
         }else{
             Log.d("MyActivity:", "Has Notification Access");
 
@@ -68,40 +56,91 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+    private void showDialogAndGoToNotificationAccessScreen(){}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
+        private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
+        private static final String KEY_SMALL_TIP = "small_tip";
+        private static final String KEY_LARGE_TIP = "large_tip";
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        private Preference notification_permission;
+        private boolean isNotificationAccessPermissionGranted;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            addPreferencesFromResource(R.xml.settings);
+
+            notification_permission = findPreference(KEY_NOTIFICATION_PERMISSION);
+            notification_permission.setOnPreferenceClickListener(this);
         }
 
-        return super.onOptionsItemSelected(item);
-    }
 
-    private boolean hasAccessGranted() {
-        ContentResolver contentResolver = this.getContentResolver();
-        String enabledNotificationListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
-        String packageName = this.getPackageName();
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
 
-        // check to see if the enabledNotificationListeners String contains our package name
-        return !(enabledNotificationListeners == null || !enabledNotificationListeners.contains(packageName));
+            /*
+            if (preference.getKey().equals(KEY_NOTIFICATION_PERMISSION)){
+                if (isNotificationAccessPermissionGranted){
+                    startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CONTEXT.getApplicationContext());
+                    builder.setMessage(R.string.permission_request_msg); //TODO: change this text
+                    builder.setTitle(R.string.permission_request_title); // TODO: change this title, maybe?
+                    builder.setCancelable(true);
+                    builder.setPositiveButton(R.string.Allow, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            }
+*/
+
+            switch (preference.getKey()){
+                case KEY_NOTIFICATION_PERMISSION:
+                    if (isNotificationAccessPermissionGranted){
+                        startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                    }else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CONTEXT.getApplicationContext());
+                        builder.setMessage(R.string.permission_request_msg); //TODO: change this text
+                        builder.setTitle(R.string.permission_request_title); // TODO: change this title, maybe?
+                        builder.setCancelable(true);
+                        builder.setPositiveButton(R.string.Allow, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                            }
+                        });
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                    break;
+
+                case KEY_SMALL_TIP:
+                    // IAP for a small tip around 2 €/$
+                    break;
+
+                case KEY_LARGE_TIP:
+                    // IAP for a small tip around 5 €/$
+                    break;
+            }
+            return false;
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+
+            isNotificationAccessPermissionGranted = Utils.hasAccessGranted();
+            notification_permission.setSummary(isNotificationAccessPermissionGranted ? "Granted" : "Not Granted");
+        }
     }
 
 }

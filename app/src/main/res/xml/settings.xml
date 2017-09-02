@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Permission">
+        <Preference
+            android:key="notification_permission"
+            android:title="Notification Access Permission"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Social">
+        <Preference
+            android:title="Twitter">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://twitter.com/iboalali"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <Preference
+        android:summary="https://goo.gl/7yq9M1"
+        android:title="Source Code">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://goo.gl/7yq9M1"/>
+    </Preference>
+
+    <PreferenceCategory
+        android:title="Tip Jar">
+        <Preference
+            android:key="small_tip"
+            android:title="Small Tip">
+
+        </Preference>
+        <Preference
+            android:key="large_tip"
+            android:title="Large Tip">
+
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>
