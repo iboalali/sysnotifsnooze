@@ -6,6 +6,9 @@
     <string name="permission_request_title">Permission</string>
     <string name="Allow">Allow</string>
     <string name="title_activity_main_settings">Hide Running in the Background Notification</string>
+    <string name="notification_content">running in the background</string>
+    <string name="notification_intent_key">android.title</string>
+    <string name="hidden_success">Successfully Hidden</string>
     <string name="granted">Granted</string>
     <string name="not_granted">Not Granted</string>
 </resources>
