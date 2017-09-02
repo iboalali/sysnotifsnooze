@@ -5,6 +5,13 @@
         <Preference
             android:key="notification_permission"
             android:title="Notification Access Permission"/>
+
+        <!--
+        <Preference
+            android:key="notification"
+            android:title="Running in the Background Notification"
+            android:summary="Not Hidden"/>
+            -->
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -17,13 +24,15 @@
         </Preference>
     </PreferenceCategory>
 
-    <Preference
-        android:summary="https://goo.gl/7yq9M1"
+    <PreferenceCategory
         android:title="Source Code">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="https://goo.gl/7yq9M1"/>
-    </Preference>
+        <Preference
+            android:title="https://goo.gl/7yq9M1">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://goo.gl/7yq9M1"/>
+        </Preference>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="Tip Jar">
