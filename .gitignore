@@ -8,3 +8,4 @@
 /captures
 .externalNativeBuild
 in-app billing public key.txt
+app/app-release.apk
