@@ -46,5 +46,12 @@
             android:title="Large Tip">
 
         </Preference>
+<!--
+        <Preference
+            android:key="restore_purchases"
+            android:title="Restore Purchases">
+
+        </Preference>
+        -->
     </PreferenceCategory>
 </PreferenceScreen>

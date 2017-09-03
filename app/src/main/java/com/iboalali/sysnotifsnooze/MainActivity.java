@@ -1,5 +1,6 @@
 package com.iboalali.sysnotifsnooze;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,8 +23,8 @@ import com.iboalali.sysnotifsnooze.util.Purchase;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static Context CONTEXT;
     public static String SKU_SMALL_TIP_2 = "small_tip_2";
+    //public static String SKU_SMALL_TIP_2 = "android.test.purchased";
     public static String SKU_LARGE_TIP_5 = "large_tip_5";
     private static final String TAG = "MainActivity";
 
@@ -33,22 +34,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        CONTEXT = this;
     }
 
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
         private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
         private static final String KEY_NOTIFICATION = "notification";
-        //private static final String KEY_SMALL_TIP = "small_tip";
-        private static final String KEY_SMALL_TIP = "android.test.purchased";
+        private static final String KEY_SMALL_TIP = "small_tip";
         private static final String KEY_LARGE_TIP = "large_tip";
+        //private static final String KEY_RESTORE_PURCHASES = "restore_purchases";
         private static final String TAG = "SettingsFragment";
 
         IabHelper mHelper;
 
-
+        Context CONTEXT;
 
         private Preference notification_permission;
         //private Preference notification;
@@ -60,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            CONTEXT = getActivity().getApplicationContext();
             addPreferencesFromResource(R.xml.settings);
 
             String base64EncodedPublicKey = "";
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         public void onResume() {
             super.onResume();
 
-            if (!Utils.hasAccessGranted()) {
+            if (!Utils.hasAccessGranted(CONTEXT)) {
                 Log.d(TAG, "No Notification Access");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CONTEXT.getApplicationContext());
@@ -218,13 +218,20 @@ public class MainActivity extends AppCompatActivity {
 
                 case KEY_SMALL_TIP:
                     // IAP for a small tip around 2 €/$
+                    if (mHelper != null) mHelper.flagEndAsync();
                     mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_SMALL_TIP_2, 1001, onIabPurchaseFinishedListener, "");
                     break;
 
                 case KEY_LARGE_TIP:
                     // IAP for a small tip around 5 €/$
+                    if (mHelper != null) mHelper.flagEndAsync();
                     mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
                     break;
+/*
+                case KEY_RESTORE_PURCHASES:
+                    mHelper.queryInventoryAsync(queryInventoryFinishedListener);
+                    break;
+                    */
             }
             return false;
         }
@@ -233,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         public void onStart() {
             super.onStart();
 
-            isNotificationAccessPermissionGranted = Utils.hasAccessGranted();
+            isNotificationAccessPermissionGranted = Utils.hasAccessGranted(CONTEXT);
             notification_permission.setSummary(isNotificationAccessPermissionGranted ? getString(R.string.granted) : getString(R.string.not_granted));
         }
     }
