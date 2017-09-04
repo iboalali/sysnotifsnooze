@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static String SKU_SMALL_TIP_2 = "small_tip_2";
-    //public static String SKU_SMALL_TIP_2 = "android.test.purchased";
     public static String SKU_LARGE_TIP_5 = "large_tip_5";
     private static final String TAG = "MainActivity";
 
@@ -42,10 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
         private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
-        private static final String KEY_NOTIFICATION = "notification";
         private static final String KEY_SMALL_TIP = "small_tip";
         private static final String KEY_LARGE_TIP = "large_tip";
-        //private static final String KEY_RESTORE_PURCHASES = "restore_purchases";
         private static final String TAG = "SettingsFragment";
 
         IabHelper mHelper;
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         Context CONTEXT;
 
         private Preference notification_permission;
-        //private Preference notification;
         private Preference small_tip;
         private Preference large_tip;
         private boolean isNotificationAccessPermissionGranted;
@@ -245,11 +241,6 @@ public class MainActivity extends AppCompatActivity {
                     if (mHelper != null) mHelper.flagEndAsync();
                     mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
                     break;
-/*
-                case KEY_RESTORE_PURCHASES:
-                    mHelper.queryInventoryAsync(queryInventoryFinishedListener);
-                    break;
-                    */
             }
             return false;
         }
