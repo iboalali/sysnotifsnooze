@@ -1,18 +1,16 @@
 package com.iboalali.sysnotifsnooze;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.service.notification.StatusBarNotification;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
@@ -34,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
 
@@ -97,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
             if (!Utils.hasAccessGranted(CONTEXT)) {
                 Log.d(TAG, "No Notification Access");
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(CONTEXT.getApplicationContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
                 builder.setMessage(R.string.permission_request_msg); //TODO: change this text
                 builder.setTitle(R.string.permission_request_title); // TODO: change this title, maybe?
                 builder.setCancelable(true);
-                builder.setPositiveButton(R.string.Allow, new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
@@ -109,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 AlertDialog alertDialog = builder.create();
-                //alertDialog.show(); //TODO: solve this problem
+                alertDialog.show(); //TODO: solve this problem
 
             }else{
                 Log.d(TAG, "Has Notification Access");
@@ -140,11 +136,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, sku_small_tip_2.getTitle() + ": " + sku_small_tip_2.getPrice());
                 Preference preference_small_tip_2 = findPreference(KEY_SMALL_TIP);
                 preference_small_tip_2.setSummary(sku_small_tip_2.getPrice());
+                String title = sku_small_tip_2.getTitle();
+                preference_small_tip_2.setTitle(title.substring(0, title.indexOf("(")));
 
-                SkuDetails sku_small_tip_5 = inv.getSkuDetails(SKU_LARGE_TIP_5);
-                Log.d(TAG, sku_small_tip_5.getTitle() + ": " + sku_small_tip_5.getPrice());
+                SkuDetails sku_large_tip_5 = inv.getSkuDetails(SKU_LARGE_TIP_5);
+                Log.d(TAG, sku_large_tip_5.getTitle() + ": " + sku_large_tip_5.getPrice());
                 Preference preference_large_tip_5 = findPreference(KEY_LARGE_TIP);
-                preference_large_tip_5.setSummary(sku_small_tip_5.getPrice());
+                preference_large_tip_5.setSummary(sku_large_tip_5.getPrice());
+                title = sku_large_tip_5.getTitle();
+                preference_large_tip_5.setTitle(title.substring(0, title.indexOf("(")));
 
                 // check for un-consumed purchases, and consume them
                 Purchase small_tip_2_purchase = inv.getPurchase(SKU_SMALL_TIP_2);
@@ -207,16 +207,16 @@ public class MainActivity extends AppCompatActivity {
         public boolean onPreferenceClick(Preference preference) {
             switch (preference.getKey()){
                 case KEY_NOTIFICATION_PERMISSION:
-                    startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                    /*
+                    //startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+
                     if (isNotificationAccessPermissionGranted){
                         startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                     }else{
-                        AlertDialog.Builder builder = new AlertDialog.Builder(CONTEXT.getApplicationContext());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
                         builder.setMessage(R.string.permission_request_msg); //TODO: change this text
                         builder.setTitle(R.string.permission_request_title); // TODO: change this title, maybe?
                         builder.setCancelable(true);
-                        builder.setPositiveButton(R.string.Allow, new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
 
-                    */
+
                     break;
 
                 case KEY_SMALL_TIP:
