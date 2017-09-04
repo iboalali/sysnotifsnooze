@@ -4,7 +4,7 @@
         android:title="Permission">
         <Preference
             android:key="notification_permission"
-            android:title="Notification Access Permission"/>
+            android:title="@string/string_settings_notification_access_permission"/>
 
         <!--
         <Preference
@@ -15,7 +15,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Social">
+        android:title="@string/string_settings_follow_me">
         <Preference
             android:title="Twitter">
             <intent
@@ -35,15 +35,15 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Tip Jar">
+        android:title="Support me with ...">
         <Preference
             android:key="small_tip"
-            android:title="Small Tip">
+            android:title="@string/string_settings_small_donation">
 
         </Preference>
         <Preference
             android:key="large_tip"
-            android:title="Large Tip">
+            android:title="@string/string_settings_large_donation">
 
         </Preference>
 <!--

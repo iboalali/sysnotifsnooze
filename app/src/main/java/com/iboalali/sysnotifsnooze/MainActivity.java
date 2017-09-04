@@ -20,6 +20,9 @@ import com.iboalali.sysnotifsnooze.util.IabHelper;
 import com.iboalali.sysnotifsnooze.util.IabResult;
 import com.iboalali.sysnotifsnooze.util.Inventory;
 import com.iboalali.sysnotifsnooze.util.Purchase;
+import com.iboalali.sysnotifsnooze.util.SkuDetails;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,7 +75,12 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                     // Hooray, IAB is fully set up!
-                    mHelper.queryInventoryAsync(queryInventoryFinishedListener);
+                    ArrayList<String> skus = new ArrayList<String>();
+                    skus.add(MainActivity.SKU_SMALL_TIP_2);
+                    skus.add(MainActivity.SKU_LARGE_TIP_5);
+
+                    mHelper.queryInventoryAsync(true, skus, queryInventoryFinishedListener);
+
                 }
             });
 
@@ -131,6 +139,16 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Log.d(TAG, "Query inventory was successful.");
+
+                SkuDetails sku_small_tip_2 = inv.getSkuDetails(SKU_SMALL_TIP_2);
+                Log.d(TAG, sku_small_tip_2.getTitle() + ": " + sku_small_tip_2.getPrice());
+                Preference preference_small_tip_2 = findPreference(KEY_SMALL_TIP);
+                preference_small_tip_2.setSummary(sku_small_tip_2.getPrice());
+
+                SkuDetails sku_small_tip_5 = inv.getSkuDetails(SKU_LARGE_TIP_5);
+                Log.d(TAG, sku_small_tip_5.getTitle() + ": " + sku_small_tip_5.getPrice());
+                Preference preference_large_tip_5 = findPreference(KEY_LARGE_TIP);
+                preference_large_tip_5.setSummary(sku_small_tip_5.getPrice());
 
                 // check for un-consumed purchases, and consume them
                 Purchase small_tip_2_purchase = inv.getPurchase(SKU_SMALL_TIP_2);
@@ -242,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
             isNotificationAccessPermissionGranted = Utils.hasAccessGranted(CONTEXT);
             notification_permission.setSummary(isNotificationAccessPermissionGranted ? getString(R.string.granted) : getString(R.string.not_granted));
+
         }
     }
 

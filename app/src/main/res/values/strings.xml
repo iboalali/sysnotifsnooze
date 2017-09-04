@@ -11,4 +11,8 @@
     <string name="hidden_success">Successfully Hidden</string>
     <string name="granted">Granted</string>
     <string name="not_granted">Not Granted</string>
+    <string name="string_settings_small_donation">a Small Donation</string>
+    <string name="string_settings_large_donation">a Large Donation</string>
+    <string name="string_settings_follow_me">Follow me</string>
+    <string name="string_settings_notification_access_permission">Notification Access Permission</string>
 </resources>
