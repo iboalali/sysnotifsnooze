@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -17,7 +18,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light.Dialog.Alert" />
 
-
+    <style name="Toolbar_AppName" parent="TextAppearance.AppCompat.Large">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
 
     <!--
     <style name="MyAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert"/>

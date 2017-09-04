@@ -14,15 +14,13 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-
+            android:layout_width="match_parent">
 
             <TextView
                 android:id="@+id/textView_app_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:textAppearance="@style/Toolbar_AppName"
                 android:text="@string/app_name"
                 android:layout_gravity="bottom"
                 android:layout_marginStart="32dp"
