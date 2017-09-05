@@ -1,8 +1,10 @@
 package com.iboalali.sysnotifsnooze;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -10,8 +12,6 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.iboalali.sysnotifsnooze.util.IabHelper;
@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 Log.d(TAG, "Has Notification Access");
 
+                NotificationListener.requestRebind(new ComponentName(CONTEXT.getPackageName(), ".NotificationListener"));
             }
         }
 
