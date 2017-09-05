@@ -1,6 +1,5 @@
 package com.iboalali.sysnotifsnooze;
 
-import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +14,22 @@ import android.util.Log;
 
 public class NotificationListener extends NotificationListenerService {
     private static final String TAG = "NotificationListener";
+    private NotificationListenerBroadcastReceiver notificationListenerBroadcastReceiver;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        notificationListenerBroadcastReceiver = new NotificationListenerBroadcastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT");
+        registerReceiver(notificationListenerBroadcastReceiver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(notificationListenerBroadcastReceiver);
+    }
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
@@ -35,6 +50,30 @@ public class NotificationListener extends NotificationListenerService {
 
         }
     }
+
+    class NotificationListenerBroadcastReceiver extends BroadcastReceiver{
+    private static final String TAG = "NL Broadcast Receiver";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Received Broadcast");
+
+
+            if(intent.getStringExtra("command").equals("hide")){
+                for(StatusBarNotification sbn: NotificationListener.this.getActiveNotifications()){
+                    Log.d(TAG, "List: " + sbn.getPackageName());
+
+                    if (sbn.getNotification().extras.getString(getString(R.string.notification_intent_key)).contains(getString(R.string.notification_content))) {
+                        NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
+                        Log.d(TAG, sbn.getPackageName() + " snoozed");
+
+                    }
+                }
+            }
+        }
+    }
+
+
 
 
 }

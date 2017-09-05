@@ -1,10 +1,8 @@
 package com.iboalali.sysnotifsnooze;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -94,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "No Notification Access");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-                builder.setMessage(R.string.permission_request_msg); //TODO: change this text
-                builder.setTitle(R.string.permission_request_title); // TODO: change this title, maybe?
+                builder.setMessage(R.string.permission_request_msg);
+                builder.setTitle(R.string.permission_request_title);
                 builder.setCancelable(true);
                 builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                     @Override
@@ -105,12 +103,14 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 AlertDialog alertDialog = builder.create();
-                alertDialog.show(); //TODO: solve this problem
+                alertDialog.show();
 
             }else{
                 Log.d(TAG, "Has Notification Access");
 
-                NotificationListener.requestRebind(new ComponentName(CONTEXT.getPackageName(), ".NotificationListener"));
+                Intent intent = new Intent("com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT");
+                intent.putExtra("command", "hide");
+                CONTEXT.sendBroadcast(intent);
             }
         }
 
@@ -214,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                     }else{
                         AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-                        builder.setMessage(R.string.permission_request_msg); //TODO: change this text
-                        builder.setTitle(R.string.permission_request_title); // TODO: change this title, maybe?
+                        builder.setMessage(R.string.permission_request_msg);
+                        builder.setTitle(R.string.permission_request_title);
                         builder.setCancelable(true);
                         builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                             @Override
