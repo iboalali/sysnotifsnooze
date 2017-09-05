@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             CONTEXT = getActivity().getApplicationContext();
             addPreferencesFromResource(R.xml.settings);
 
-            String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
+            String base64EncodedPublicKey = "";
 
             mHelper = new IabHelper(CONTEXT, base64EncodedPublicKey);
             mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
