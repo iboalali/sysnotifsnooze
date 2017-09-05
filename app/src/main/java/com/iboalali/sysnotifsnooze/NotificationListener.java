@@ -37,12 +37,15 @@ public class NotificationListener extends NotificationListenerService {
             return;
 
 
-        Log.d(TAG, sbn.getPackageName());
+        Log.d(TAG, sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
 
         if (sbn.getPackageName().equals("android")) {
-            if (sbn.getNotification().extras.getString(getString(R.string.notification_intent_key)).contains(getString(R.string.notification_content))) {
+            String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
+            if (key == null) return;
+
+            if (key.contains(getString(R.string.notification_content))) {
                 NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
-                Log.d(TAG, sbn.getPackageName() + " snoozed");
+                Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
 
             }
             //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
@@ -61,11 +64,14 @@ public class NotificationListener extends NotificationListenerService {
 
             if(intent.getStringExtra("command").equals("hide")){
                 for(StatusBarNotification sbn: NotificationListener.this.getActiveNotifications()){
-                    Log.d(TAG, "List: " + sbn.getPackageName());
+                    Log.d(TAG, "List: " + sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
 
-                    if (sbn.getNotification().extras.getString(getString(R.string.notification_intent_key)).contains(getString(R.string.notification_content))) {
+                    String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
+                    if (key == null) return;
+
+                    if (key.contains(getString(R.string.notification_content))) {
                         NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
-                        Log.d(TAG, sbn.getPackageName() + " snoozed");
+                        Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
 
                     }
                 }
