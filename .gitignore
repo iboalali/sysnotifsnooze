@@ -9,3 +9,4 @@
 .externalNativeBuild
 in-app billing public key.txt
 app/app-release.apk
+app/src/main/res/values/publickey.xml
