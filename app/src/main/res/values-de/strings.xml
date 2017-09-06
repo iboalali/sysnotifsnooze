@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hide \"Running in the Background\" Notification</string>
+    <string name="Allow">Erlauben</string>
+    <string name="OK">OK</string>
+    <string name="string_settings_large_donation">eine Große Spende</string>
+    <string name="string_settings_small_donation">eine Kleine Spende</string>
+    <string name="string_settings_notification_access_permission">Benachrichtigungszugriff</string>
+</resources>
