@@ -28,7 +28,9 @@ public class NotificationListener extends NotificationListenerService {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(notificationListenerBroadcastReceiver);
+        if (notificationListenerBroadcastReceiver != null) {
+            unregisterReceiver(notificationListenerBroadcastReceiver);
+        }
     }
 
     @Override
@@ -69,7 +71,9 @@ public class NotificationListener extends NotificationListenerService {
                     String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
                     if (key == null) return;
 
-                    if (key.contains(getString(R.string.notification_content))) {
+                    String nc = getString(R.string.notification_content);
+
+                    if (key.contains(nc)) {
                         NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
                         Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
 

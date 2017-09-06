@@ -7,8 +7,8 @@ android {
         applicationId "com.iboalali.sysnotifsnooze"
         minSdkVersion 26
         targetSdkVersion 26
-        versionCode 23
-        versionName "v1.1vc23"
+        versionCode 24
+        versionName "v1.1vc24"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

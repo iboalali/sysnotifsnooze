@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="Permission">
+        android:title="@string/string_settings_permission">
         <Preference
             android:key="notification_permission"
             android:title="@string/string_settings_notification_access_permission"/>
@@ -35,7 +35,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Support me with ...">
+        android:title="@string/string_settings_support_me_with">
         <Preference
             android:key="small_tip"
             android:title="@string/string_settings_small_donation">
