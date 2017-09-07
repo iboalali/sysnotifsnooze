@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 Log.d(TAG, "Has Notification Access");
 
-                Log.d(TAG, getString(R.string.notification_content));
+                Log.d(TAG, getString(R.string.notification_content_singular));
 
-                Intent intent = new Intent("com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT");
+                Intent intent = new Intent(getString(R.string.string_filter_intent));
                 intent.putExtra("command", "hide");
                 CONTEXT.sendBroadcast(intent);
             }

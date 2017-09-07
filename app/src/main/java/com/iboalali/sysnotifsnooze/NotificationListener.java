@@ -21,7 +21,7 @@ public class NotificationListener extends NotificationListenerService {
         super.onCreate();
         notificationListenerBroadcastReceiver = new NotificationListenerBroadcastReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction("com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT");
+        filter.addAction(getString(R.string.string_filter_intent));
         registerReceiver(notificationListenerBroadcastReceiver, filter);
     }
 
@@ -45,7 +45,10 @@ public class NotificationListener extends NotificationListenerService {
             String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
             if (key == null) return;
 
-            if (key.contains(getString(R.string.notification_content))) {
+            String nc = getString(R.string.notification_content_singular);
+            String ncp = getString(R.string.notification_content_plural);
+
+            if (key.contains(nc) || key.contains(ncp)) {
                 NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
                 Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
 
@@ -71,9 +74,10 @@ public class NotificationListener extends NotificationListenerService {
                     String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
                     if (key == null) return;
 
-                    String nc = getString(R.string.notification_content);
+                    String nc = getString(R.string.notification_content_singular);
+                    String ncp = getString(R.string.notification_content_plural);
 
-                    if (key.contains(nc)) {
+                    if (key.contains(nc) || key.contains(ncp)) {
                         NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
                         Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
 

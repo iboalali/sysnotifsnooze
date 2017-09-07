@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
+    <string name="notification_content_singular">በጀርባ ውስጥ እያሄደ ነው</string>
+    <string name="notification_content_plural">መተግበሪያዎች በጀርባ ውስጥ እያሄዱ ነው</string>
+</resources>

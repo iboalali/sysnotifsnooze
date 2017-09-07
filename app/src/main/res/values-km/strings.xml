@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
+    <string name="notification_content_singular">កំពុងដំណើរការនៅផ្ទៃខាងក្រោយ</string>
+    <string name="notification_content_plural">កំពុងដំណើរការនៅផ្ទៃខាងក្រោយ</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
+    <string name="notification_content_singular">po ekzekutohet në sfond</string>
+    <string name="notification_content_plural">aplikacione po ekzekutohen në sfond</string>
+</resources>
