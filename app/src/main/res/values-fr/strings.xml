@@ -2,4 +2,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
     <string name="notification_content_singular">s\'exécute en arrière-plan</string>
     <string name="notification_content_plural"> applications s\'exécutent en arrière-plan</string>
+    <string name="notification_content_display_over">s\'affiche sur autres applis</string>
 </resources>
