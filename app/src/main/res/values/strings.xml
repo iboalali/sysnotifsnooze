@@ -8,6 +8,7 @@
     <string name="title_activity_main_settings" translatable="false">Hide Running in the Background Notification</string>
     <string name="notification_content_singular">is running in the background</string>
     <string name="notification_content_plural">apps are running in the background</string>
+    <string name="notification_content_display_over">is displaying over other apps</string>
     <string name="notification_intent_key" translatable="false">android.title</string>
     <string name="hidden_success" translatable="false">Successfully Hidden</string>
     <string name="granted" translatable="false">Granted</string>

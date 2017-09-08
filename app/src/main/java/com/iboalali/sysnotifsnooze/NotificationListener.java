@@ -76,8 +76,9 @@ public class NotificationListener extends NotificationListenerService {
 
                     String nc = getString(R.string.notification_content_singular);
                     String ncp = getString(R.string.notification_content_plural);
+                    String ncd = getString(R.string.notification_content_display_over);
 
-                    if (key.contains(nc) || key.contains(ncp)) {
+                    if (key.contains(nc) || key.contains(ncp) || key.contains(ncd)) {
                         NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
                         Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
 
