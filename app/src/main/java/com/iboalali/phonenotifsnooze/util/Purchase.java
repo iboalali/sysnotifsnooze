@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.iboalali.sysnotifsnooze.util;
+package com.iboalali.phonenotifsnooze.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;

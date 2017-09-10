@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.iboalali.sysnotifsnooze.util;
+package com.iboalali.phonenotifsnooze.util;
 
 /**
  * Exception thrown when something went wrong with in-app billing.

@@ -13,13 +13,10 @@
  * limitations under the License.
  */
 
-package com.iboalali.sysnotifsnooze.util;
+package com.iboalali.phonenotifsnooze.util;
 
 import android.text.TextUtils;
 import android.util.Log;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 import java.security.InvalidKeyException;

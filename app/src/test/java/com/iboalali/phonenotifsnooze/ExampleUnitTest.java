@@ -1,4 +1,4 @@
-package com.iboalali.sysnotifsnooze;
+package com.iboalali.phonenotifsnooze;
 
 import org.junit.Test;
 

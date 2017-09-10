@@ -23,35 +23,36 @@
                 android:data="https://twitter.com/iboalali"/>
         </Preference>
     </PreferenceCategory>
+    <!--
+     <PreferenceCategory
+         android:title="Source Code">
+         <Preference
+             android:title="https://goo.gl/7yq9M1">
+             <intent
+                 android:action="android.intent.action.VIEW"
+                 android:data="https://goo.gl/7yq9M1"/>
+         </Preference>
+     </PreferenceCa
 
-    <PreferenceCategory
-        android:title="Source Code">
-        <Preference
-            android:title="https://goo.gl/7yq9M1">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://goo.gl/7yq9M1"/>
-        </Preference>
-    </PreferenceCategory>
+         <PreferenceCategory
+             android:title="@string/string_settings_support_me_with">
+             <Preference
+                 android:key="small_tip"
+                 android:title="@string/string_settings_small_donation">
 
-    <PreferenceCategory
-        android:title="@string/string_settings_support_me_with">
-        <Preference
-            android:key="small_tip"
-            android:title="@string/string_settings_small_donation">
+             </Preference>
+             <Preference
+                 android:key="large_tip"
+                 android:title="@string/string_settings_large_donation">
 
-        </Preference>
-        <Preference
-            android:key="large_tip"
-            android:title="@string/string_settings_large_donation">
+             </Preference>
 
-        </Preference>
-<!--
-        <Preference
-            android:key="restore_purchases"
-            android:title="Restore Purchases">
+             <Preference
+                 android:key="restore_purchases"
+                 android:title="Restore Purchases">
 
-        </Preference>
-        -->
-    </PreferenceCategory>
+             </Preference>
+
+     </PreferenceCategory>
+     -->
 </PreferenceScreen>

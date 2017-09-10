@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.iboalali.sysnotifsnooze">
-
-    <uses-permission android:name="com.android.vending.BILLING" />
+    package="com.iboalali.phonenotifsnooze">
 
     <application
         android:allowBackup="false"
@@ -12,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".NotificationListener"
+            android:name="com.iboalali.phonenotifsnooze.NotificationListener"
             android:label="@string/service_name"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
@@ -21,7 +19,7 @@
         </service>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.iboalali.phonenotifsnooze.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

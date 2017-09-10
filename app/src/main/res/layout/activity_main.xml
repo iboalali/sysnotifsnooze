@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iboalali.sysnotifsnooze.MainActivity">
+    tools:context="com.iboalali.phonenotifsnooze.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <fragment
-        android:name="com.iboalali.sysnotifsnooze.MainActivity$SettingsFragment"
+        android:name="com.iboalali.phonenotifsnooze.MainActivity$SettingsFragment"
         android:layout_marginTop="180dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

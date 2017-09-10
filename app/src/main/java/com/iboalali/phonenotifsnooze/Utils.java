@@ -1,4 +1,4 @@
-package com.iboalali.sysnotifsnooze;
+package com.iboalali.phonenotifsnooze;
 
 import android.content.ContentResolver;
 import android.content.Context;

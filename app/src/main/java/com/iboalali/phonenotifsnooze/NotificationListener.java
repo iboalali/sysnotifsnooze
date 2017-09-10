@@ -1,4 +1,4 @@
-package com.iboalali.sysnotifsnooze;
+package com.iboalali.phonenotifsnooze;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,20 +39,30 @@ public class NotificationListener extends NotificationListenerService {
             return;
 
 
-        Log.d(TAG, sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
+        Log.d(TAG, sbn.getPackageName() + ": " + sbn.getNotification().extras.getString("android.title", ""));
 
-        if (sbn.getPackageName().equals("android")) {
-            String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
+        if (sbn.getPackageName().equals("com.android.phone")) {
+            String key = sbn.getNotification().extras.getString("android.title");
             if (key == null) return;
 
-            String nc = getString(R.string.notification_content_singular);
-            String ncp = getString(R.string.notification_content_plural);
+            if (key.equals("No data service") || key.equals("No voice service")){
+                String text = sbn.getNotification().extras.getString("android.text");
+                if (text == null) return;
 
-            if (key.contains(nc) || key.contains(ncp)) {
-                NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
-                Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
-
+                if (text.equals("Temporarily not offered by the mobile network at your location")){
+                    NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
+                    Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
+                }
             }
+
+            //String nc = getString(R.string.notification_content_singular);
+            //String ncp = getString(R.string.notification_content_plural);
+
+            //if (key.contains(nc) || key.contains(ncp)) {
+            //    NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
+            //    Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
+
+            //}
             //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
             //10000000000000 = 317.09792 years -> working
 
