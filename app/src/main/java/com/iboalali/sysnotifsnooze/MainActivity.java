@@ -1,6 +1,5 @@
 package com.iboalali.sysnotifsnooze;
 
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +12,6 @@ import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,34 +36,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /*
-    public class DialBroadcast extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-            Log.d(TAG, phoneNumber + " received");
-
-            if(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
-                String pNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-                Log.d(TAG, "Number is: " + phoneNumber);
-                Intent appIntent = new Intent(getApplicationContext(), MainActivity.class);
-                appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(appIntent);
-
-            }
-
-            if (phoneNumber.equals("4433")){
-                Intent appIntent = new Intent(getApplicationContext(), MainActivity.class);
-                appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(appIntent);
-                //setResultData(null);
-            }
-
-        }
-    }
-
-*/
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
         private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
         private static final String KEY_SETTINGS_HIDE_ICON = "hide_icon";
@@ -76,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         private boolean isSwitchSet;
 
         IabHelper mHelper;
-
         Context CONTEXT;
 
         private Preference notification_permission;
@@ -94,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             CONTEXT = getActivity().getApplicationContext();
             addPreferencesFromResource(R.xml.settings);
 
-            sharedPreferences = getActivity().getPreferences(CONTEXT.MODE_PRIVATE);
+            sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
 
             String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
 
@@ -124,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
             settings_hide_icon.setOnPreferenceClickListener(this);
             small_tip.setOnPreferenceClickListener(this);
             large_tip.setOnPreferenceClickListener(this);
-
-            //settings_hide_icon.setOnPreferenceClickListener(this);
 
             settings_hide_icon.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -332,7 +299,6 @@ public class MainActivity extends AppCompatActivity {
         public boolean onPreferenceClick(Preference preference) {
             switch (preference.getKey()){
                 case KEY_NOTIFICATION_PERMISSION:
-                    //startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
 
                     if (isNotificationAccessPermissionGranted){
                         startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
