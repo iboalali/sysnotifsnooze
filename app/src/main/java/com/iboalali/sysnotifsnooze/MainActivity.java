@@ -1,13 +1,19 @@
 package com.iboalali.sysnotifsnooze;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,21 +38,54 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /*
+    public class DialBroadcast extends BroadcastReceiver{
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+            Log.d(TAG, phoneNumber + " received");
+
+            if(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
+                String pNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+                Log.d(TAG, "Number is: " + phoneNumber);
+                Intent appIntent = new Intent(getApplicationContext(), MainActivity.class);
+                appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(appIntent);
+
+            }
+
+            if (phoneNumber.equals("4433")){
+                Intent appIntent = new Intent(getApplicationContext(), MainActivity.class);
+                appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(appIntent);
+                //setResultData(null);
+            }
+
+        }
+    }
+
+*/
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
         private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
+        private static final String KEY_SETTINGS_HIDE_ICON = "hide_icon";
         private static final String KEY_SMALL_TIP = "small_tip";
         private static final String KEY_LARGE_TIP = "large_tip";
         private static final String TAG = "SettingsFragment";
+
+        private boolean isSwitchSet;
 
         IabHelper mHelper;
 
         Context CONTEXT;
 
         private Preference notification_permission;
+        private SwitchPreference settings_hide_icon;
         private Preference small_tip;
         private Preference large_tip;
         private boolean isNotificationAccessPermissionGranted;
+
+        private SharedPreferences sharedPreferences;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
             CONTEXT = getActivity().getApplicationContext();
             addPreferencesFromResource(R.xml.settings);
+
+            sharedPreferences = getActivity().getPreferences(CONTEXT.MODE_PRIVATE);
 
             String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
 
@@ -75,12 +116,93 @@ public class MainActivity extends AppCompatActivity {
             });
 
             notification_permission = findPreference(KEY_NOTIFICATION_PERMISSION);
+            settings_hide_icon = (SwitchPreference)findPreference(KEY_SETTINGS_HIDE_ICON);
             small_tip = findPreference(KEY_SMALL_TIP);
             large_tip = findPreference(KEY_LARGE_TIP);
 
             notification_permission.setOnPreferenceClickListener(this);
+            settings_hide_icon.setOnPreferenceClickListener(this);
             small_tip.setOnPreferenceClickListener(this);
             large_tip.setOnPreferenceClickListener(this);
+
+            //settings_hide_icon.setOnPreferenceClickListener(this);
+
+            settings_hide_icon.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(final Preference preference, Object o) {
+                    Log.d(TAG, "in onPreferenceChange");
+
+                    if (!settings_hide_icon.isChecked()){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage(R.string.string_hide_icon_alert_dialog_msg);
+                        builder.setTitle(R.string.string_hide_icon_alert_dialog_title);
+                        builder.setCancelable(true);
+                        builder.setPositiveButton(R.string.string_yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Log.d(TAG, "set switch to TRUE");
+
+                                PackageManager pkg = CONTEXT.getPackageManager();
+                                pkg.setComponentEnabledSetting(new ComponentName(CONTEXT, MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                                        PackageManager.DONT_KILL_APP);
+
+                                settings_hide_icon.setChecked(true);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), true);
+                                editor.apply();
+
+                                Log.d(TAG, "switch is: " + String.valueOf(settings_hide_icon.isChecked()));
+                            }
+                        });
+
+                        builder.setNegativeButton(CONTEXT.getString(R.string.string_no), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                settings_hide_icon.setChecked(false);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), true);
+                                editor.apply();
+                            }
+                        });
+
+                        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialogInterface) {
+                                Log.d(TAG, "set switch to FALSE (1)");
+
+                                PackageManager pkg = CONTEXT.getPackageManager();
+                                pkg.setComponentEnabledSetting(new ComponentName(CONTEXT, MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                        PackageManager.DONT_KILL_APP);
+
+                                settings_hide_icon.setChecked(false);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), false);
+                                editor.apply();
+                                Log.d(TAG, "switch is: " + String.valueOf(settings_hide_icon.isChecked()));
+                            }
+                        });
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+
+                    }else{
+                        Log.d(TAG, "set switch to FALSE (2)");
+
+                        PackageManager pkg = CONTEXT.getPackageManager();
+                        pkg.setComponentEnabledSetting(new ComponentName(CONTEXT, MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                PackageManager.DONT_KILL_APP);
+
+                        settings_hide_icon.setChecked(false);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), false);
+                        editor.apply();
+                        Log.d(TAG, "switch is: " + String.valueOf(settings_hide_icon.isChecked()));
+                    }
+
+
+                    return true;
+                }
+            });
 
         }
 
@@ -244,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
                     if (mHelper != null) mHelper.flagEndAsync();
                     mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
                     break;
+
             }
             return false;
         }
@@ -255,7 +378,11 @@ public class MainActivity extends AppCompatActivity {
             isNotificationAccessPermissionGranted = Utils.hasAccessGranted(CONTEXT);
             notification_permission.setSummary(isNotificationAccessPermissionGranted ? getString(R.string.granted) : getString(R.string.not_granted));
 
+            isSwitchSet = sharedPreferences.getBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), false);
+            settings_hide_icon.setChecked(isSwitchSet);
+
         }
+
     }
 
 }

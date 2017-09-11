@@ -38,10 +38,9 @@ public class NotificationListener extends NotificationListenerService {
         if (sbn == null)
             return;
 
-
-        Log.d(TAG, sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
-
         if (sbn.getPackageName().equals("android")) {
+            Log.d(TAG, sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
+
             String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
             if (key == null) return;
 
@@ -66,21 +65,23 @@ public class NotificationListener extends NotificationListenerService {
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "Received Broadcast");
 
-
             if(intent.getStringExtra("command").equals("hide")){
                 for(StatusBarNotification sbn: NotificationListener.this.getActiveNotifications()){
-                    Log.d(TAG, "List: " + sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
 
-                    String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
-                    if (key == null) return;
+                    if (sbn.getPackageName().equals("android")) {
+                        Log.d(TAG, "List: " + sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
 
-                    String nc = getString(R.string.notification_content_singular);
-                    String ncp = getString(R.string.notification_content_plural);
+                        String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
+                        if (key == null) return;
 
-                    if (key.contains(nc) || key.contains(ncp)) {
-                        NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
-                        Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
+                        String nc = getString(R.string.notification_content_singular);
+                        String ncp = getString(R.string.notification_content_plural);
 
+                        if (key.contains(nc) || key.contains(ncp)) {
+                            NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
+                            Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
+
+                        }
                     }
                 }
             }

@@ -19,4 +19,11 @@
     <string name="string_settings_permission" translatable="false">Permission</string>
     <string name="string_settings_support_me_with" translatable="false">Support me with …</string>
     <string name="string_filter_intent" translatable="false">com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT</string>
+    <string name="string_settings_hide_app_icon_from_launcher" translatable="false">Hide app icon from launcher</string>
+    <string name="string_settings_settings" translatable="false">Settings</string>
+    <string name="string_hide_icon_alert_dialog_title" translatable="false">Hide the app icon from launcher?</string>
+    <string name="string_hide_icon_alert_dialog_msg" translatable="false">This switch will hide the app icon from launcher.\n\nCaution!\nYou have to uninstall and install this app from the Play Store again to open it</string>
+    <string name="string_sharedPreferences_isIconHidden" translatable="false">isIconHidden</string>
+    <string name="string_yes" translatable="false">Yes</string>
+    <string name="string_no" translatable="false">No</string>
 </resources>

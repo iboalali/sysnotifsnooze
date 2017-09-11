@@ -15,16 +15,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/string_settings_follow_me">
-        <Preference
-            android:title="Twitter">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://twitter.com/iboalali"/>
-        </Preference>
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="Source Code">
         <Preference
             android:title="https://goo.gl/7yq9M1">
@@ -46,12 +36,24 @@
             android:title="@string/string_settings_large_donation">
 
         </Preference>
-<!--
-        <Preference
-            android:key="restore_purchases"
-            android:title="Restore Purchases">
+    </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/string_settings_follow_me">
+        <Preference
+            android:title="Twitter">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://twitter.com/iboalali"/>
         </Preference>
-        -->
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="settings_preference_category"
+        android:title="@string/string_settings_settings">
+        <SwitchPreference
+            android:checked="true"
+            android:key="hide_icon"
+            android:title="@string/string_settings_hide_app_icon_from_launcher" />
     </PreferenceCategory>
 </PreferenceScreen>
