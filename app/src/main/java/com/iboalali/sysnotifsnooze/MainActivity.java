@@ -180,6 +180,10 @@ public class MainActivity extends AppCompatActivity {
             if (!Utils.hasAccessGranted(CONTEXT)) {
                 Log.d(TAG, "No Notification Access");
 
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), false);
+                editor.apply();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
                 builder.setMessage(R.string.permission_request_msg);
                 builder.setTitle(R.string.permission_request_title);
@@ -197,11 +201,18 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 Log.d(TAG, "Has Notification Access");
 
-                Log.d(TAG, getString(R.string.notification_content_singular));
+                if (!sharedPreferences.getBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), false)) {
 
-                Intent intent = new Intent(getString(R.string.string_filter_intent));
-                intent.putExtra("command", "hide");
-                CONTEXT.sendBroadcast(intent);
+                    Log.d(TAG, "sending broadcast");
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), true);
+                    editor.apply();
+
+                    Intent intent = new Intent(getString(R.string.string_filter_intent));
+                    intent.putExtra("command", "hide");
+                    CONTEXT.sendBroadcast(intent);
+                }
             }
         }
 
