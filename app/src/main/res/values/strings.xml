@@ -26,4 +26,5 @@
     <string name="string_sharedPreferences_isIconHidden" translatable="false">isIconHidden</string>
     <string name="string_yes" translatable="false">Yes</string>
     <string name="string_no" translatable="false">No</string>
+    <string name="string_sharedPref_granted" translatable="false">granted?</string>
 </resources>
