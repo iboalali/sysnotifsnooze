@@ -240,14 +240,21 @@ public class MainActivity extends AppCompatActivity {
                 Preference preference_small_tip_2 = findPreference(KEY_SMALL_TIP);
                 preference_small_tip_2.setSummary(sku_small_tip_2.getPrice());
                 String title = sku_small_tip_2.getTitle();
-                preference_small_tip_2.setTitle(title.substring(0, title.indexOf("(")));
 
                 SkuDetails sku_large_tip_5 = inv.getSkuDetails(SKU_LARGE_TIP_5);
                 Log.d(TAG, sku_large_tip_5.getTitle() + ": " + sku_large_tip_5.getPrice());
                 Preference preference_large_tip_5 = findPreference(KEY_LARGE_TIP);
                 preference_large_tip_5.setSummary(sku_large_tip_5.getPrice());
                 title = sku_large_tip_5.getTitle();
-                preference_large_tip_5.setTitle(title.substring(0, title.indexOf("(")));
+
+                try{
+                    preference_small_tip_2.setTitle(title.substring(0, title.indexOf("(")));
+                    preference_large_tip_5.setTitle(title.substring(0, title.indexOf("(")));
+                }catch (StringIndexOutOfBoundsException e){
+                    e.printStackTrace();
+                    preference_small_tip_2.setTitle(getString(R.string.string_settings_small_donation));
+                    preference_large_tip_5.setTitle(getString(R.string.string_settings_large_donation));
+                }
 
                 // check for un-consumed purchases, and consume them
                 Purchase small_tip_2_purchase = inv.getPurchase(SKU_SMALL_TIP_2);
