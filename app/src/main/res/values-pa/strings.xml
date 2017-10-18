@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
-    <string name="notification_content_singular">ਐਪ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਚੱਲ ਰਹੀ ਹੈ</string>
-    <string name="notification_content_plural">ਐਪਾਂ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਚੱਲ ਰਹੀਆਂ ਹਨ</string>
-</resources>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
-    <string name="notification_content_singular">నేపథ్యంలో అమలు అవుతోంది</string>
-    <string name="notification_content_plural">ఆప్‌లు నేపథ్యంలో అమలు అవుతున్నాయి</string>
-</resources>
