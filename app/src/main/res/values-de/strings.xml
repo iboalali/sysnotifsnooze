@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Verstecke die \"im Hintergrund ausgeführt\" Benachrichtigung</string>
+    <string name="Allow">Erlauben</string>
+    <string name="OK">OK</string>
+    <string name="string_settings_large_donation">eine Große Spende</string>
+    <string name="string_settings_small_donation">eine Kleine Spende</string>
+    <string name="string_settings_notification_access_permission">Benachrichtigungszugriff</string>
+    <string name="granted">Erlaubt</string>
+    <string name="string_settings_follow_me">Folge mir</string>
+    <string name="string_settings_permission">Berechtigung</string>
+    <string name="string_settings_support_me_with">Unterstütze mich mit …</string>
+    <string name="title_activity_main_settings">Verstecke die Im Hintergrund ausgeführt Benachrichtigung</string>
+    <string name="not_granted">Nicht Erlaubt</string>
+    <string name="permission_request_msg">\"Um die lästige \"im Hintergrung ausgefüht\" Benachrichtigung zu verstecken, muss du diese App das zugriff auf deine Benachrichtigungen erlauben.\n\nDrücke OK, und in der nächsten Seite, lege den Schalter um und drücke auf \"Zulassen\"</string>
+    <string name="permission_request_title">Erlaubnis zum Zugreifen auf deine Benachrichtigungen</string>
+</resources>
