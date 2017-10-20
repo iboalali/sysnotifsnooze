@@ -2,15 +2,20 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.iboalali.sysnotifsnooze"
         minSdkVersion 26
         targetSdkVersion 26
-        versionCode 35
-        versionName "v1.3vc35"
+        versionCode 39
+        versionName "v1.3vc" + getVersionCode()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    lintOptions{
+        disable 'MissingTranslation'
+    }
+
     buildTypes {
         release {
             minifyEnabled false

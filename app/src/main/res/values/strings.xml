@@ -27,4 +27,8 @@
     <string name="string_yes" translatable="false">Yes</string>
     <string name="string_no" translatable="false">No</string>
     <string name="string_sharedPref_granted" translatable="false">granted?</string>
+
+    <!-- device specific changes -->
+    <string name="notification_content_singular_pixel2">is using battery</string>
+    <string name="notification_content_plural_pixel2">are using battery</string>
 </resources>
