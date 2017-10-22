@@ -6,12 +6,12 @@
             android:key="notification_permission"
             android:title="@string/string_settings_notification_access_permission"/>
 
-        <!--
+
         <Preference
             android:key="notification"
             android:title="Running in the Background Notification"
-            android:summary="Not Hidden"/>
-            -->
+            />
+
     </PreferenceCategory>
 
     <PreferenceCategory
