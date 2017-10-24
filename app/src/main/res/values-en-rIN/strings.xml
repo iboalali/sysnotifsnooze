@@ -4,7 +4,5 @@
     <string name="notification_content_singular">is running in the background</string>
     <string name="notification_content_plural">apps are running in the background</string>
 
-    <!-- device specific changes -->
-    <string name="notification_content_singular_pixel2">is using battery</string>
-    <string name="notification_content_plural_pixel2">are using battery</string>
+
 </resources>
