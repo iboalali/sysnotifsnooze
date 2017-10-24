@@ -1,5 +1,6 @@
 package com.iboalali.sysnotifsnooze;
 
+import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,16 @@ import android.util.Log;
 public class NotificationListener extends NotificationListenerService {
     private static final String TAG = "NotificationListener";
     private NotificationListenerBroadcastReceiver notificationListenerBroadcastReceiver;
+
+    /**
+     * This is set on the notification shown by the activity manager about all apps
+     * running in the background.  It indicates that the notification should be shown
+     * only if any of the given apps do not already have a {@link Notification#FLAG_FOREGROUND_SERVICE}
+     * notification currently visible to the user.  This is a string array of all
+     * package names of the apps.
+     * @hide
+     */
+    public static final String EXTRA_FOREGROUND_APPS = "android.foregroundApps";
 
     @Override
     public void onCreate() {
@@ -34,29 +45,27 @@ public class NotificationListener extends NotificationListenerService {
         }
     }
 
+    private void checkAndSnoozeNotification(StatusBarNotification sbn)
+    {
+        if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
+            String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
+            if (key == null) return;
+
+            snoozeNotification(sbn.getKey(), 10000000000000L);
+            //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
+            //10000000000000 = 317.09792 years -> working
+
+            Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
+        }
+    }
+
+
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         if (sbn == null)
             return;
 
-        if (sbn.getPackageName().equals("android")) {
-            Log.d(TAG, sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
-
-            String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
-            if (key == null) return;
-
-            String nc = getString(R.string.notification_content_singular);
-            String ncp = getString(R.string.notification_content_plural);
-
-            if (key.contains(nc) || key.contains(ncp)) {
-                NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
-                Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
-
-            }
-            //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
-            //10000000000000 = 317.09792 years -> working
-
-        }
+        checkAndSnoozeNotification(sbn);
     }
 
     class NotificationListenerBroadcastReceiver extends BroadcastReceiver{
@@ -66,29 +75,14 @@ public class NotificationListener extends NotificationListenerService {
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "Received Broadcast");
 
-            if(intent.getStringExtra("command").equals("hide")){
-                for(StatusBarNotification sbn: NotificationListener.this.getActiveNotifications()){
-
-                    if (sbn.getPackageName().equals("android")) {
-                        Log.d(TAG, "List: " + sbn.getPackageName() + ": " + sbn.getNotification().extras.getString(getString(R.string.notification_intent_key), ""));
-
-                        String key = sbn.getNotification().extras.getString(getString(R.string.notification_intent_key));
-                        if (key == null) return;
-
-                        String nc = getString(R.string.notification_content_singular);
-                        String ncp = getString(R.string.notification_content_plural);
-
-                        if (key.contains(nc) || key.contains(ncp)) {
-                            NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
-                            Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed");
-
-                        }
-                    }
+            if (intent.getStringExtra("command").equals("hide")) {
+                for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {
+                    checkAndSnoozeNotification(sbn);
                 }
             }
 
-
         }
     }
-
 }
+
+

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
-    <string name="notification_content_singular">앱이 백그라운드에서 실행 중</string>
-    <string name="notification_content_plural">개의 앱이 백그라운드에서 실행 중</string>
-</resources>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
-    <string name="notification_content_singular">പശ്ചാത്തലത്തിൽ റൺ ചെയ്യുന്നു</string>
-    <string name="notification_content_plural">ആപ്പുകൾ പശ്ചാത്തലത്തിൽ റൺ ചെയ്യുന്നു</string>
-</resources>

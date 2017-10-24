@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation" >
-    <string name="notification_content_singular">běží na pozadí</string>
-    <string name="notification_content_plural">běží na pozadí</string>
-</resources>

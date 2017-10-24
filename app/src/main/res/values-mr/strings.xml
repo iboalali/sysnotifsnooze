@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"     tools:ignore="MissingTranslation" >
-    <string name="notification_content_singular">बॅकग्राउंडमध्‍ये चालू आहे</string>
-    <string name="notification_content_plural">अॅप्‍स बॅकग्राउंडमध्‍ये चालू आहेत</string>
-</resources>
