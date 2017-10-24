@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
@@ -58,6 +59,7 @@ public class NotificationListener extends NotificationListenerService {
         }
     }
 
+
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         if (sbn == null)
@@ -66,7 +68,7 @@ public class NotificationListener extends NotificationListenerService {
         checkAndSnoozeNotification(sbn);
     }
 
-    class NotificationListenerBroadcastReceiver extends BroadcastReceiver {
+    class NotificationListenerBroadcastReceiver extends BroadcastReceiver{
         private static final String TAG = "NL Broadcast Receiver";
 
         @Override
@@ -78,6 +80,9 @@ public class NotificationListener extends NotificationListenerService {
                     checkAndSnoozeNotification(sbn);
                 }
             }
+
         }
     }
 }
+
+
