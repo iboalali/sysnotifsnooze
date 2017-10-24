@@ -3,5 +3,4 @@
     tools:ignore="MissingTranslation" >
     <string name="notification_content_singular">is running in the background</string>
     <string name="notification_content_plural">apps are running in the background</string>
-
 </resources>
