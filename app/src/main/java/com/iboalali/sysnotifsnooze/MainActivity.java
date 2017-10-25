@@ -39,9 +39,12 @@ public class MainActivity extends AppCompatActivity {
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
         private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
         private static final String KEY_SETTINGS_HIDE_ICON = "hide_icon";
+        private static final String KEY_HIDE_NOTIFICATION = "hide_notification";
         private static final String KEY_SMALL_TIP = "small_tip";
         private static final String KEY_LARGE_TIP = "large_tip";
         private static final String TAG = "SettingsFragment";
+
+        ComplexPreferences complexPreferences;
 
         private boolean isSwitchSet;
 
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings);
 
             sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+            complexPreferences = ComplexPreferences.getComplexPreferences(CONTEXT, CONTEXT.getString(R.string.shared_pref_name), MODE_PRIVATE);
 
             String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
 
@@ -349,6 +353,10 @@ public class MainActivity extends AppCompatActivity {
                     // IAP for a small tip around 5 €/$
                     if (mHelper != null) mHelper.flagEndAsync();
                     mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
+                    break;
+
+                case KEY_HIDE_NOTIFICATION:
+
                     break;
 
             }
