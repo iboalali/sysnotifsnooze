@@ -82,7 +82,6 @@ public class NotificationListener extends NotificationListenerService {
                 }
             }
 
-
             snoozeNotification(sbn.getKey(), 10000000000000L);
             //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
             //10000000000000 = 317.09792 years -> working
@@ -97,7 +96,7 @@ public class NotificationListener extends NotificationListenerService {
         if (sbn == null)
             return;
 
-        checkAndSnoozeNotification(sbn);
+        //checkAndSnoozeNotification(sbn);
     }
 
     class NotificationListenerBroadcastReceiver extends BroadcastReceiver{
@@ -109,9 +108,33 @@ public class NotificationListener extends NotificationListenerService {
 
             if (intent.getStringExtra("command").equals("hide")) {
                 for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {
-                    checkAndSnoozeNotification(sbn);
+                    //checkAndSnoozeNotification(sbn);
+                }
+            }else if(intent.getStringExtra("command").equals("extra_hide")){
+                for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {
+                    //checkAndSnoozeNotification(sbn);
+                    if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
+                        NotificationListener.this.snoozeNotification(sbn.getKey(), 10000000000000L);
+
+                        String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
+                        Log.d(TAG, sbn.getPackageName() + ": snoozed");
+                    }
+                }
+            }else if (intent.getStringExtra("command").equals("extra_show")){
+                for (StatusBarNotification sbn : NotificationListener.this.getSnoozedNotifications()) {
+                    if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
+                        NotificationListener.this.snoozeNotification(sbn.getKey(), -100000000000000L);
+                        NotificationListener.this.cancelNotification(sbn.getKey());
+
+                        
+
+                        String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
+                        Log.d(TAG, sbn.getPackageName() + ": un-snoozed");
+                    }
                 }
             }
+
+
 
         }
     }

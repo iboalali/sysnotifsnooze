@@ -38,11 +38,16 @@ public class MainActivity extends AppCompatActivity {
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
         private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
+        private static final String KEY_BACKGROUND_APPS = "background_app";
         private static final String KEY_SETTINGS_HIDE_ICON = "hide_icon";
-        private static final String KEY_HIDE_NOTIFICATION = "hide_notification";
         private static final String KEY_SMALL_TIP = "small_tip";
         private static final String KEY_LARGE_TIP = "large_tip";
         private static final String TAG = "SettingsFragment";
+
+        // debug code
+        private static final String KEY_HIDE_NOTIFICATION = "hide_notification";
+        private static final String KEY_SHOW_NOTIFICATION = "show_notification";
+        // **********
 
         ComplexPreferences complexPreferences;
 
@@ -51,8 +56,14 @@ public class MainActivity extends AppCompatActivity {
         IabHelper mHelper;
         Context CONTEXT;
 
+        // debug code
+        private Preference hide_notification;
+        private Preference show_notification;
+        // **********
+
         private Preference notification_permission;
         private SwitchPreference settings_hide_icon;
+        private Preference background_app;
         private Preference small_tip;
         private Preference large_tip;
         private boolean isNotificationAccessPermissionGranted;
@@ -88,13 +99,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            notification_permission = findPreference(KEY_NOTIFICATION_PERMISSION);
             settings_hide_icon = (SwitchPreference)findPreference(KEY_SETTINGS_HIDE_ICON);
+            notification_permission = findPreference(KEY_NOTIFICATION_PERMISSION);
+            background_app = findPreference(KEY_BACKGROUND_APPS);
+
+            // debug code
+            hide_notification = findPreference(KEY_HIDE_NOTIFICATION);
+            hide_notification.setOnPreferenceClickListener(this);
+            show_notification = findPreference(KEY_SHOW_NOTIFICATION);
+            show_notification.setOnPreferenceClickListener(this);
+            // **********
+
             small_tip = findPreference(KEY_SMALL_TIP);
             large_tip = findPreference(KEY_LARGE_TIP);
 
             notification_permission.setOnPreferenceClickListener(this);
             settings_hide_icon.setOnPreferenceClickListener(this);
+            background_app.setOnPreferenceClickListener(this);
             small_tip.setOnPreferenceClickListener(this);
             large_tip.setOnPreferenceClickListener(this);
 
@@ -355,7 +376,21 @@ public class MainActivity extends AppCompatActivity {
                     mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
                     break;
 
+                // debug code
                 case KEY_HIDE_NOTIFICATION:
+                    Intent intent = new Intent(getString(R.string.string_filter_intent));
+                    intent.putExtra("command", "extra_hide");
+                    CONTEXT.sendBroadcast(intent);
+                    break;
+
+                case KEY_SHOW_NOTIFICATION:
+                    Intent intentt = new Intent(getString(R.string.string_filter_intent));
+                    intentt.putExtra("command", "extra_show");
+                    CONTEXT.sendBroadcast(intentt);
+                    break;
+                // *********
+
+                case KEY_BACKGROUND_APPS:
 
                     break;
 
