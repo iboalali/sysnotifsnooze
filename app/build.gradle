@@ -8,7 +8,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 27
         versionCode 44
-        versionName "v1.3Betavc" + getVersionCode()
+        versionName "v1.4Betavc" + getVersionCode()
     }
 
     lintOptions{

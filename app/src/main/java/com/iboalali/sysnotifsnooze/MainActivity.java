@@ -23,6 +23,7 @@ import com.iboalali.sysnotifsnooze.util.Purchase;
 import com.iboalali.sysnotifsnooze.util.SkuDetails;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,11 +78,30 @@ public class MainActivity extends AppCompatActivity {
             CONTEXT = getActivity().getApplicationContext();
             addPreferencesFromResource(R.xml.settings);
 
+            // setup shared preferences
             sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
             complexPreferences = ComplexPreferences.getComplexPreferences(CONTEXT, CONTEXT.getString(R.string.shared_pref_name), MODE_PRIVATE);
+            complexPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                    if (s.equals(getString(R.string.shared_pref_key_package_name))) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        List<String> l = complexPreferences.getObject(getString(R.string.shared_pref_key_package_name), PackageNameList.class).getPackageNames();
+                        for (String str : l) {
+                            stringBuilder.append(str).append("\n");
+                        }
 
+                        if (background_app == null) return;
+                        background_app.setSummary(stringBuilder.toString());
+
+                    }
+                }
+            });
+
+            // license key
             String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
 
+            // setup In-app billing
             mHelper = new IabHelper(CONTEXT, base64EncodedPublicKey);
             mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                 public void onIabSetupFinished(IabResult result) {
@@ -99,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            // find Preferences
             settings_hide_icon = (SwitchPreference)findPreference(KEY_SETTINGS_HIDE_ICON);
             notification_permission = findPreference(KEY_NOTIFICATION_PERMISSION);
             background_app = findPreference(KEY_BACKGROUND_APPS);
@@ -113,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             small_tip = findPreference(KEY_SMALL_TIP);
             large_tip = findPreference(KEY_LARGE_TIP);
 
+            // setup click listener
             notification_permission.setOnPreferenceClickListener(this);
             settings_hide_icon.setOnPreferenceClickListener(this);
             background_app.setOnPreferenceClickListener(this);

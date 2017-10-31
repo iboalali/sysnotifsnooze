@@ -17,32 +17,34 @@ import com.google.gson.reflect.TypeToken;
 
 public class ComplexPreferences {
     private static ComplexPreferences complexPreferences;
-    private Context context;
+    //private Context context;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
     private static Gson GSON = new Gson();
     Type typeOfObject = new TypeToken<Object>() {
     }.getType();
 
     private ComplexPreferences(Context context, String namePreferences, int mode) {
-        this.context = context;
+        //this.context = context;
         if (namePreferences == null || namePreferences.equals("")) {
             namePreferences = "complex_preferences";
         }
         preferences = context.getSharedPreferences(namePreferences, mode);
         editor = preferences.edit();
-
     }
 
-    public static ComplexPreferences getComplexPreferences(Context context,
-                                                           String namePreferences, int mode) {
-
+    public static ComplexPreferences getComplexPreferences(Context context, String namePreferences, int mode) {
         if (complexPreferences == null) {
-            complexPreferences = new ComplexPreferences(context,
-                    namePreferences, mode);
+            complexPreferences = new ComplexPreferences(context, namePreferences, mode);
         }
 
         return complexPreferences;
+    }
+
+    public void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener){
+        preferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+        this.onSharedPreferenceChangeListener = onSharedPreferenceChangeListener;
     }
 
     public void putObject(String key, Object object) {
