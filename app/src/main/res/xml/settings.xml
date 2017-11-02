@@ -9,7 +9,7 @@
         <Preference
             android:key="background_app"
             android:title="Apps running in the Background"/>
-
+<!--
         <Preference
             android:key="hide_notification"
             android:title="Hide Notification"
@@ -19,7 +19,7 @@
             android:key="show_notification"
             android:title="Show Notification"
             android:summary="Touch to show"/>
-
+-->
     </PreferenceCategory>
 
     <PreferenceCategory

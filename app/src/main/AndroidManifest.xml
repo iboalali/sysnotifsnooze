@@ -37,6 +37,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".AppSelectorActivity"
+            android:label="Select apps"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

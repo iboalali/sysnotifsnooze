@@ -23,7 +23,7 @@ import java.util.Set;
 public class NotificationListener extends NotificationListenerService {
     private static final String TAG = "NotificationListener";
     private NotificationListenerBroadcastReceiver notificationListenerBroadcastReceiver;
-    ComplexPreferences complexPreferences;
+    //ComplexPreferences complexPreferences;
     SharedPreferences sharedPreferencesPackageNames;
     SharedPreferences.Editor editor;
 
@@ -43,7 +43,7 @@ public class NotificationListener extends NotificationListenerService {
         IntentFilter filter = new IntentFilter();
         filter.addAction(getString(R.string.string_filter_intent));
         registerReceiver(notificationListenerBroadcastReceiver, filter);
-        complexPreferences = ComplexPreferences.getComplexPreferences(getApplicationContext(), getApplicationContext().getString(R.string.shared_pref_name), MODE_PRIVATE);
+        //complexPreferences = ComplexPreferences.getComplexPreferences(getApplicationContext(), getApplicationContext().getString(R.string.shared_pref_name), MODE_PRIVATE);
         sharedPreferencesPackageNames = getSharedPreferences("myPackageNames", MODE_PRIVATE);
 
     }
@@ -67,10 +67,11 @@ public class NotificationListener extends NotificationListenerService {
             // checking for null, just to avoid a potential null exception
             if (svcs != null){
                 // if key exist, add new package names to the list and put in shared preferences
-                if (sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name))){
+                //if (sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name))){
                 //if (complexPreferences.contains(getString(R.string.shared_pref_key_package_name))) {
                     //List<String> pns = complexPreferences.getObject(getString(R.string.shared_pref_key_package_name), PackageNameList.class).getPackageNames();
-                    Set<String> pns = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name), null);
+                Set<String> pns = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
+                if (pns != null){
                     List<String> newList = new ArrayList<>(pns);
                     for (String s : svcs) {
                         Log.d(TAG, "EXTRA_FOREGROUND_APPS: " + s);
@@ -82,7 +83,8 @@ public class NotificationListener extends NotificationListenerService {
 
                     editor = sharedPreferencesPackageNames.edit();
                     editor.clear();
-                    editor.putStringSet(getString(R.string.shared_pref_key_package_name), new HashSet<>(newList));
+                    editor.putStringSet(getString(R.string.shared_pref_key_package_name_all), new HashSet<>(newList));
+                    editor.putStringSet(getString(R.string.shared_pref_key_package_name_current), new HashSet<String>(Arrays.asList(svcs)));
                     editor.apply();
 
                     //complexPreferences.putObject(getString(R.string.shared_pref_key_package_name), newList);
@@ -97,7 +99,8 @@ public class NotificationListener extends NotificationListenerService {
 
                     Log.d(TAG, "Add all EXTRA_FOREGROUND_APPS to the list");
                     editor = sharedPreferencesPackageNames.edit();
-                    editor.putStringSet(getString(R.string.shared_pref_key_package_name), new HashSet<>(Arrays.asList(svcs)));
+                    editor.putStringSet(getString(R.string.shared_pref_key_package_name_all), new HashSet<>(Arrays.asList(svcs)));
+                    editor.putStringSet(getString(R.string.shared_pref_key_package_name_current), new HashSet<String>(Arrays.asList(svcs)));
                     editor.apply();
                 }
             }
@@ -113,6 +116,14 @@ public class NotificationListener extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+        if (sbn == null)
+            return;
+
+        checkAndSnoozeNotification(sbn);
+    }
+
+    @Override
+    public void onNotificationRemoved(StatusBarNotification sbn) {
         if (sbn == null)
             return;
 
@@ -145,8 +156,6 @@ public class NotificationListener extends NotificationListenerService {
                     if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
                         NotificationListener.this.snoozeNotification(sbn.getKey(), -100000000000000L);
                         NotificationListener.this.cancelNotification(sbn.getKey());
-
-                        
 
                         String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
                         Log.d(TAG, sbn.getPackageName() + ": un-snoozed");

@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         Context CONTEXT;
 
         // debug code
-        private Preference hide_notification;
-        private Preference show_notification;
+        //private Preference hide_notification;
+        //private Preference show_notification;
         // **********
 
         private Preference notification_permission;
@@ -87,15 +87,20 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
                 @Override
                 public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                    if (s.equals(getString(R.string.shared_pref_key_package_name))) {
+                    if (s.equals(getString(R.string.shared_pref_key_package_name_current))) {
                         StringBuilder stringBuilder = new StringBuilder();
-                        Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name), null);
-                        for (String str : l) {
-                            stringBuilder.append(str).append("\n");
-                        }
+                        Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_current), null);
+                        if (l != null) {
+                            for (String str : l) {
+                                stringBuilder.append("- ").append(Utils.getAppName(CONTEXT, str)).append("\n");
+                            }
 
-                        if (background_app == null) return;
-                        background_app.setSummary(stringBuilder.toString());
+                            stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+
+                            if (background_app != null) {
+                                background_app.setSummary(stringBuilder.toString());
+                            }
+                        }
                     }
                 }
             });
@@ -148,10 +153,10 @@ public class MainActivity extends AppCompatActivity {
             background_app = findPreference(KEY_BACKGROUND_APPS);
 
             // debug code
-            hide_notification = findPreference(KEY_HIDE_NOTIFICATION);
-            hide_notification.setOnPreferenceClickListener(this);
-            show_notification = findPreference(KEY_SHOW_NOTIFICATION);
-            show_notification.setOnPreferenceClickListener(this);
+            //hide_notification = findPreference(KEY_HIDE_NOTIFICATION);
+            //hide_notification.setOnPreferenceClickListener(this);
+            //show_notification = findPreference(KEY_SHOW_NOTIFICATION);
+            //show_notification.setOnPreferenceClickListener(this);
             // **********
 
             small_tip = findPreference(KEY_SMALL_TIP);
@@ -241,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        }
+        } // end of onCreate
 
         @Override
         public void onResume() {
@@ -271,8 +276,21 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 Log.d(TAG, "Has Notification Access");
 
-                if (!sharedPreferences.getBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), false)) {
+                StringBuilder stringBuilder = new StringBuilder();
+                Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_current), null);
+                if (l != null) {
+                    for (String str : l) {
+                        stringBuilder.append("- ").append(Utils.getAppName(CONTEXT, str)).append("\n");
+                    }
 
+                    stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+
+                    if (background_app != null) {
+                        background_app.setSummary(stringBuilder.toString());
+                    }
+                }
+
+                if (!sharedPreferences.getBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), false)) {
                     Log.d(TAG, "sending broadcast");
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
