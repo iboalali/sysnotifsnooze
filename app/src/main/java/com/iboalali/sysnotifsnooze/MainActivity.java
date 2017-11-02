@@ -24,6 +24,7 @@ import com.iboalali.sysnotifsnooze.util.SkuDetails;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         private boolean isNotificationAccessPermissionGranted;
 
         private SharedPreferences sharedPreferences;
+        private SharedPreferences sharedPreferencesPackageNames;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +81,27 @@ public class MainActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings);
 
             // setup shared preferences
-            sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+            sharedPreferences = getActivity().getSharedPreferences("mySettingsPref", MODE_PRIVATE);
+            sharedPreferencesPackageNames = getActivity().getSharedPreferences("myPackageNames", MODE_PRIVATE);
+
+            sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                    if (s.equals(getString(R.string.shared_pref_key_package_name))) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name), null);
+                        for (String str : l) {
+                            stringBuilder.append(str).append("\n");
+                        }
+
+                        if (background_app == null) return;
+                        background_app.setSummary(stringBuilder.toString());
+                    }
+                }
+            });
+
+            // TODO: maybe use sharedPreferences.edit().putStringSet() and sharedPreferences.getStringSet() instead ComplexPreferences
+            /*
             complexPreferences = ComplexPreferences.getComplexPreferences(CONTEXT, CONTEXT.getString(R.string.shared_pref_name), MODE_PRIVATE);
             complexPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
                 @Override
@@ -97,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+            */
 
             // license key
             String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
