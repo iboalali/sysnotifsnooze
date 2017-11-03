@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         private static final String KEY_SHOW_NOTIFICATION = "show_notification";
         // **********
 
-        ComplexPreferences complexPreferences;
+        //ComplexPreferences complexPreferences;
 
         private boolean isSwitchSet;
 
@@ -454,7 +454,8 @@ public class MainActivity extends AppCompatActivity {
                 // *********
 
                 case KEY_BACKGROUND_APPS:
-
+                    Intent i = new Intent(getContext(), AppSelectorActivity.class);
+                    startActivity(i);
                     break;
 
             }
