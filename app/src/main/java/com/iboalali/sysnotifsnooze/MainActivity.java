@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             String base64EncodedPublicKey = getContext().getString(R.string.public_license_key);
 
             // setup In-app billing
-            mHelper = new IabHelper(getContext(), base64EncodedPublicKey);
+            mHelper = new IabHelper(getActivity().getApplicationContext(), base64EncodedPublicKey);
             mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                 public void onIabSetupFinished(IabResult result) {
                     if (!result.isSuccess()) {

@@ -19,13 +19,6 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
-<!--
-        <receiver android:name=".MainActivity$DialBroadcast">
-            <intent-filter>
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
-            </intent-filter>
-        </receiver>
--->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
