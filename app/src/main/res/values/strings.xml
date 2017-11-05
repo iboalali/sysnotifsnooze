@@ -22,7 +22,7 @@
     <string name="string_sharedPreferences_isIconHidden" translatable="false">isIconHidden</string>
     <string name="string_yes">Yes</string>
     <string name="string_no">No</string>
-    <string name="string_sharedPref_granted" translatable="false">granted?</string>
+    <string name="string_sharedPref_granted">granted?</string>
 
     <string name="shared_pref_key_package_name_all" translatable="false">packageNamesAll</string>
     <string name="shared_pref_key_package_name_current" translatable="false">packageNamesCurrent</string>

@@ -121,10 +121,6 @@ public class NotificationListener extends NotificationListenerService {
                     editor.apply();
                 }
             }
-
-            //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
-            //10000000000000 = 317.09792 years -> working
-
         }
     }
 
@@ -135,6 +131,7 @@ public class NotificationListener extends NotificationListenerService {
             return;
 
         checkForSystemNotification(sbn);
+        snoozeSystemNotification(sbn);
     }
 
     @Override
@@ -143,6 +140,7 @@ public class NotificationListener extends NotificationListenerService {
             return;
 
         checkForSystemNotification(sbn);
+        snoozeSystemNotification(sbn);
     }
 
     class NotificationListenerBroadcastReceiver extends BroadcastReceiver{

@@ -1,5 +1,6 @@
 package com.iboalali.sysnotifsnooze;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -61,6 +62,14 @@ public class AppSelectorActivity extends AppCompatActivity{
                 }
             }
 
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            Intent intent = new Intent(getString(R.string.string_filter_intent));
+            intent.putExtra("command", "hide");
+            getContext().sendBroadcast(intent);
         }
 
         @Override
