@@ -66,15 +66,23 @@ public class NotificationListener extends NotificationListenerService {
 
             String[] svcs = sbn.getNotification().extras.getStringArray(EXTRA_FOREGROUND_APPS);
 
+            boolean areAllSelected = false;
+
             Set<String> selected = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_selected), null);
             if (selected != null && svcs != null){
                 for(String s: svcs){
                     if (selected.contains(s)){
-                        // TODO: test for the best combination of duration and battery life
-                        snoozeNotification(sbn.getKey(), snoozeDurationMs);
-                        Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed for " + snoozeDurationMs);
-
+                        areAllSelected = true;
+                    }else{
+                        areAllSelected = false;
+                        break;
                     }
+                }
+
+                if (areAllSelected){
+                    // TODO: test for the best combination of duration and battery life
+                    snoozeNotification(sbn.getKey(), snoozeDurationMs);
+                    Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed for " + snoozeDurationMs);
                 }
             }
 
