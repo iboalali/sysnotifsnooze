@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:key="apps"
-        android:title="Apps">
+        android:title="Select the apps, for which to hide the running in the background/is using battery notification for">
 
     </PreferenceCategory>
 </PreferenceScreen>

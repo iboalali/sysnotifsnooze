@@ -20,8 +20,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Toolbar_AppName"
-                android:text="Select the apps"
                 android:layout_gravity="bottom"
+                android:text="Select Apps"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"/>

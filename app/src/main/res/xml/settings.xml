@@ -8,7 +8,7 @@
 
         <Preference
             android:key="background_app"
-            android:title="Apps running in the Background"/>
+            android:title="Apps running in the Background/are using battery"/>
 <!--
         <Preference
             android:key="hide_notification"

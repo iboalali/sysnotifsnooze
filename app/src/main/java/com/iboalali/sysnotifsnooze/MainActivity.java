@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -51,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         private static final String KEY_SHOW_NOTIFICATION = "show_notification";
         // **********
 
-        //ComplexPreferences complexPreferences;
-
         private boolean isSwitchSet;
 
         IabHelper mHelper;
@@ -84,47 +85,7 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferences = getActivity().getSharedPreferences("mySettingsPref", MODE_PRIVATE);
             sharedPreferencesPackageNames = getActivity().getSharedPreferences("myPackageNames", MODE_PRIVATE);
 
-            sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                    if (s.equals(getString(R.string.shared_pref_key_package_name_current))) {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_current), null);
-                        if (l != null) {
-                            for (String str : l) {
-                                stringBuilder.append("- ").append(Utils.getAppName(CONTEXT, str)).append("\n");
-                            }
-
-                            stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
-
-                            if (background_app != null) {
-                                background_app.setSummary(stringBuilder.toString());
-                            }
-                        }
-                    }
-                }
-            });
-
-            // TODO: maybe use sharedPreferences.edit().putStringSet() and sharedPreferences.getStringSet() instead ComplexPreferences
-            /*
-            complexPreferences = ComplexPreferences.getComplexPreferences(CONTEXT, CONTEXT.getString(R.string.shared_pref_name), MODE_PRIVATE);
-            complexPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                    if (s.equals(getString(R.string.shared_pref_key_package_name))) {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        List<String> l = complexPreferences.getObject(getString(R.string.shared_pref_key_package_name), PackageNameList.class).getPackageNames();
-                        for (String str : l) {
-                            stringBuilder.append(str).append("\n");
-                        }
-
-                        if (background_app == null) return;
-                        background_app.setSummary(stringBuilder.toString());
-
-                    }
-                }
-            });
-            */
+            sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
             // license key
             String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
@@ -184,25 +145,25 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Log.d(TAG, "set switch to TRUE");
 
-                                PackageManager pkg = CONTEXT.getPackageManager();
-                                pkg.setComponentEnabledSetting(new ComponentName(CONTEXT, MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                                PackageManager pkg = getContext().getPackageManager();
+                                pkg.setComponentEnabledSetting(new ComponentName(getContext(), MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                                         PackageManager.DONT_KILL_APP);
 
                                 settings_hide_icon.setChecked(true);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), true);
+                                editor.putBoolean(getContext().getString(R.string.string_sharedPreferences_isIconHidden), true);
                                 editor.apply();
 
                                 Log.d(TAG, "switch is: " + String.valueOf(settings_hide_icon.isChecked()));
                             }
                         });
 
-                        builder.setNegativeButton(CONTEXT.getString(R.string.string_no), new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(getContext().getString(R.string.string_no), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 settings_hide_icon.setChecked(false);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), true);
+                                editor.putBoolean(getContext().getString(R.string.string_sharedPreferences_isIconHidden), true);
                                 editor.apply();
                             }
                         });
@@ -212,13 +173,13 @@ public class MainActivity extends AppCompatActivity {
                             public void onCancel(DialogInterface dialogInterface) {
                                 Log.d(TAG, "set switch to FALSE (1)");
 
-                                PackageManager pkg = CONTEXT.getPackageManager();
-                                pkg.setComponentEnabledSetting(new ComponentName(CONTEXT, MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                PackageManager pkg = getContext().getPackageManager();
+                                pkg.setComponentEnabledSetting(new ComponentName(getContext(), MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                                         PackageManager.DONT_KILL_APP);
 
                                 settings_hide_icon.setChecked(false);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), false);
+                                editor.putBoolean(getContext().getString(R.string.string_sharedPreferences_isIconHidden), false);
                                 editor.apply();
                                 Log.d(TAG, "switch is: " + String.valueOf(settings_hide_icon.isChecked()));
                             }
@@ -230,13 +191,13 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         Log.d(TAG, "set switch to FALSE (2)");
 
-                        PackageManager pkg = CONTEXT.getPackageManager();
-                        pkg.setComponentEnabledSetting(new ComponentName(CONTEXT, MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager pkg = getContext().getPackageManager();
+                        pkg.setComponentEnabledSetting(new ComponentName(getContext(), MainActivity.class),PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                                 PackageManager.DONT_KILL_APP);
 
                         settings_hide_icon.setChecked(false);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), false);
+                        editor.putBoolean(getContext().getString(R.string.string_sharedPreferences_isIconHidden), false);
                         editor.apply();
                         Log.d(TAG, "switch is: " + String.valueOf(settings_hide_icon.isChecked()));
                     }
@@ -252,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
         public void onResume() {
             super.onResume();
 
-            if (!Utils.hasAccessGranted(CONTEXT)) {
+            if (!Utils.hasAccessGranted(getContext())) {
                 Log.d(TAG, "No Notification Access");
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -280,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_current), null);
                 if (l != null) {
                     for (String str : l) {
-                        stringBuilder.append("- ").append(Utils.getAppName(CONTEXT, str)).append("\n");
+                        stringBuilder.append("- ").append(Utils.getAppName(getContext(), str)).append("\n");
                     }
 
                     stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
@@ -290,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                if (!sharedPreferences.getBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), false)) {
+                if (!sharedPreferences.getBoolean(getContext().getString(R.string.string_sharedPref_granted), false)) {
                     Log.d(TAG, "sending broadcast");
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -299,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getString(R.string.string_filter_intent));
                     intent.putExtra("command", "hide");
-                    CONTEXT.sendBroadcast(intent);
+                    getContext().sendBroadcast(intent);
                 }
             }
         }
@@ -309,7 +270,30 @@ public class MainActivity extends AppCompatActivity {
             super.onDestroy();
             if (mHelper != null) mHelper.dispose();
             mHelper = null;
+
+            sharedPreferencesPackageNames.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         }
+
+        SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                if (s.equals(getString(R.string.shared_pref_key_package_name_current))) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_current), null);
+                    if (l != null) {
+                        for (String str : l) {
+                            stringBuilder.append("- ").append(Utils.getAppName(getContext(), str)).append("\n");
+                        }
+
+                        stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+
+                        if (background_app != null) {
+                            background_app.setSummary(stringBuilder.toString());
+                        }
+                    }
+                }
+            }
+        };
 
         IabHelper.QueryInventoryFinishedListener queryInventoryFinishedListener = new IabHelper.QueryInventoryFinishedListener() {
             @Override
