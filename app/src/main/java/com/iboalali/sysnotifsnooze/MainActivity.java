@@ -1,23 +1,21 @@
 package com.iboalali.sysnotifsnooze;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.iboalali.sysnotifsnooze.util.IabHelper;
 import com.iboalali.sysnotifsnooze.util.IabResult;
@@ -26,7 +24,6 @@ import com.iboalali.sysnotifsnooze.util.Purchase;
 import com.iboalali.sysnotifsnooze.util.SkuDetails;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView textView = findViewById(R.id.textView_app_name);
+        String title = textView.getText().toString();
+
+        if (Build.VERSION.SDK_INT >= 27 || Build.MODEL.equals("Pixel 2") || Build.MODEL.equals("Pixel 2 XL")){
+            title = title.replace("%s", getString(R.string.string_app_name_replace_using_battery));
+        }else{
+            title = title.replace("%s", getString(R.string.string_app_name_replace_running_in_the_background));
+        }
+
+        textView.setText(title);
     }
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
@@ -49,20 +57,9 @@ public class MainActivity extends AppCompatActivity {
         private static final String KEY_LARGE_TIP = "large_tip";
         private static final String TAG = "SettingsFragment";
 
-        // debug code
-        private static final String KEY_HIDE_NOTIFICATION = "hide_notification";
-        private static final String KEY_SHOW_NOTIFICATION = "show_notification";
-        // **********
-
         private boolean isSwitchSet;
 
         IabHelper mHelper;
-        Context CONTEXT;
-
-        // debug code
-        //private Preference hide_notification;
-        //private Preference show_notification;
-        // **********
 
         private Preference notification_permission;
         private SwitchPreference settings_hide_icon;
@@ -77,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
-            CONTEXT = getActivity().getApplicationContext();
             addPreferencesFromResource(R.xml.settings);
 
             // setup shared preferences
@@ -88,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
             // license key
-            String base64EncodedPublicKey = CONTEXT.getString(R.string.public_license_key);
+            String base64EncodedPublicKey = getContext().getString(R.string.public_license_key);
 
             // setup In-app billing
-            mHelper = new IabHelper(CONTEXT, base64EncodedPublicKey);
+            mHelper = new IabHelper(getContext(), base64EncodedPublicKey);
             mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                 public void onIabSetupFinished(IabResult result) {
                     if (!result.isSuccess()) {
@@ -112,13 +107,6 @@ public class MainActivity extends AppCompatActivity {
             settings_hide_icon = (SwitchPreference)findPreference(KEY_SETTINGS_HIDE_ICON);
             notification_permission = findPreference(KEY_NOTIFICATION_PERMISSION);
             background_app = findPreference(KEY_BACKGROUND_APPS);
-
-            // debug code
-            //hide_notification = findPreference(KEY_HIDE_NOTIFICATION);
-            //hide_notification.setOnPreferenceClickListener(this);
-            //show_notification = findPreference(KEY_SHOW_NOTIFICATION);
-            //show_notification.setOnPreferenceClickListener(this);
-            // **********
 
             small_tip = findPreference(KEY_SMALL_TIP);
             large_tip = findPreference(KEY_LARGE_TIP);
@@ -217,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "No Notification Access");
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), false);
+                editor.putBoolean(getContext().getString(R.string.string_sharedPref_granted), false);
                 editor.apply();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
@@ -255,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "sending broadcast");
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean(CONTEXT.getString(R.string.string_sharedPref_granted), true);
+                    editor.putBoolean(getContext().getString(R.string.string_sharedPref_granted), true);
                     editor.apply();
 
                     Intent intent = new Intent(getString(R.string.string_filter_intent));
@@ -423,20 +411,6 @@ public class MainActivity extends AppCompatActivity {
                     mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
                     break;
 
-                // debug code
-                case KEY_HIDE_NOTIFICATION:
-                    Intent intent = new Intent(getString(R.string.string_filter_intent));
-                    intent.putExtra("command", "extra_hide");
-                    CONTEXT.sendBroadcast(intent);
-                    break;
-
-                case KEY_SHOW_NOTIFICATION:
-                    Intent intentt = new Intent(getString(R.string.string_filter_intent));
-                    intentt.putExtra("command", "extra_show");
-                    CONTEXT.sendBroadcast(intentt);
-                    break;
-                // *********
-
                 case KEY_BACKGROUND_APPS:
                     Intent i = new Intent(getContext(), AppSelectorActivity.class);
                     startActivity(i);
@@ -450,10 +424,10 @@ public class MainActivity extends AppCompatActivity {
         public void onStart() {
             super.onStart();
 
-            isNotificationAccessPermissionGranted = Utils.hasAccessGranted(CONTEXT);
+            isNotificationAccessPermissionGranted = Utils.hasAccessGranted(getContext());
             notification_permission.setSummary(isNotificationAccessPermissionGranted ? getString(R.string.granted) : getString(R.string.not_granted));
 
-            isSwitchSet = sharedPreferences.getBoolean(CONTEXT.getString(R.string.string_sharedPreferences_isIconHidden), false);
+            isSwitchSet = sharedPreferences.getBoolean(getContext().getString(R.string.string_sharedPreferences_isIconHidden), false);
             settings_hide_icon.setChecked(isSwitchSet);
 
         }

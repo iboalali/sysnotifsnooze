@@ -11,3 +11,4 @@ in-app billing public key.txt
 app/app-release.apk
 app/src/main/res/values/publickey.xml
 app/release/app-release.apk
+app/release/output.json

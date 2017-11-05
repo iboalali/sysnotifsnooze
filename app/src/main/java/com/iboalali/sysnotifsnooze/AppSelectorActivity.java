@@ -2,6 +2,7 @@ package com.iboalali.sysnotifsnooze;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -61,6 +62,17 @@ public class AppSelectorActivity extends AppCompatActivity{
                     preferenceCategory.addPreference(p);
                 }
             }
+
+            String title = preferenceCategory.getTitle().toString();
+
+            // all devices with android 8.1 and Pixel 2 (XL) on 8.0 and onward are using "using battery" instead of "running in the background"
+            if (Build.VERSION.SDK_INT >= 27 || Build.MODEL.equals("Pixel 2") || Build.MODEL.equals("Pixel 2 XL")){
+                title = title.replace("%s", "using battery");
+            }else{
+                title = title.replace("%s", "running in the background");
+            }
+
+            preferenceCategory.setTitle(title);
 
         }
 

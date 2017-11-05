@@ -8,8 +8,8 @@
 
         <Preference
             android:key="background_app"
-            android:title="Apps currently running in the Background"/>
-<!--
+            android:title="@string/string_settings_running_in_the_background"/>
+<!-- for debugging only
         <Preference
             android:key="hide_notification"
             android:title="Hide Notification"
@@ -23,7 +23,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Source Code">
+        android:title="@string/string_settings_source_code">
         <Preference
             android:title="https://goo.gl/7yq9M1">
             <intent
@@ -49,7 +49,7 @@
     <PreferenceCategory
         android:title="@string/string_settings_follow_me">
         <Preference
-            android:title="Twitter">
+            android:title="@string/string_settings_twitter">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://twitter.com/iboalali"/>
