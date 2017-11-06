@@ -16,7 +16,7 @@
     <string name="string_settings_small_donation">捐小款</string>
     <string name="string_settings_support_me_with">支持我 …</string>
     <string name="title_activity_main_settings">隐藏在后台中运行的通知</string>
-    <string name="string_hide_icon_alert_dialog_msg">"这个开关将隐藏启动器的应用程序图标
+    <string name="string_hide_icon_alert_dialog_msg">"这个开关将隐藏此应用程序在桌面上的图标
 
 警告！
 隐藏之后你必须重新安装此应用才能将其打开！"</string>
