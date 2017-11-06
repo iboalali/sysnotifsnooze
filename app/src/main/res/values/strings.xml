@@ -19,7 +19,7 @@
     <string name="string_title_select_apps_screen">Select the apps, for which to hide the \"%s\" notification for</string>
     <string name="string_app_name_replace_using_battery">using battery</string>
     <string name="string_app_name_replace_running_in_the_background">running in the background</string>
-    <string name="string_all_key">all.all.all.all.all</string>
+    <string name="string_all_key" translatable="false">all.all.all.all.all</string>
 
     <!-- settings screen strings -->
     <string name="string_settings_small_donation">a Small Donation</string>
