@@ -1,0 +1,29 @@
+<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<resources>
+    <string name=\"Allow\">允許</string>
+    <string name=\"OK\">確定</string>
+    <string name=\"app_name\">隱藏 \\\"正在後台執行\\\" 通知</string>
+    <string name=\"granted\">已允許</string>
+    <string name=\"not_granted\">未允許</string>
+    <string name=\"permission_request_msg\">\"這個應用程式能幹掉那些煩人的「XX在後台執行」通知，你必須讓這個應用程式獲取你的通知存取權,
+
+點\"是\"，然後在下一個熒幕中，將此應用程式的存取權打開，然後點\"允許\"\"</string>
+    <string name=\"permission_request_title\">獲取通知存取權</string>
+    <string name=\"string_settings_follow_me\">聯繫我</string>
+    <string name=\"string_settings_large_donation\">捐大款</string>
+    <string name=\"string_settings_notification_access_permission\">通知存取權</string>
+    <string name=\"string_settings_permission\">許可</string>
+    <string name=\"string_settings_small_donation\">捐小款</string>
+    <string name=\"string_settings_support_me_with\">支持我…</string>
+    <string name=\"title_activity_main_settings\">隱藏在後台中執行的通知</string>
+    <string name=\"string_hide_icon_alert_dialog_msg\">\"這個開關將隱藏此應用程式在桌布上圖標
+
+警告！
+隱藏之後你必須再安裝此應用才能將其打開！\"</string>
+    <string name=\"string_hide_icon_alert_dialog_title\">在桌布上隱藏應用圖標?</string>
+    <string name=\"string_no\">否</string>
+    <string name=\"string_settings_hide_app_icon_from_launcher\">在桌布上隱藏應用圖標</string>
+    <string name=\"string_settings_settings\">設定</string>
+    <string name=\"string_sharedPref_granted\">允許?</string>
+    <string name=\"string_yes\">是</string>
+</resources>
