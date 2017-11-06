@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.0"
+    buildToolsVersion "27.0.1"
     defaultConfig {
         applicationId "com.iboalali.sysnotifsnooze"
         minSdkVersion 26
         targetSdkVersion 27
-        versionCode 69
+        versionCode 70
         versionName "v1.5-Beta-vc" + getVersionCode()
     }
 
@@ -30,5 +30,4 @@ dependencies {
     compile 'com.android.support:design:27.+'
     compile 'com.android.support:support-v4:27.+'
     //compile 'com.android.billingclient:billing:1.0'
-    compile 'com.google.code.gson:gson:2.8.2'
 }
