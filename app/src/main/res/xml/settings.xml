@@ -6,26 +6,20 @@
             android:key="notification_permission"
             android:title="@string/string_settings_notification_access_permission"/>
 
-
-<!-- for debugging only
         <Preference
-            android:key="hide_notification"
-            android:title="Hide Notification"
-            android:summary="Touch to hide"/>
-
-        <Preference
-            android:key="show_notification"
-            android:title="Show Notification"
-            android:summary="Touch to show"/>
--->
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/string_settings_running_in_the_background">
-        <Preference
+            android:title="@string/string_settings_running_in_the_background"
             android:key="background_app"/>
-            <!--android:title="@string/string_settings_running_in_the_background"-->
+        <!-- for debugging only
+                <Preference
+                    android:key="hide_notification"
+                    android:title="Hide Notification"
+                    android:summary="Touch to hide"/>
 
+                <Preference
+                    android:key="show_notification"
+                    android:title="Show Notification"
+                    android:summary="Touch to show"/>
+        -->
     </PreferenceCategory>
 
     <PreferenceCategory
