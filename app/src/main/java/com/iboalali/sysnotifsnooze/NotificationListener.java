@@ -70,12 +70,16 @@ public class NotificationListener extends NotificationListenerService {
 
             Set<String> selected = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_selected), null);
             if (selected != null && svcs != null){
-                for(String s: svcs){
-                    if (selected.contains(s)){
-                        areAllSelected = true;
-                    }else{
-                        areAllSelected = false;
-                        break;
+                if (selected.contains(getString(R.string.string_all_key))){
+                    areAllSelected = true;
+                }else {
+                    for (String s : svcs) {
+                        if (selected.contains(s)) {
+                            areAllSelected = true;
+                        } else {
+                            areAllSelected = false;
+                            break;
+                        }
                     }
                 }
 
@@ -85,7 +89,6 @@ public class NotificationListener extends NotificationListenerService {
                     Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed for " + snoozeDurationMs);
                 }
             }
-
         }
     }
 

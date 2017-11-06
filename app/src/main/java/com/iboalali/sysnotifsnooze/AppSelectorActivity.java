@@ -43,13 +43,27 @@ public class AppSelectorActivity extends AppCompatActivity{
             PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("apps");
             sharedPreferencesPackageNames = getActivity().getSharedPreferences("myPackageNames", MODE_PRIVATE);
 
+
             Set<String> all = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
             Set<String> selected = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_selected), null);
+
+            CheckBoxPreference a = new CheckBoxPreference(getContext());
+            a.setKey(getContext().getString(R.string.string_all_key));
+            a.setTitle("All");
+            if (selected != null){
+                if (selected.contains(getContext().getString(R.string.string_all_key))){
+                    a.setChecked(true);
+                }
+            }
+            a.setOnPreferenceClickListener(this);
+            preferenceCategory.addPreference(a);
+
             if (all != null){
                 for(String s: all){
                     CheckBoxPreference p = new CheckBoxPreference(getContext());
                     p.setKey(s);
                     p.setSummary(s);
+                    p.setEnabled(!a.isChecked());
 
                     if (selected != null){
                         if (selected.contains(s)){
@@ -88,25 +102,54 @@ public class AppSelectorActivity extends AppCompatActivity{
         public boolean onPreferenceClick(Preference preference) {
             PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("apps");
 
-            Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
-            if (l != null) {
-                List<String> list = new ArrayList<>();
-
-                for (String s : l) {
-                    CheckBoxPreference p = (CheckBoxPreference) preferenceCategory.findPreference(s);
-                    if (p.isChecked()){
-                        Log.d(TAG, preference.getKey() + ": is checked. Put in selected list");
-                        list.add(s);
+            if (preference.getKey().equals(getString(R.string.string_all_key))){
+                Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
+                if (l != null){
+                    for (String s : l){
+                        CheckBoxPreference p = (CheckBoxPreference) preferenceCategory.findPreference(s);
+                        p.setEnabled(!((CheckBoxPreference)preference).isChecked());
                     }
                 }
 
-                for(String s: list){
-                    Log.d(TAG, "list: " + s);
-                }
-
+                List<String> list = new ArrayList<>();
                 SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
+
+                if (((CheckBoxPreference)preference).isChecked()){
+                    list.add(getString(R.string.string_all_key));
+                }else{
+                    if (l != null) {
+                        for (String s : l) {
+                            CheckBoxPreference p = (CheckBoxPreference) preferenceCategory.findPreference(s);
+                            if (p.isChecked()) {
+                                Log.d(TAG, preference.getKey() + ": is checked. Put in selected list");
+                                list.add(s);
+                            }
+                        }
+                    }
+                }
                 editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
                 editor.apply();
+            }else {
+                Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
+                if (l != null) {
+                    List<String> list = new ArrayList<>();
+
+                    for (String s : l) {
+                        CheckBoxPreference p = (CheckBoxPreference) preferenceCategory.findPreference(s);
+                        if (p.isChecked()) {
+                            Log.d(TAG, preference.getKey() + ": is checked. Put in selected list");
+                            list.add(s);
+                        }
+                    }
+
+                    for (String s : list) {
+                        Log.d(TAG, "list: " + s);
+                    }
+
+                    SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
+                    editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+                    editor.apply();
+                }
             }
 
             return false;
