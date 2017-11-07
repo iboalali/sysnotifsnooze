@@ -49,7 +49,7 @@ public class AppSelectorActivity extends AppCompatActivity{
 
             CheckBoxPreference a = new CheckBoxPreference(getContext());
             a.setKey(getContext().getString(R.string.string_all_key));
-            a.setTitle("All");
+            a.setTitle("All apps");
             if (selected != null){
                 if (selected.contains(getContext().getString(R.string.string_all_key))){
                     a.setChecked(true);
