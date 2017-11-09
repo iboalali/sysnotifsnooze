@@ -7,7 +7,7 @@
             android:title="@string/string_settings_notification_access_permission"/>
 
         <Preference
-            android:title="@string/string_settings_running_in_the_background"
+            android:title="@string/string_settings_select_apps"
             android:key="background_app"/>
         <!-- for debugging only
                 <Preference

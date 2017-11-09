@@ -10,7 +10,7 @@
     <string name="string_title_select_apps">选择应用程序</string>
     <string name="string_app_name_replace_using_battery">电池相关</string>
     <string name="string_settings_source_code">源码</string>
-    <string name="string_all_text">所有应用</string>
+    <string name="string_all_apps">所有应用</string>
     <string name="granted">已允许</string>
     <string name="not_granted">未允许</string>
     <string name="permission_request_msg">"这个应用程序能去掉那些烦人的“XX在后台运行”通知，你必须让这个应用程序获取你的通知使用权。请点击"确定"，然后在下一个屏幕中，将此应用程序的权限打开，然后点"允许""</string>
@@ -29,6 +29,5 @@
     <string name="string_no">否</string>
     <string name="string_settings_hide_app_icon_from_launcher">在桌面上隐藏应用图标</string>
     <string name="string_settings_settings">设置</string>
-    <string name="string_sharedPref_granted">允许?</string>
     <string name="string_yes">是</string>
 </resources>

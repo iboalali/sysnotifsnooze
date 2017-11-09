@@ -9,9 +9,22 @@
     <string name="granted">Erlaubt</string>
     <string name="string_settings_follow_me">Folge mir</string>
     <string name="string_settings_permission">Berechtigung</string>
-    <string name="string_settings_support_me_with">Unterstütze mich mit …</string>
+    <string name="string_settings_support_me_with">Unterstüze …</string>
     <string name="title_activity_main_settings">Verstecke die Im Hintergrund ausgeführt Benachrichtigung</string>
     <string name="not_granted">Nicht Erlaubt</string>
     <string name="permission_request_msg">\"Um die lästige \"im Hintergrung ausgefüht\" Benachrichtigung zu verstecken, muss du diese App das zugriff auf deine Benachrichtigungen erlauben.\n\nDrücke OK, und in der nächsten Seite, lege den Schalter um und drücke auf \"Zulassen\"</string>
     <string name="permission_request_title">Erlaubnis zum Zugreifen auf deine Benachrichtigungen</string>
+    <string name="string_hide_icon_alert_dialog_title">Verstecke die App Icon vom launcher?</string>
+    <string name="string_no">Nein</string>
+    <string name="string_settings_hide_app_icon_from_launcher">Verstecke die App Icon vom launcher</string>
+    <string name="string_settings_settings">Einstellungen</string>
+    <string name="string_yes">Ja</string>
+    <string name="app_name_2">Verstecke die \"%s\" Benachrichtigung</string>
+    <string name="string_title_select_apps">Apps Auswählen</string>
+    <string name="string_title_select_apps_screen">Wählen sie für welche app die \"%s\" Benachrichtigung versteckt werden soll</string>
+    <string name="string_app_name_replace_running_in_the_background">im Hintergrund ausgeführt</string>
+    <string name="string_all_apps">Alle Apps</string>
+    <string name="string_settings_running_in_the_background">Apps die gerade im Hintergrund laufen</string>
+    <string name="string_settings_select_apps">Drücken Sie, um Apps auszuwählen</string>
+    <string name="string_app_name_replace_using_battery">verbraucht Strom</string>
 </resources>

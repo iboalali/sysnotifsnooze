@@ -243,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
                 StringBuilder stringBuilder = new StringBuilder();
                 Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_current), null);
                 if (l != null) {
+                    stringBuilder.append(getString(R.string.string_settings_running_in_the_background)).append(":").append("\n");
                     for (String str : l) {
                         stringBuilder.append("- ").append(Utils.getAppName(getContext(), str)).append("\n");
                     }
@@ -284,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
                     StringBuilder stringBuilder = new StringBuilder();
                     Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_current), null);
                     if (l != null) {
+                        stringBuilder.append(getString(R.string.string_settings_running_in_the_background)).append(":").append("\n");
                         for (String str : l) {
                             stringBuilder.append("- ").append(Utils.getAppName(getContext(), str)).append("\n");
                         }
