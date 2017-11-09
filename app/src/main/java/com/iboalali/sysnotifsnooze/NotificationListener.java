@@ -26,7 +26,7 @@ public class NotificationListener extends NotificationListenerService {
     SharedPreferences sharedPreferencesPackageNames;
     SharedPreferences.Editor editor;
 
-    long snoozeDurationMs = 3000L;
+    long snoozeDurationMs = 5000L;
 
     /**
      * This is set on the notification shown by the activity manager about all apps

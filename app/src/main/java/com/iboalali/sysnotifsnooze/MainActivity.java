@@ -24,6 +24,8 @@ import com.iboalali.sysnotifsnooze.util.Purchase;
 import com.iboalali.sysnotifsnooze.util.SkuDetails;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     public static String SKU_SMALL_TIP_2 = "small_tip_2";
     public static String SKU_LARGE_TIP_5 = "large_tip_5";
     private static final String TAG = "MainActivity";
+
+    private SharedPreferences sharedPreferencesPackageNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textView.setText(title);
+
+        sharedPreferencesPackageNames = getSharedPreferences("myPackageNames", MODE_PRIVATE);
+        if(!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
+            SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
+            List<String> list = new ArrayList<>();
+            list.add(getString(R.string.string_all_key));
+            editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+            editor.apply();
+        }
+
     }
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
@@ -68,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
         private Preference large_tip;
         private boolean isNotificationAccessPermissionGranted;
 
-        private SharedPreferences sharedPreferences;
         private SharedPreferences sharedPreferencesPackageNames;
+        private SharedPreferences sharedPreferences;
+
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
