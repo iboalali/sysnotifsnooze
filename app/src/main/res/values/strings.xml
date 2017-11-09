@@ -16,7 +16,7 @@
     <string name="string_yes">Yes</string>
     <string name="string_no">No</string>
     <string name="string_title_select_apps">Select Apps</string>
-    <!--String_title_select_apps_screen, \"%s\", cannot use translations from other regions<-->
+    <!--String_title_select_apps_screen, \"%s\" cannot use translations from other regions<-->
     <string name="string_title_select_apps_screen">Choose for which app the \"%s\" notification should be hidden</string>
     <string name="string_app_name_replace_using_battery">using battery</string>
     <string name="string_app_name_replace_running_in_the_background">running in the background</string>

@@ -5,6 +5,7 @@
     <string name="app_name">隐藏 \"正在后台运行\" 通知</string>
     <string name="app_name_2">隐藏 \"%s\" 通知</string>
     <string name="string_settings_running_in_the_background">当前正在后台运行的应用程序</string>
+    <!-->\"%s\"<-->
     <string name="string_title_select_apps_screen">选择用于隐藏 \"正在后台运行\" 通知的应用程序</string>
     <string name="string_app_name_replace_running_in_the_background">正在后台运行</string>
     <string name="string_title_select_apps">请选择应用程序</string>
