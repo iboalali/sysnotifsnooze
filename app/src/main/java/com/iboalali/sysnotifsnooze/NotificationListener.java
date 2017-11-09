@@ -141,6 +141,14 @@ public class NotificationListener extends NotificationListenerService {
         if (sbn == null)
             return;
 
+        if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
+            SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
+            List<String> list = new ArrayList<>();
+            list.add(getString(R.string.string_all_key));
+            editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+            editor.apply();
+        }
+
         checkForSystemNotification(sbn);
         snoozeSystemNotification(sbn);
     }
