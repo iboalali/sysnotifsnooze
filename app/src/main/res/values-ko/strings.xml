@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">백그라운드에서 실행 중 알림 숨기기</string>
+    <string name="Allow">수락</string>
+    <string name="permission_request_title">알림 접근 권한</string>
+    <string name="app_name_2">\"%s\" 알림 숨기기</string>
+    <string name="permission_request_msg">이 앱이 짜증나는 \"백그라운드에서 실행 중\" 알림을 숨기기 위해서는 이 앱에서 당신의 알림에 접근하는 것을 허용해야 합니다.\n\n확인 버튼 선택 후, 다음 화면에서 이 앱의 권한을 위한 스위치를 켜고 허용을 누르세요.</string>
+    <string name="OK">확인</string>
+    <string name="title_activity_main_settings">백그라운드에서 실행 중 알림 숨기기</string>
+    <string name="granted">허용됨</string>
+    <string name="not_granted">허용되지 않음</string>
+    <string name="string_hide_icon_alert_dialog_title">런처에서 앱 아이콘을 숨기시겠습니까?</string>
+    <string name="string_hide_icon_alert_dialog_msg">이 스위치는 런처에서 앱 아이콘을 숨길 것입니다.\n\n주의! 다시 앱을 열기 위해서는 플레이 스토어에서 앱을 삭제 후 재설치 해야 합니다.</string>
+    <string name="string_yes">네</string>
+    <string name="string_no">아니요</string>
+    <string name="string_title_select_apps">앱 선택</string>
+    <string name="string_title_select_apps_screen">\"%s\" 알림을 숨길 앱을 선택하세요.</string>
+    <string name="string_app_name_replace_using_battery">배터리 사용</string>
+    <string name="string_app_name_replace_running_in_the_background">백그라운드에서 실행 중</string>
+    <string name="string_all_apps">모든 앱</string>
+    <string name="string_settings_select_apps">앱 선택하기</string>
+    <string name="string_settings_settings">설정</string>
+    <string name="string_settings_hide_app_icon_from_launcher">런처에서 앱 아이콘 숨기기</string>
+    <string name="string_settings_twitter">트위터</string>
+    <string name="string_settings_source_code">소스 코드</string>
+    <string name="string_settings_running_in_the_background">앱이 백그라운드에서 실행 중</string>
+    <string name="string_settings_support_me_with">기부하기</string>
+    <string name="string_settings_permission">권한</string>
+    <string name="string_settings_notification_access_permission">알림 접근 권한</string>
+    <string name="string_settings_follow_me">팔로우하기</string>
+    <string name="string_settings_large_donation">큰 기부하기</string>
+    <string name="string_settings_small_donation">작은 기부하기</string>
+</resources>
