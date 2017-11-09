@@ -16,6 +16,7 @@
     <string name="string_yes">Yes</string>
     <string name="string_no">No</string>
     <string name="string_title_select_apps">Select Apps</string>
+    <!--String_title_select_apps_screen, \"%s\" cannot use translations from other regions<-->
     <string name="string_title_select_apps_screen">Choose for which app the \"%s\" notification should be hidden</string>
     <string name="string_app_name_replace_using_battery">using battery</string>
     <string name="string_app_name_replace_running_in_the_background">running in the background</string>
@@ -23,6 +24,9 @@
     <string name="string_all_key" translatable="false">all.all.all.all.all</string>
 
     <!-- settings screen strings -->
+    <!--Debug: SettingsFragment: a Small Donation (Hide "running in the background" Notification): $2.49
+ App interface shows "a Large Donation" text, I can not solve this problem, the other languages show the same.   "In the case of money"
+<-->
     <string name="string_settings_small_donation">a Small Donation</string>
     <string name="string_settings_large_donation">a Large Donation</string>
     <string name="string_settings_follow_me">Follow me</string>
