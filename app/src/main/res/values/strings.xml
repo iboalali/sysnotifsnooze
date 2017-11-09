@@ -16,9 +16,11 @@
     <string name="string_yes">Yes</string>
     <string name="string_no">No</string>
     <string name="string_sharedPref_granted">granted?</string>
+    <string name="string_title_select_apps">Select Apps</string>
     <string name="string_title_select_apps_screen">Choose for which app the \"%s\" notification should be hidden</string>
     <string name="string_app_name_replace_using_battery">using battery</string>
     <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+    <string name="string_all_text">All apps</string>
     <string name="string_all_key" translatable="false">all.all.all.all.all</string>
 
     <!-- settings screen strings -->
