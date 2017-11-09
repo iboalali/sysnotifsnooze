@@ -19,9 +19,9 @@
     <string name="string_settings_hide_app_icon_from_launcher">Verstecke die App Icon vom launcher</string>
     <string name="string_settings_settings">Einstellungen</string>
     <string name="string_yes">Ja</string>
-    <string name="app_name_2">Verstecke die \"%s\" Benachrichtigung</string>
+    <string name="app_name_2">Verstecke die %s Benachrichtigung</string>
     <string name="string_title_select_apps">Apps Auswählen</string>
-    <string name="string_title_select_apps_screen">Wählen sie für welche app die \"%s\" Benachrichtigung versteckt werden soll</string>
+    <string name="string_title_select_apps_screen">Wählen sie für welche app die %s Benachrichtigung versteckt werden soll</string>
     <string name="string_app_name_replace_running_in_the_background">im Hintergrund ausgeführt</string>
     <string name="string_all_apps">Alle Apps</string>
     <string name="string_settings_running_in_the_background">Apps die gerade im Hintergrund laufen</string>

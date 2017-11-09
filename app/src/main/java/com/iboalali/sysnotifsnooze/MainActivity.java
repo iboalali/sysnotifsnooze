@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     public static String SKU_LARGE_TIP_5 = "large_tip_5";
     private static final String TAG = "MainActivity";
 
-    private SharedPreferences sharedPreferencesPackageNames;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
         String title = textView.getText().toString();
 
         if (Build.VERSION.SDK_INT >= 27 || Build.MODEL.equals("Pixel 2") || Build.MODEL.equals("Pixel 2 XL")){
-            title = title.replace("%s", getString(R.string.string_app_name_replace_using_battery));
+            title = title.replace("%s", "\"" + getString(R.string.string_app_name_replace_using_battery) + "\"");
         }else{
-            title = title.replace("%s", getString(R.string.string_app_name_replace_running_in_the_background));
+            title = title.replace("%s", "\"" + getString(R.string.string_app_name_replace_running_in_the_background) + "\"");
         }
 
         textView.setText(title);
 
-        sharedPreferencesPackageNames = getSharedPreferences("myPackageNames", MODE_PRIVATE);
+        SharedPreferences sharedPreferencesPackageNames = getSharedPreferences("myPackageNames", MODE_PRIVATE);
         if(!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
             SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
             List<String> list = new ArrayList<>();
@@ -324,14 +322,8 @@ public class MainActivity extends AppCompatActivity {
                 preference_large_tip_5.setSummary(sku_large_tip_5.getPrice());
                 title = sku_large_tip_5.getTitle();
 
-                try{
-                    preference_small_tip_2.setTitle(title.substring(0, title.indexOf("(")));
-                    preference_large_tip_5.setTitle(title.substring(0, title.indexOf("(")));
-                }catch (StringIndexOutOfBoundsException e){
-                    e.printStackTrace();
-                    preference_small_tip_2.setTitle(getString(R.string.string_settings_small_donation));
-                    preference_large_tip_5.setTitle(getString(R.string.string_settings_large_donation));
-                }
+                preference_small_tip_2.setTitle(getString(R.string.string_settings_small_donation));
+                preference_large_tip_5.setTitle(getString(R.string.string_settings_large_donation));
 
                 // check for un-consumed purchases, and consume them
                 Purchase small_tip_2_purchase = inv.getPurchase(SKU_SMALL_TIP_2);

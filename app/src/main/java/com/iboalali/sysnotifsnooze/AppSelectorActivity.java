@@ -81,9 +81,9 @@ public class AppSelectorActivity extends AppCompatActivity{
 
             // all devices with android 8.1 and Pixel 2 (XL) on 8.0 and onward are using "using battery" instead of "running in the background"
             if (Build.VERSION.SDK_INT >= 27 || Build.MODEL.equals("Pixel 2") || Build.MODEL.equals("Pixel 2 XL")){
-                title = title.replace("%s", "using battery");
+                title = title.replace("%s", "\"" + getString(R.string.string_app_name_replace_using_battery) + "\"");
             }else{
-                title = title.replace("%s", "running in the background");
+                title = title.replace("%s", "\"" + getString(R.string.string_app_name_replace_running_in_the_background) + "\"");
             }
 
             preferenceCategory.setTitle(title);
