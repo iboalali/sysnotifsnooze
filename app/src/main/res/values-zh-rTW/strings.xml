@@ -9,7 +9,7 @@
     <string name="string_app_name_replace_running_in_the_background">正在後台執行</string>
     <string name="string_title_select_apps">請選擇應用程式</string>
     <string name="string_settings_select_apps">輕觸選擇應用程式</string>
-    <string name="string_app_name_replace_using_battery">電池相關</string>
+    <string name="string_app_name_replace_using_battery">正在使用電池</string>
     <string name="string_settings_source_code">原始碼</string>
     <string name="string_all_apps">所有應用</string>
     <string name="granted">已允許</string>
