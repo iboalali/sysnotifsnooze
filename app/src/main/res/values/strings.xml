@@ -9,10 +9,12 @@
     <string name="title_activity_main_settings">Hide Running in the Background Notification</string>
     <string name="granted">Granted</string>
     <string name="not_granted">Not Granted</string>
-    <string name="string_filter_intent" translatable="false">com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT</string>
     <string name="string_hide_icon_alert_dialog_title">Hide the app icon from launcher?</string>
     <string name="string_hide_icon_alert_dialog_msg">This switch will hide the app icon from launcher.\n\nCaution!\nYou have to uninstall and install this app from the Play Store again to open it</string>
-    <string name="string_sharedPreferences_isIconHidden" translatable="false">isIconHidden</string>
+    <string name="string_old_way_alert_dialog_msg">This setting will switch the app to use the old method. It will disable the option to select apps</string>
+    <string name="string_new_way_alert_dialog_msg">Restart your phone for this option to take effect. Selecting apps will be enabled</string>
+    <string name="string_old_way_alert_dialog_title">Are You Sure?</string>
+    <string name="string_new_way_alert_dialog_title">Restart!</string>
     <string name="string_yes">Yes</string>
     <string name="string_no">No</string>
     <string name="string_title_select_apps">Select Apps</string>
@@ -39,6 +41,12 @@
     <string name="shared_pref_key_package_name_current" translatable="false">packageNamesCurrent</string>
     <string name="shared_pref_key_package_name_selected" translatable="false">packageNamesSelected</string>
     <string name="shared_pref_name" translatable="false">myComPref</string>
-    <string name="string_sharedPref_granted" translatable="false">granted?</string>
+    <string name="shared_pref_key_granted" translatable="false">granted?</string>
+    <string name="shared_pref_key_isOldWay" translatable="false">isOldWay</string>
+    <string name="shared_pref_key_isIconHidden" translatable="false">isIconHidden</string>
+
+    <string name="string_filter_intent" translatable="false">com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT</string>
+
+
 
 </resources>
