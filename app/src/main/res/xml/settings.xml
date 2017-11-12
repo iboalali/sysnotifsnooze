@@ -63,5 +63,10 @@
             android:checked="true"
             android:key="hide_icon"
             android:title="@string/string_settings_hide_app_icon_from_launcher" />
+
+        <SwitchPreference
+            android:checked="false"
+            android:key="old_way"
+            android:title="Use old hiding method"/>
     </PreferenceCategory>
 </PreferenceScreen>
