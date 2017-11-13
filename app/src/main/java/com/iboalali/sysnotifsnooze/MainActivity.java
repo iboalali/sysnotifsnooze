@@ -234,6 +234,10 @@ public class MainActivity extends AppCompatActivity {
                                 editor.putBoolean(getContext().getString(R.string.shared_pref_key_isOldWay), true);
                                 editor.apply();
                                 Log.d(TAG, "switch is: " + String.valueOf(settings_old_way.isChecked()));
+
+                                Intent intent = new Intent(getString(R.string.string_filter_intent));
+                                intent.putExtra("command", "hide");
+                                getContext().sendBroadcast(intent);
                             }
                         });
 
@@ -521,6 +525,7 @@ public class MainActivity extends AppCompatActivity {
             isSwitchSet_isOldWay = sharedPreferences.getBoolean(getContext().getString(R.string.shared_pref_key_isOldWay), false);
             settings_hide_icon.setChecked(isSwitchSet_isIconHidden);
             settings_old_way.setChecked(isSwitchSet_isOldWay);
+            background_app.setEnabled(! isSwitchSet_isOldWay);
 
         }
 
