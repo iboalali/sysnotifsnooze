@@ -67,6 +67,7 @@
         <SwitchPreference
             android:checked="false"
             android:key="old_way"
-            android:title="Use old hiding method"/>
+            android:title="@string/string_settings_use_old_hiding_method"
+            android:summary="@string/string_settings_old_way_summary"/>
     </PreferenceCategory>
 </PreferenceScreen>
