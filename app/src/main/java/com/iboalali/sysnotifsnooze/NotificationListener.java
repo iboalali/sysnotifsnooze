@@ -24,6 +24,7 @@ public class NotificationListener extends NotificationListenerService {
     private static final String TAG = "NotificationListener";
     private NotificationListenerBroadcastReceiver notificationListenerBroadcastReceiver;
     SharedPreferences sharedPreferencesPackageNames;
+    SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
     long snoozeDurationMs = 5000L;
@@ -45,7 +46,7 @@ public class NotificationListener extends NotificationListenerService {
         filter.addAction(getString(R.string.string_filter_intent));
         registerReceiver(notificationListenerBroadcastReceiver, filter);
         sharedPreferencesPackageNames = getSharedPreferences("myPackageNames", MODE_PRIVATE);
-
+        sharedPreferences = getSharedPreferences("mySettingsPref", MODE_PRIVATE);
     }
 
     @Override
@@ -92,8 +93,7 @@ public class NotificationListener extends NotificationListenerService {
         }
     }
 
-    private void checkForSystemNotification(StatusBarNotification sbn)
-    {
+    private void checkForSystemNotification(StatusBarNotification sbn){
         Log.d(TAG, "in checkForSystemNotification");
 
         if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
@@ -135,6 +135,18 @@ public class NotificationListener extends NotificationListenerService {
         }
     }
 
+    private void snoozeSystemNotificationTheOldWay(StatusBarNotification sbn){
+        if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
+            String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
+            if (key == null) return;
+
+            snoozeNotification(sbn.getKey(), 10000000000000L);
+            //Long.MAX_VALUE = 9223372036854775807 = 292.5 million years -> not working
+            //10000000000000 = 317.09792 years -> working
+
+            Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed the old way");
+        }
+    }
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
@@ -149,8 +161,12 @@ public class NotificationListener extends NotificationListenerService {
             editor.apply();
         }
 
-        checkForSystemNotification(sbn);
-        snoozeSystemNotification(sbn);
+        if(sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false )) {
+            snoozeSystemNotificationTheOldWay(sbn);
+        }else{
+            checkForSystemNotification(sbn);
+            snoozeSystemNotification(sbn);
+        }
     }
 
     @Override
@@ -159,7 +175,7 @@ public class NotificationListener extends NotificationListenerService {
             return;
 
         checkForSystemNotification(sbn);
-        snoozeSystemNotification(sbn);
+        //snoozeSystemNotification(sbn);
     }
 
     class NotificationListenerBroadcastReceiver extends BroadcastReceiver{
@@ -171,8 +187,12 @@ public class NotificationListener extends NotificationListenerService {
 
             if (intent.getStringExtra("command").equals("hide")) {
                 for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {
-                    checkForSystemNotification(sbn);
-                    snoozeSystemNotification(sbn);
+                    if(sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false )) {
+                        snoozeSystemNotificationTheOldWay(sbn);
+                    }else{
+                        checkForSystemNotification(sbn);
+                        snoozeSystemNotification(sbn);
+                    }
                 }
             }
             // Debug code, not used in production
