@@ -14,7 +14,7 @@
     <string name="string_all_apps">所有应用</string>
     <string name="granted">已允许</string>
     <string name="not_granted">未允许</string>
-    <string name="permission_request_msg">"这个应用程序能去掉那些烦人的“XX在后台运行”通知，你必须让这个应用程序获取你的通知使用权。请点击“确定”，然后在下一个屏幕中，将此应用程序的权限打开，然后点“允许”"</string>
+    <string name="permission_request_msg">"这个应用程序能去掉那些烦人的“XX在后台运行”通知，你必须让这个应用程序获取你的通知使用权。\n\n请点击“确定”，然后在下一个屏幕中，将此应用程序的权限打开，然后点“允许”"</string>
     <string name="permission_request_title">获取通知使用权</string>
     <string name="string_settings_follow_me">联系我</string>
     <string name="string_settings_large_donation">捐大款</string>
@@ -25,10 +25,14 @@
     <string name="string_settings_use_old_hiding_method">使用旧的隐藏方法</string>
     <string name="string_settings_old_way_summary">如果您有出现呼吸灯异常显示的“一加手机”等设备或无法隐藏通知等其他问题，请尝试使用此选项</string>
     <string name="title_activity_main_settings">隐藏在后台中运行的通知</string>
-    <string name="string_hide_icon_alert_dialog_msg">"这个开关将隐藏此应用程序在桌面上的图标。警告！！隐藏之后你必须重新安装此应用才能将其打开！"</string>
+    <string name="string_hide_icon_alert_dialog_msg">"这个开关将隐藏此应用程序在桌面上的图标。\n\n警告！！隐藏之后你必须重新安装此应用才能将其打开！"</string>
     <string name="string_hide_icon_alert_dialog_title">在桌面上隐藏应用图标?</string>
-    <string name="string_no">否</string>
     <string name="string_settings_hide_app_icon_from_launcher">在桌面上隐藏应用图标</string>
     <string name="string_settings_settings">设置</string>
+    <string name="string_old_way_alert_dialog_msg">此设置将切换此程序旧的隐藏方法， 它将禁用选择应用程序的选项</string>
+    <string name="string_new_way_alert_dialog_msg">请重启手机让此选项生效，选择的应用程序将被启用</string>
+    <string name="string_old_way_alert_dialog_title">你确定?</string>
+    <string name="string_new_way_alert_dialog_title">重启!</string>
     <string name="string_yes">是</string>
+    <string name="string_no">否</string>
 </resources>

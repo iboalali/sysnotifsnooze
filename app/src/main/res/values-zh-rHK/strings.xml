@@ -30,5 +30,9 @@
     <string name="string_no">否</string>
     <string name="string_settings_hide_app_icon_from_launcher">在桌布上隱藏應用圖標</string>
     <string name="string_settings_settings">設定</string>
+    <string name="string_old_way_alert_dialog_msg">此設定將切換此程式舊的隱藏方法， 它將禁用選擇應用程式的選項</string>
+    <string name="string_new_way_alert_dialog_msg">請重啟手機讓此選項生效，選擇的應用程式將被啟用</string>
+    <string name="string_old_way_alert_dialog_title">你確定?</string>
+    <string name="string_new_way_alert_dialog_title">重啟!</string>
     <string name="string_yes">是</string>
 </resources>
