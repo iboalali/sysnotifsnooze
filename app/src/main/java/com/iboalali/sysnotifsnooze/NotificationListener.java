@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
@@ -152,13 +153,25 @@ public class NotificationListener extends NotificationListenerService {
     public void onNotificationPosted(StatusBarNotification sbn) {
         if (sbn == null)
             return;
+        SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
 
-        if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
-            SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
-            List<String> list = new ArrayList<>();
-            list.add(getString(R.string.string_all_key));
-            editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+        if (!sharedPreferences.contains(getString(R.string.shared_pref_key_version_code))){
+            editor.putInt(getString(R.string.shared_pref_key_version_code), Utils.getAppVersionCode(getApplicationContext()));
             editor.apply();
+        }
+
+        if (sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1) < Utils.getAppVersionCode(getApplicationContext())){
+            editor.putInt(getString(R.string.shared_pref_key_version_code), Utils.getAppVersionCode(getApplicationContext()));
+            editor.apply();
+
+            if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
+                List<String> list = new ArrayList<>();
+                list.add(getString(R.string.string_all_key));
+                editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+
+            }
+            editor.apply();
+
         }
 
         if(sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false )) {

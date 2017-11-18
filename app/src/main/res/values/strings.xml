@@ -48,5 +48,6 @@
     <string name="shared_pref_key_isIconHidden" translatable="false">isIconHidden</string>
 
     <string name="string_filter_intent" translatable="false">com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT</string>
+    <string name="shared_pref_key_version_code" translatable="false">version_code</string>
 
 </resources>
