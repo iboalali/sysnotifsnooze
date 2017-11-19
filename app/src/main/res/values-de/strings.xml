@@ -27,4 +27,7 @@
     <string name="string_settings_running_in_the_background">Apps die gerade im Hintergrund laufen</string>
     <string name="string_settings_select_apps">Drücken Sie, um Apps auszuwählen</string>
     <string name="string_app_name_replace_using_battery">verbraucht Strom</string>
+    <string name="string_old_way_alert_dialog_title">Bist du dir Sicher?</string>
+    <string name="string_new_way_alert_dialog_title">Neustart!</string>
+    <string name="string_settings_use_old_hiding_method">Alte Versteck Methode</string>
 </resources>

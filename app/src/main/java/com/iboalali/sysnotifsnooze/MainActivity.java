@@ -59,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
         }
 
+        SharedPreferences sharedPreferences = getSharedPreferences("mySettingsPref", MODE_PRIVATE);
+        if (!sharedPreferences.contains(getString(R.string.shared_pref_key_version_code))){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(getString(R.string.shared_pref_key_version_code), Utils.getAppVersionCode(getApplicationContext()));
+            editor.apply();
+        }
+
     }
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
