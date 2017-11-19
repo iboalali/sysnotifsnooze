@@ -10,7 +10,7 @@
     <string name="permission_request_title">알림 접근 권한</string>
     <string name="string_all_apps">모든 앱</string>
     <string name="string_app_name_replace_running_in_the_background">백그라운드에서 실행 중</string>
-    <string name="string_app_name_replace_using_battery">배터리 사용 중</string>
+    <string name="string_app_name_replace_using_battery">에서 배터리 사용 중</string>
     <string name="string_hide_icon_alert_dialog_msg">이 스위치는 런처에서 앱 아이콘을 숨길 것입니다.\n\n주의! 다시 앱을 열기 위해서는 플레이 스토어에서 앱을 삭제 후 재설치 해야 합니다.</string>
     <string name="string_hide_icon_alert_dialog_title">런처에서 앱 아이콘을 숨기시겠습니까?</string>
     <string name="string_new_way_alert_dialog_msg">이 옵션을 적용하기 위해 기기를 재시작합니다. 이것은 \"앱 선택하기\" 기능을 활성화 할 것입니다.</string>

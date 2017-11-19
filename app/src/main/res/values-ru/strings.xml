@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hide running in the background Notification</string>
+    <string name="app_name">Hide \"running in the background\" Notification</string>
+    <string name="string_app_name_replace_using_battery">расходует заряд</string>
+    <string name="string_app_name_replace_running_in_the_background">в фоновом режиме</string>
 </resources>
