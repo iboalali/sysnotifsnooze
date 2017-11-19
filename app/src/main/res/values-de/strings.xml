@@ -30,4 +30,7 @@
     <string name="string_old_way_alert_dialog_title">Bist du dir Sicher?</string>
     <string name="string_new_way_alert_dialog_title">Neustart!</string>
     <string name="string_settings_use_old_hiding_method">Alte Versteck Methode</string>
+    <string name="string_new_way_alert_dialog_msg">Starten Sie Ihr Telefon neu, damit diese Option wirksam wird. Die Auswahl von Apps wird aktiviert</string>
+    <string name="string_old_way_alert_dialog_msg">Mit dieser Einstellung wechselt die App zur der alten Versteck Methode. Die Option zum Auswählen von Apps wird deaktiviert</string>
+    <string name="string_hide_icon_alert_dialog_msg">Dieser Schalter versteckt die App-Icon vom Launcher. Vorsicht! Sie müssen diese App im Play Store deinstallieren und wieder installieren, um die App wider zu öffnen.</string>
 </resources>
