@@ -10,9 +10,8 @@
     <string name="string_settings_follow_me">Folge mir</string>
     <string name="string_settings_permission">Berechtigung</string>
     <string name="string_settings_support_me_with">Unterstüze …</string>
-    <string name="title_activity_main_settings">Verstecke die Im Hintergrund ausgeführt Benachrichtigung</string>
     <string name="not_granted">Nicht Erlaubt</string>
-    <string name="permission_request_msg">\"Um die lästige \"im Hintergrung ausgefüht\" Benachrichtigung zu verstecken, muss du diese App das zugriff auf deine Benachrichtigungen erlauben.\n\nDrücke OK, und in der nächsten Seite, lege den Schalter um und drücke auf \"Zulassen\"</string>
+    <string name="permission_request_msg">Um die lästige %s Benachrichtigung zu verstecken, muss du diese App das zugriff auf deine Benachrichtigungen erlauben.\n\nDrücke OK, und in der nächsten Seite, lege den Schalter um und drücke auf \"Zulassen\"</string>
     <string name="permission_request_title">Erlaubnis zum Zugreifen auf deine Benachrichtigungen</string>
     <string name="string_hide_icon_alert_dialog_title">Verstecke die App Icon vom launcher?</string>
     <string name="string_no">Nein</string>
