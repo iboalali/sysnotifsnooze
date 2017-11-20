@@ -6,7 +6,7 @@
     <string name="app_name_2">%s 알림 숨기기</string>
     <string name="granted">허용됨</string>
     <string name="not_granted">허용되지 않음</string>
-    <string name="permission_request_msg">이 앱이 성가신 \"백그라운드에서 실행 중\" 알림을 숨기기 위해서는 이 앱에서 당신의 알림에 접근하는 것을 허용해야 합니다.\n\n확인 버튼 선택 후, 다음 화면에서 이 앱의 권한을 위한 스위치를 켜고 허용을 누르세요.</string>
+    <string name="permission_request_msg">이 앱이 성가신 %s 알림을 숨기기 위해서는 이 앱에서 당신의 알림에 접근하는 것을 허용해야 합니다.\n\n확인 버튼 선택 후, 다음 화면에서 이 앱의 권한을 위한 스위치를 켜고 허용을 누르세요.</string>
     <string name="permission_request_title">알림 접근 권한</string>
     <string name="string_all_apps">모든 앱</string>
     <string name="string_app_name_replace_running_in_the_background">백그라운드에서 실행 중</string>
