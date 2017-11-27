@@ -36,7 +36,7 @@
 
     <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
             If there are any questions or change requests about these translations please contact me -->
-    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+    <string name="string_app_name_replace_running_in_the_background">がバックグラウンドで実行中です</string>
     <string name="string_app_name_replace_using_battery">が電池を使用しています</string>
     <!-- *********************************************************************************************** -->
 
