@@ -314,7 +314,16 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-                builder.setMessage(R.string.permission_request_msg);
+
+                String msg = getString(R.string.permission_request_msg);
+                if (Build.VERSION.SDK_INT >= 27 || Build.MODEL.equals("Pixel 2") || Build.MODEL.equals("Pixel 2 XL")){
+                    msg = msg.replace("%s", "\"" + getString(R.string.string_app_name_replace_using_battery) + "\"");
+                }else{
+                    msg = msg.replace("%s", "\"" + getString(R.string.string_app_name_replace_running_in_the_background) + "\"");
+                }
+
+                builder.setMessage(msg);
+
                 builder.setTitle(R.string.permission_request_title);
                 builder.setCancelable(true);
                 builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {

@@ -4,18 +4,17 @@
     <string name="Allow">Erlauben</string>
     <string name="OK">OK</string>
     <string name="string_settings_large_donation">mit einer großen Spende</string>
-    <string name="string_settings_small_donation">einer kleinen Spende</string>
+    <string name="string_settings_small_donation">mit einer kleinen Spende</string>
     <string name="string_settings_notification_access_permission">Benachrichtigungszugriff</string>
     <string name="granted">Erlaubt</string>
     <string name="string_hide_icon_alert_dialog_msg">Diese Einstellung wird den Eintrag dieser App aus deinem Launcher entfernen.\n\nAchtung!\n Um die App erneut öffnen zu können, musst die im Play Store deinstallieren und erneut installieren.</string>
     <string name="string_settings_use_old_hiding_method">Alte Methode zum Verstecken</string>
     <string name="string_settings_old_way_summary">Probiere diese Option wenn du ein OnePlus Geräte hast und das Ambient Display flackert oder das Verstecken der Benachritigung nicht funktioniert.</string>
-
     <string name="string_settings_follow_me">Folge mir</string>
     <string name="string_settings_permission">Berechtigung</string>
     <string name="string_settings_support_me_with">Unterstütze mich…</string>
     <string name="not_granted">Nicht Erlaubt</string>
-    <string name="permission_request_msg">\"Um die lästige \"im Hintergrung ausgefüht\" Benachrichtigung zu verstecken, muss du dieser App den Zugriff auf deine Benachrichtigungen erlauben.\n\nDrücke OK, und in der nächsten Seite, lege den Schalter um und drücke auf \"Zulassen\"</string>
+    <string name="permission_request_msg">Um die lästige %s Benachrichtigung zu verstecken, muss du dieser App den Zugriff auf deine Benachrichtigungen erlauben.\n\nDrücke OK, und in der nächsten Seite, lege den Schalter um und drücke auf \"Zulassen\"</string>
     <string name="permission_request_title">Erlaubnis zum Zugreifen auf deine Benachrichtigungen</string>
     <string name="string_hide_icon_alert_dialog_title">Verstecke das Icon dieser App im Launcher?</string>
     <string name="string_no">Nein</string>

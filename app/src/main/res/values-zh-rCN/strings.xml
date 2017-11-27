@@ -6,15 +6,13 @@
     <string name="app_name_2">隐藏 %s 通知</string>
     <string name="string_settings_running_in_the_background">当前正在后台运行的应用程序</string>
     <string name="string_title_select_apps_screen">选择用于隐藏 %s 通知的应用程序</string>
-    <string name="string_app_name_replace_running_in_the_background">正在后台运行</string>
     <string name="string_title_select_apps">请选择应用程序</string>
     <string name="string_settings_select_apps">轻触选择应用程序</string>
-    <string name="string_app_name_replace_using_battery">正在消耗电量</string>
     <string name="string_settings_source_code">源码</string>
     <string name="string_all_apps">所有应用</string>
     <string name="granted">已允许</string>
     <string name="not_granted">未允许</string>
-    <string name="permission_request_msg">"这个应用程序能去掉那些烦人的“XX在后台运行”通知，你必须让这个应用程序获取你的通知使用权。\n\n请点击“确定”，然后在下一个屏幕中，将此应用程序的权限打开，然后点“允许”"</string>
+    <string name="permission_request_msg">"这个应用程序能去掉那些烦人的 %s 通知，你必须让这个应用程序获取你的通知使用权。\n\n请点击“确定”，然后在下一个屏幕中，将此应用程序的权限打开，然后点“允许”"</string>
     <string name="permission_request_title">获取通知使用权</string>
     <string name="string_settings_follow_me">联系我</string>
     <string name="string_settings_large_donation">捐大款</string>
@@ -24,7 +22,6 @@
     <string name="string_settings_support_me_with">支持我…</string>
     <string name="string_settings_use_old_hiding_method">使用旧的隐藏方法</string>
     <string name="string_settings_old_way_summary">如果您有出现呼吸灯异常显示的“一加手机”等设备或无法隐藏通知等其他问题，请尝试使用此选项</string>
-    <string name="title_activity_main_settings">隐藏在后台中运行的通知</string>
     <string name="string_hide_icon_alert_dialog_msg">"这个开关将隐藏此应用程序在桌面上的图标。\n\n警告！！隐藏之后你必须重新安装此应用才能将其打开！"</string>
     <string name="string_hide_icon_alert_dialog_title">在桌面上隐藏应用图标?</string>
     <string name="string_settings_hide_app_icon_from_launcher">在桌面上隐藏应用图标</string>
@@ -35,4 +32,10 @@
     <string name="string_new_way_alert_dialog_title">重启!</string>
     <string name="string_yes">是</string>
     <string name="string_no">否</string>
+
+    <!-- For all contributors, Please do not translate these two. I will use the translation used by AOSP.
+            If there are any questions or change requests about these translations please contact me-->
+    <string name="string_app_name_replace_using_battery">正在消耗电量</string>
+    <string name="string_app_name_replace_running_in_the_background">正在后台运行</string>
+    <!-- *********************************************************************************************** -->
 </resources>
