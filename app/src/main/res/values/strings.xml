@@ -19,13 +19,6 @@
     <string name="string_title_select_apps">Select Apps</string>
     <string name="string_title_select_apps_screen">Choose for which app the %s notification should be hidden</string>
     <string name="string_all_apps">All apps</string>
-
-    <!-- For all contributors, Please do not translate these two. I will use the translation used by AOSP.
-            If there are any questions or change requests about these translations please contact me-->
-    <string name="string_app_name_replace_using_battery">using battery</string>
-    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
-    <!-- *********************************************************************************************** -->
-
     <string name="string_settings_small_donation">a Small Donation</string>
     <string name="string_settings_large_donation">a Large Donation</string>
     <string name="string_settings_follow_me">Follow me</string>
@@ -52,5 +45,11 @@
 
     <string name="string_filter_intent" translatable="false">com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT</string>
     <string name="shared_pref_key_version_code" translatable="false">version_code</string>
+
+    <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
+            If there are any questions or change requests about these translations please contact me-->
+    <string name="string_app_name_replace_using_battery">using battery</string>
+    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+    <!-- *********************************************************************************************** -->
 
 </resources>

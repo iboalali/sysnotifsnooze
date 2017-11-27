@@ -24,15 +24,20 @@
     <string name="app_name_2">Verstecke die %s Benachrichtigung</string>
     <string name="string_title_select_apps">Apps auswählen</string>
     <string name="string_title_select_apps_screen">Wähle für welche Apps die %s Benachrichtigung versteckt werden soll.</string>
-    <string name="string_app_name_replace_running_in_the_background">im Hintergrund ausgeführt</string>
     <string name="string_all_apps">Alle Apps</string>
     <string name="string_settings_running_in_the_background">Apps die gerade im Hintergrund laufen</string>
     <string name="string_settings_select_apps">Drücken Sie, um Apps auszuwählen</string>
-    <string name="string_app_name_replace_using_battery">verbraucht Strom</string>
     <string name="string_old_way_alert_dialog_title">Bist du dir Sicher?</string>
     <string name="string_new_way_alert_dialog_title">Neustart!</string>
     <string name="string_settings_use_old_hiding_method">Alte Versteck Methode</string>
     <string name="string_new_way_alert_dialog_msg">Starten Sie Ihr Telefon neu, damit diese Option wirksam wird. Die Auswahl von Apps wird aktiviert</string>
     <string name="string_old_way_alert_dialog_msg">Mit dieser Einstellung wechselt die App zur der alten Versteck Methode. Die Option zum Auswählen von Apps wird deaktiviert</string>
     <string name="string_hide_icon_alert_dialog_msg">Dieser Schalter versteckt die App-Icon vom Launcher. Vorsicht! Sie müssen diese App im Play Store deinstallieren und wieder installieren, um die App wider zu öffnen.</string>
+
+    <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
+            If there are any questions or change requests about these translations please contact me-->
+    <string name="string_app_name_replace_running_in_the_background">im Hintergrund ausgeführt</string>
+    <string name="string_app_name_replace_using_battery">verbraucht Strom</string>
+     <!-- *********************************************************************************************** -->
+
 </resources>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Hide \"running in the background\" Notification</string>
-    <string name="string_app_name_replace_using_battery">расходует заряд</string>
+
+    <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
+            If there are any questions or change requests about these translations please contact me-->
     <string name="string_app_name_replace_running_in_the_background">в фоновом режиме</string>
+    <string name="string_app_name_replace_using_battery">расходует заряд</string>
+     <!-- *********************************************************************************************** -->
 </resources>

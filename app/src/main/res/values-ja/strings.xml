@@ -19,13 +19,6 @@
     <string name="string_title_select_apps">アプリ選択</string>
     <string name="string_title_select_apps_screen">%s 通知を隠すアプリを選択してください</string>
     <string name="string_all_apps">すべてのアプリ</string>
-
-    <!-- For all contributors, Please do not translate these two. I will use the translation used by AOSP.
-            If there are any questions or change requests about these translations please contact me-->
-    <string name="string_app_name_replace_using_battery">using battery</string>
-    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
-    <!-- *********************************************************************************************** -->
-
     <string name="string_settings_small_donation">少額の寄付</string>
     <string name="string_settings_large_donation">(ちょっとだけ)大きめの寄付</string>
     <string name="string_settings_follow_me">フォローする</string>
@@ -40,4 +33,11 @@
     <string name="string_settings_select_apps">アプリを選択する</string>
     <string name="string_settings_use_old_hiding_method">(通知を隠すための)古い方法を利用する</string>
     <string name="string_settings_old_way_summary">OnePlusデバイスにおいてAmbientディスプレイの点滅の問題が出ていたり、その他通知を隠すことに関係する問題があるときには、このオプションを選択してみてください。</string>
+
+    <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
+            If there are any questions or change requests about these translations please contact me-->
+    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+    <string name="string_app_name_replace_using_battery">が電池を使用しています</string>
+    <!-- *********************************************************************************************** -->
+
 </resources>
