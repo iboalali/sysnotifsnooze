@@ -35,7 +35,7 @@
     <string name="string_hide_icon_alert_dialog_msg">Dieser Schalter versteckt die App-Icon vom Launcher. Vorsicht! Sie müssen diese App im Play Store deinstallieren und wieder installieren, um die App wider zu öffnen.</string>
 
     <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
-            If there are any questions or change requests about these translations please contact me-->
+            If there are any questions or change requests about these translations please contact me -->
     <string name="string_app_name_replace_running_in_the_background">im Hintergrund ausgeführt</string>
     <string name="string_app_name_replace_using_battery">verbraucht Strom</string>
      <!-- *********************************************************************************************** -->
