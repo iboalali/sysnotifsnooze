@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">\"バックグラウンドで実行中です\"の通知を隠す</string>
+    <string name="app_name_2">%s の通知を隠す</string>
+    <string name="service_name" translatable="false">@string/app_name</string>
+    <string name="permission_request_msg">このアプリは迷惑な %s 通知を隠すため、このアプリに通知へのアクセス権限を与える必要があります。\n\nOKを押して、次の画面でこのアプリへの権限を有効にしたあと、\"許可\"を押してください。</string>
+    <string name="permission_request_title">通知へのアクセス権限</string>
+    <string name="Allow">許可</string>
+    <string name="OK">OK</string>
+    <string name="granted">付与済</string>
+    <string name="not_granted">未付与</string>
+    <string name="string_hide_icon_alert_dialog_title">ランチャーからアプリアイコンを隠す?</string>
+    <string name="string_hide_icon_alert_dialog_msg">このスイッチを選択するとアプリアイコンをランチャーから隠します。\n\n注意!\n再び表示しようとする場合、アプリをアンインストールして再度Play Storeからインストールし直す必要があります。</string>
+    <string name="string_old_way_alert_dialog_msg">この設定はアプリが(通知を隠すための)古い方法を使うかどうかの選択です。古い方法を選択すると個々のアプリの選択はできなくなります。</string>
+    <string name="string_new_way_alert_dialog_msg">このオプションの効果を有効にするためにはスマホを再起動する必要があります。選択されているアプリは有効になります。</string>
+    <string name="string_old_way_alert_dialog_title">よろしいですか?</string>
+    <string name="string_new_way_alert_dialog_title">再起動!</string>
+    <string name="string_yes">はい</string>
+    <string name="string_no">いいえ</string>
+    <string name="string_title_select_apps">アプリ選択</string>
+    <string name="string_title_select_apps_screen">%s 通知を隠すアプリを選択してください</string>
+    <string name="string_all_apps">すべてのアプリ</string>
+
+    <!-- For all contributors, Please do not translate these two. I will use the translation used by AOSP.
+            If there are any questions or change requests about these translations please contact me-->
+    <string name="string_app_name_replace_using_battery">using battery</string>
+    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+    <!-- *********************************************************************************************** -->
+
+    <string name="string_settings_small_donation">少額の寄付</string>
+    <string name="string_settings_large_donation">(ちょっとだけ)大きめの寄付</string>
+    <string name="string_settings_follow_me">フォローする</string>
+    <string name="string_settings_notification_access_permission">通知へのアクセス権限</string>
+    <string name="string_settings_permission">権限</string>
+    <string name="string_settings_support_me_with">作者を援助する…</string>
+    <string name="string_settings_running_in_the_background">現在バックグラウンドで動作中のアプリ</string>
+    <string name="string_settings_source_code">ソースコード</string>
+    <string name="string_settings_twitter">Twitter</string>
+    <string name="string_settings_hide_app_icon_from_launcher">アプリアイコンをランチャーから隠す</string>
+    <string name="string_settings_settings">設定</string>
+    <string name="string_settings_select_apps">アプリを選択する</string>
+    <string name="string_settings_use_old_hiding_method">(通知を隠すための)古い方法を利用する</string>
+    <string name="string_settings_old_way_summary">OnePlusデバイスにおいてAmbientディスプレイの点滅の問題が出ていたり、その他通知を隠すことに関係する問題があるときには、このオプションを選択してみてください。</string>
+</resources>
