@@ -48,6 +48,39 @@ public class NotificationListener extends NotificationListenerService {
         registerReceiver(notificationListenerBroadcastReceiver, filter);
         sharedPreferencesPackageNames = getSharedPreferences("myPackageNames", MODE_PRIVATE);
         sharedPreferences = getSharedPreferences("mySettingsPref", MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
+
+        if (sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1) < Utils.getAppVersionCode(getApplicationContext())){
+            editor.putInt(getString(R.string.shared_pref_key_version_code), Utils.getAppVersionCode(getApplicationContext()));
+            editor.apply();
+
+            if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
+                List<String> list = new ArrayList<>();
+                list.add(getString(R.string.string_all_key));
+                editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+            }
+            editor.apply();
+
+            new Runnable(){
+                @Override
+                public void run() {
+                    Log.d("NL runnable", "will run in 1 second");
+                    try {
+                        Thread.sleep(1000);
+                        Intent intent = new Intent(getString(R.string.string_filter_intent));
+                        intent.putExtra("command", "hide");
+                        sendBroadcast(intent);
+                        Log.d("NL runnable","1 second is finished, Broadcast \"hide\" send");
+                        Log.i("NL runnable","1 second is finished, Broadcast \"hide\" send");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }.run();
+
+        }
     }
 
     @Override
@@ -153,39 +186,6 @@ public class NotificationListener extends NotificationListenerService {
     public void onNotificationPosted(StatusBarNotification sbn) {
         if (sbn == null)
             return;
-        SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
-
-        if (sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1) < Utils.getAppVersionCode(getApplicationContext())){
-            editor.putInt(getString(R.string.shared_pref_key_version_code), Utils.getAppVersionCode(getApplicationContext()));
-            editor.apply();
-
-            if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
-                List<String> list = new ArrayList<>();
-                list.add(getString(R.string.string_all_key));
-                editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
-
-            }
-            editor.apply();
-
-            new Runnable(){
-
-                @Override
-                public void run() {
-                    Log.d("NL runnable", "will run in 1 second");
-                    try {
-                        Thread.sleep(1000);
-                        Intent intent = new Intent(getString(R.string.string_filter_intent));
-                        intent.putExtra("command", "hide");
-                        sendBroadcast(intent);
-                        Log.d("NL runnable", "1 second is finished, Broadcast \"hide\" send");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }.run();
-
-        }
 
         if(sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false )) {
             snoozeSystemNotificationTheOldWay(sbn);
@@ -210,6 +210,7 @@ public class NotificationListener extends NotificationListenerService {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "Received Broadcast");
+            Log.i(TAG, "Received Broadcast");
 
             if (intent.getStringExtra("command").equals("hide")) {
                 for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {

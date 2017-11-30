@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name">\"バックグラウンドで実行中です\"の通知を隠す</string>
+    <string name="app_name">\"がバックグラウンドで実行中です\"の通知を隠す</string>
     <string name="app_name_2">%s の通知を隠す</string>
-    <string name="service_name" translatable="false">@string/app_name</string>
     <string name="permission_request_msg">このアプリは迷惑な %s 通知を隠すため、このアプリに通知へのアクセス権限を与える必要があります。\n\nOKを押して、次の画面でこのアプリへの権限を有効にしたあと、\"許可\"を押してください。</string>
     <string name="permission_request_title">通知へのアクセス権限</string>
     <string name="Allow">許可</string>

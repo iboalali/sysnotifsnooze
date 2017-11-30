@@ -356,6 +356,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!sharedPreferences.getBoolean(getContext().getString(R.string.shared_pref_key_granted), false)) {
                     Log.d(TAG, "sending broadcast");
+                    Log.i(TAG, "sending broadcast");
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean(getContext().getString(R.string.shared_pref_key_granted), true);
