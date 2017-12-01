@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
@@ -49,18 +50,25 @@ public class NotificationListener extends NotificationListenerService {
         sharedPreferencesPackageNames = getSharedPreferences("myPackageNames", MODE_PRIVATE);
         sharedPreferences = getSharedPreferences("mySettingsPref", MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences.Editor editorP = sharedPreferencesPackageNames.edit();
 
         if (sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1) < Utils.getAppVersionCode(getApplicationContext())){
+            Log.d(TAG, "onCreate: old version " + sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1));
+            Log.i(TAG, "onCreate: old version " + sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1));
+
+            Log.d(TAG, "onCreate: current version " + Utils.getAppVersionCode(getApplicationContext()));
+            Log.i(TAG, "onCreate: current version " + Utils.getAppVersionCode(getApplicationContext()));
+
             editor.putInt(getString(R.string.shared_pref_key_version_code), Utils.getAppVersionCode(getApplicationContext()));
             editor.apply();
 
             if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
                 List<String> list = new ArrayList<>();
                 list.add(getString(R.string.string_all_key));
-                editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+                editorP.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
             }
-            editor.apply();
+            editorP.apply();
 
             new Runnable(){
                 @Override
@@ -71,7 +79,7 @@ public class NotificationListener extends NotificationListenerService {
                         Intent intent = new Intent(getString(R.string.string_filter_intent));
                         intent.putExtra("command", "hide");
                         sendBroadcast(intent);
-                        Log.d("NL runnable","1 second is finished, Broadcast \"hide\" send");
+                        //Log.d("NL runnable","1 second is finished, Broadcast \"hide\" send");
                         Log.i("NL runnable","1 second is finished, Broadcast \"hide\" send");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -80,6 +88,9 @@ public class NotificationListener extends NotificationListenerService {
                 }
             }.run();
 
+        }else{
+            Log.d(TAG, "onCreate: not updated. version: " + Utils.getAppVersionCode(getApplicationContext()));
+            Log.i(TAG, "onCreate: not updated. version: " + Utils.getAppVersionCode(getApplicationContext()));
         }
     }
 
@@ -132,6 +143,7 @@ public class NotificationListener extends NotificationListenerService {
 
         if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
             Log.d(TAG, "found the notification");
+            //Log.d(TAG, "checkForSystemNotification: " + sbn.getNotification().getChannelId());
 
             String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
             if (key == null) return;

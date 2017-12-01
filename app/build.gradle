@@ -7,7 +7,7 @@ android {
         applicationId "com.iboalali.sysnotifsnooze"
         minSdkVersion 26
         targetSdkVersion 27
-        versionCode 87
+        versionCode 95
         versionName "v1.5vc" + getVersionCode()
     }
 
