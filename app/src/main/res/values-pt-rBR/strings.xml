@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Esconda a notificação de segundo plano</string>
+    <string name="app_name">Esconda a \"Notificação de segundo plano\"</string>
+	<string name="app_name_2">Esconda a notificação %s </string>
     <string name="permission_request_title">Permissão para Acessar Notificações</string>
     <string name="permission_request_msg">Para que este aplicativo consiga remover a irritante notificação de %s, você tem que permitir que ele acesse suas notificações. \\n\\n Toque em Ok e, na próxima tela, altere a permissão deste aplicativo para LIGADO e então confirme tocando em \\\"Permitir\\\"</string>
     <string name="Allow">Permitir</string>
     <string name="OK">Ok</string>
     <string name="app_name_2">Esconda a notificação de %s</string>
     <string name="granted">Concedida</string>
-    <string name="not_granted">Não Concendida</string>
+    <string name="not_granted">Não Concedida</string>
     <string name="string_hide_icon_alert_dialog_title">Esconder este aplicativo na Tela Inicial?</string>
-    <string name="string_hide_icon_alert_dialog_msg">Esta opção esconderá o aplicativo da tela inicial.  CUIDADO! Você terá que desinstalar e instalar este aplicativo pela Play Store para abrí-lo novamente.</string>
+    <string name="string_hide_icon_alert_dialog_msg">Esta opção esconderá o aplicativo da tela inicial.\n\nCUIDADO!\nVocê terá que desinstalar e instalar este aplicativo pela Play Store para abrí-lo novamente.</string>
     <string name="string_old_way_alert_dialog_title">Você tem certeza?</string>
     <string name="string_new_way_alert_dialog_title">Reinicie!</string>
     <string name="string_yes">Sim</string>
@@ -25,12 +26,18 @@
     <string name="string_settings_settings">Opções</string>
     <string name="string_settings_notification_access_permission">Permissão de Acessar Notificações</string>
     <string name="string_old_way_alert_dialog_msg">Esta opção vai fazer com que o aplicativo use o método antigo. Isto fará com que a opção de selecionar aplicativo seja desabilitada.</string>
-    <string name="string_new_way_alert_dialog_msg">Reinicie seu telefone para que esta opção tenha efeito. \\\"Escolher Aplicativos\\\" será habilitado.</string>
+    <string name="string_new_way_alert_dialog_msg">Reinicie seu telefone para que esta opção tenha efeito. \"Escolher Aplicativos\" será habilitado.</string>
     <string name="string_title_select_apps">Escolher Aplicativos</string>
-    <string name="string_title_select_apps_screen">Escolha quais aplicativos terão a notifcação de %s removidas</string>
+    <string name="string_title_select_apps_screen">Escolha quais aplicativos terão a notificação de %s removidas</string>
     <string name="string_settings_running_in_the_background">Aplicativos atualmente sendo executados em Segundo Plano</string>
     <string name="string_settings_hide_app_icon_from_launcher">Esconder o ícone do aplicativo da tela inicial</string>
     <string name="string_settings_select_apps">Clique para escolher os aplicativos</string>
     <string name="string_settings_use_old_hiding_method">Use o antigo método de remoção</string>
     <string name="string_settings_old_way_summary">Tente esta opção se você tem um aparelho OnePlus onde o Ambient Display pisca ou há outros problemas ao esconder as notificações</string>
+	
+    <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
+            If there are any questions or change requests about these translations please contact me -->
+    <string name="string_app_name_replace_using_battery">using battery</string>
+    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+<!-- *********************************************************************************************** -->
 </resources>
