@@ -3,7 +3,7 @@
     <string name="app_name">Esconda a \"Notificação de segundo plano\"</string>
 	<string name="app_name_2">Esconda a notificação %s </string>
     <string name="permission_request_title">Permissão para Acessar Notificações</string>
-    <string name="permission_request_msg">Para que este aplicativo consiga remover a irritante notificação de %s, você tem que permitir que ele acesse suas notificações. \\n\\n Toque em Ok e, na próxima tela, altere a permissão deste aplicativo para LIGADO e então confirme tocando em \\\"Permitir\\\"</string>
+    <string name="permission_request_msg">Para que este aplicativo consiga remover a irritante notificação de %s, você tem que permitir que ele acesse suas notificações. \n\n Toque em Ok, na próxima tela, altere a permissão deste aplicativo para LIGADO e então confirme tocando em \"Permitir\"</string>
     <string name="Allow">Permitir</string>
     <string name="OK">Ok</string>
     <string name="app_name_2">Esconda a notificação de %s</string>
