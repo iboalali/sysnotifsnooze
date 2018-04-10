@@ -14,8 +14,10 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iboalali.sysnotifsnooze.util.IabHelper;
 import com.iboalali.sysnotifsnooze.util.IabResult;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         private boolean isSwitchSet_isOldWay;
 
         IabHelper mHelper;
+        private Boolean useIap;
 
         private Preference notification_permission;
         private SwitchPreference settings_hide_icon;
@@ -109,26 +112,40 @@ public class MainActivity extends AppCompatActivity {
 
             sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
+
             // license key
-            String base64EncodedPublicKey = getContext().getString(R.string.public_license_key);
+            int publicKeyStringId = getResources().getIdentifier(
+                    "public_license_key",
+                    "string",
+                    getContext().getPackageName()
+            );
+            useIap = TextUtils.equals(
+                    getContext().getResources().getString(R.string.use_iap),
+                    "true"
+            );
 
-            // setup In-app billing
-            mHelper = new IabHelper(getActivity().getApplicationContext(), base64EncodedPublicKey);
-            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-                public void onIabSetupFinished(IabResult result) {
-                    if (!result.isSuccess()) {
-                        Log.d(TAG, "Problem setting up In-app Billing: " + result);
-                        return;
+            if (useIap && publicKeyStringId != 0) {
+                // setup In-app billing
+                String base64EncodedPublicKey = getContext().getString(publicKeyStringId);
+                mHelper = new IabHelper(getActivity().getApplicationContext(), base64EncodedPublicKey);
+                mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                    public void onIabSetupFinished(IabResult result) {
+                        if (!result.isSuccess()) {
+                            Log.d(TAG, "Problem setting up In-app Billing: " + result);
+                            return;
+                        }
+                        // Hooray, IAB is fully set up!
+                        ArrayList<String> skus = new ArrayList<String>();
+                        skus.add(MainActivity.SKU_SMALL_TIP_2);
+                        skus.add(MainActivity.SKU_LARGE_TIP_5);
+
+                        mHelper.queryInventoryAsync(true, skus, queryInventoryFinishedListener);
+
                     }
-                    // Hooray, IAB is fully set up!
-                    ArrayList<String> skus = new ArrayList<String>();
-                    skus.add(MainActivity.SKU_SMALL_TIP_2);
-                    skus.add(MainActivity.SKU_LARGE_TIP_5);
-
-                    mHelper.queryInventoryAsync(true, skus, queryInventoryFinishedListener);
-
-                }
-            });
+                });
+            } else {
+                mHelper = null;
+            }
 
             // find Preferences
             settings_hide_icon = (SwitchPreference) findPreference(KEY_SETTINGS_HIDE_ICON);
@@ -516,14 +533,22 @@ public class MainActivity extends AppCompatActivity {
 
                 case KEY_SMALL_TIP:
                     // IAP for a small tip around 2 €/$
-                    if (mHelper != null) mHelper.flagEndAsync();
-                    mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_SMALL_TIP_2, 1001, onIabPurchaseFinishedListener, "");
+                    if (mHelper != null) {
+                        mHelper.flagEndAsync();
+                        mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_SMALL_TIP_2, 1001, onIabPurchaseFinishedListener, "");
+                    } else if (!useIap) {
+                        Toast.makeText(getContext(), "IAP not available for f-droid version", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case KEY_LARGE_TIP:
                     // IAP for a small tip around 5 €/$
-                    if (mHelper != null) mHelper.flagEndAsync();
-                    mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
+                    if (mHelper != null) {
+                        mHelper.flagEndAsync();
+                        mHelper.launchPurchaseFlow(getActivity(), MainActivity.SKU_LARGE_TIP_5, 1001, onIabPurchaseFinishedListener, "");
+                    } else if (!useIap) {
+                        Toast.makeText(getContext(), "IAP not available for f-droid version", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case KEY_BACKGROUND_APPS:

@@ -25,10 +25,10 @@
     <PreferenceCategory
         android:title="@string/string_settings_source_code">
         <Preference
-            android:title="https://goo.gl/7yq9M1">
+            android:title="https://github.com/iboalali/sysnotifsnooze">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://goo.gl/7yq9M1"/>
+                android:data="https://github.com/iboalali/sysnotifsnooze"/>
         </Preference>
     </PreferenceCategory>
 
