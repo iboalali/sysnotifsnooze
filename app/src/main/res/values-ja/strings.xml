@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">\"がバックグラウンドで実行中です\"の通知を隠す</string>
     <string name="app_name_2">%s の通知を隠す</string>

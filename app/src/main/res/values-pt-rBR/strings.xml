@@ -17,7 +17,7 @@
     <string name="string_no">Não</string>
     <string name="string_all_apps">Todos os aplicativos</string>
     <string name="string_settings_small_donation">uma pequena doação</string>
-    <string name="string_settings_support_me_with">Me Apoie com...</string>
+    <string name="string_settings_support_me_with">Me Apoie com…</string>
     <string name="string_settings_large_donation">uma grande doação</string>
     <string name="string_settings_follow_me">Siga-me</string>
     <string name="string_settings_permission">Permissão</string>
@@ -37,7 +37,7 @@
 	
     <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
             If there are any questions or change requests about these translations please contact me -->
-    <string name="string_app_name_replace_using_battery">using battery</string>
-    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+    <string name="string_app_name_replace_using_battery">está consumindo a bateria</string>
+    <string name="string_app_name_replace_running_in_the_background">está sendo executado em segundo plano</string>
 <!-- *********************************************************************************************** -->
 </resources>

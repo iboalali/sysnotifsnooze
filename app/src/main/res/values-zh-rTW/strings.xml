@@ -4,7 +4,7 @@
     <string name="OK">確定</string>
     <string name="app_name">隱藏 \"正在背景執行\" 通知</string>
     <string name="app_name_2">隱藏 %s 通知</string>
-    <string name="string_settings_running_in_the_background">當前正在後台執行的應用程式</string>
+    <string name="string_settings_running_in_the_background">當前正在背景執行的應用程式</string>
     <string name="string_title_select_apps_screen">選擇用於隱藏 %s 通知的應用程式</string>
     <string name="string_title_select_apps">請選擇應用程式</string>
     <string name="string_settings_select_apps">輕觸選擇應用程式</string>
