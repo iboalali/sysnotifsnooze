@@ -127,7 +127,7 @@ public class AppSelectorActivity extends AppCompatActivity{
                         }
                     }
                 }
-                editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+                editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<>(list));
                 editor.apply();
             }else {
                 Set<String> l = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
@@ -147,7 +147,7 @@ public class AppSelectorActivity extends AppCompatActivity{
                     }
 
                     SharedPreferences.Editor editor = sharedPreferencesPackageNames.edit();
-                    editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
+                    editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<>(list));
                     editor.apply();
                 }
             }

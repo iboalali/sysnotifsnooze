@@ -59,15 +59,25 @@
     <PreferenceCategory
         android:key="settings_preference_category"
         android:title="@string/string_settings_settings">
-        <SwitchPreference
-            android:checked="true"
-            android:key="hide_icon"
-            android:title="@string/string_settings_hide_app_icon_from_launcher" />
+
+        <Preference
+            android:title="@string/string_settings_hide_persistent_notification"
+            android:summary="@string/string_settings_hide_persistent_notification_summery">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://play.google.com/store/apps/details?id=com.iboalali.hidepersistentnotifications"/>
+        </Preference>
 
         <SwitchPreference
             android:checked="false"
             android:key="old_way"
             android:title="@string/string_settings_use_old_hiding_method"
             android:summary="@string/string_settings_old_way_summary"/>
+
+        <SwitchPreference
+            android:checked="true"
+            android:key="hide_icon"
+            android:title="@string/string_settings_hide_app_icon_from_launcher" />
+
     </PreferenceCategory>
 </PreferenceScreen>
