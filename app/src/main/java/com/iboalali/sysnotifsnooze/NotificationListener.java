@@ -130,11 +130,39 @@ public class NotificationListener extends NotificationListenerService {
                 if (areAllSelected){
                     // TODO: test for the best combination of duration and battery life
                     snoozeNotification(sbn.getKey(), snoozeDurationMs);
+
                     Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed for " + snoozeDurationMs);
+                } else {
+                    //unSnoozeSystemNotification();
                 }
             }
         }
     }
+
+    /*
+    private void unSnoozeSystemNotification(){
+        try {
+            for (StatusBarNotification sbn: NotificationListener.this.getSnoozedNotifications()){
+                if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)){
+                    Class c = Class.forName("android.service.notification.NotificationAssistantService").getClass();
+                    Method m = Class.forName("android.service.notification.NotificationAssistantService").getDeclaredMethod("unsnoozeNotification", String.class);
+                    m.invoke(c, sbn.getKey());
+                    Log.d(TAG, sbn.getPackageName() + " with key: " +sbn.getKey() + ": un-snoozed");
+
+                }
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+    */
 
     private void checkForSystemNotification(StatusBarNotification sbn){
         Log.d(TAG, "in checkForSystemNotification");
@@ -231,6 +259,9 @@ public class NotificationListener extends NotificationListenerService {
                         snoozeSystemNotification(sbn);
                     }
                 }
+            }
+            else if(intent.getStringExtra("command").equals("show")){
+
             }
             // Debug code, not used in production
             else if(intent.getStringExtra("command").equals("extra_hide")){

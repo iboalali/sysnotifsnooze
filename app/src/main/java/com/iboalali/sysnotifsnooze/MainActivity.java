@@ -23,6 +23,8 @@ import com.iboalali.sysnotifsnooze.util.Inventory;
 import com.iboalali.sysnotifsnooze.util.Purchase;
 import com.iboalali.sysnotifsnooze.util.SkuDetails;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
             editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
             editor.apply();
         }
+
+        // Snackbar.make(findViewById(R.id.rootLayout), "Updated to the latest version", Snackbar.LENGTH_SHORT).show();
 
         SharedPreferences sharedPreferences = getSharedPreferences("mySettingsPref", MODE_PRIVATE);
         if (!sharedPreferences.contains(getString(R.string.shared_pref_key_version_code))){
@@ -104,6 +108,26 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferencesPackageNames = getActivity().getSharedPreferences("myPackageNames", MODE_PRIVATE);
 
             sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+
+            Method m;
+            Method [] ms;
+            Class c;
+            try {
+                c = Class.forName("android.service.notification.NotificationAssistantService").getClass();
+                m = Class.forName("android.service.notification.NotificationAssistantService").getDeclaredMethod("unsnoozeNotification", String.class);
+                m.invoke(c, "65165151");
+                Log.d(TAG, "onCreate: method name: " + m.getName());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            //Log.d(TAG, "onCreate: method name: " + method.getName());
+
 
             // license key
             String base64EncodedPublicKey = getContext().getString(R.string.public_license_key);

@@ -33,6 +33,8 @@
     <string name="string_settings_select_apps">Press to select apps</string>
     <string name="string_settings_use_old_hiding_method">Use old hiding method</string>
     <string name="string_settings_old_way_summary">Try this option if you have an OnePlus device where the Ambient Display flickers, or any other problem with hiding the notification</string>
+    <string name="string_settings_hide_persistent_notification">Hide other Persistent Notification?</string>
+    <string name="string_settings_hide_persistent_notification_summery">With my other app Hide Persistent Notification, you can hide any persistent notification</string>
 
     <string name="shared_pref_key_package_name_all" translatable="false">packageNamesAll</string>
     <string name="shared_pref_key_package_name_current" translatable="false">packageNamesCurrent</string>

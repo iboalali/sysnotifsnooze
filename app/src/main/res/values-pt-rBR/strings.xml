@@ -6,7 +6,7 @@
     <string name="permission_request_msg">Para que este aplicativo consiga remover a irritante notificação de %s, você tem que permitir que ele acesse suas notificações. \n\n Toque em Ok, na próxima tela, altere a permissão deste aplicativo para LIGADO e então confirme tocando em \"Permitir\"</string>
     <string name="Allow">Permitir</string>
     <string name="OK">Ok</string>
-    <string name="app_name_2">Esconda a notificação de %s</string>
+
     <string name="granted">Concedida</string>
     <string name="not_granted">Não Concedida</string>
     <string name="string_hide_icon_alert_dialog_title">Esconder este aplicativo na Tela Inicial?</string>
