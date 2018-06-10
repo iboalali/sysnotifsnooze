@@ -109,26 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
             sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
-            Method m;
-            Method [] ms;
-            Class c;
-            try {
-                c = Class.forName("android.service.notification.NotificationAssistantService").getClass();
-                m = Class.forName("android.service.notification.NotificationAssistantService").getDeclaredMethod("unsnoozeNotification", String.class);
-                m.invoke(c, "65165151");
-                Log.d(TAG, "onCreate: method name: " + m.getName());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-            //Log.d(TAG, "onCreate: method name: " + method.getName());
-
-
             // license key
             String base64EncodedPublicKey = getContext().getString(R.string.public_license_key);
 

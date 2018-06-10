@@ -8,11 +8,13 @@ android {
         minSdkVersion 26
         targetSdkVersion 28
         versionCode 96
-        versionName "v1.6vc" + getVersionCode()
+        versionCode 102
+        versionName "v1.7vc" + getVersionCode()
     }
 
     lintOptions{
         disable 'MissingTranslation'
+        abortOnError false
     }
 
     buildTypes {
@@ -26,7 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
     //compile 'com.android.billingclient:billing:1.0'
