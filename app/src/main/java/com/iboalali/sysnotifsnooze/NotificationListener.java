@@ -51,24 +51,22 @@ public class NotificationListener extends NotificationListenerService {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         SharedPreferences.Editor editorP = sharedPreferencesPackageNames.edit();
 
-        if (sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1) < Utils.getAppVersionCode(getApplicationContext())){
-            Log.d(TAG, "onCreate: old version " + sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1));
+        if (sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1) < Utils.getAppVersionCode(getApplicationContext())) {
             Log.i(TAG, "onCreate: old version " + sharedPreferences.getInt(getString(R.string.shared_pref_key_version_code), -1));
-
-            Log.d(TAG, "onCreate: current version " + Utils.getAppVersionCode(getApplicationContext()));
             Log.i(TAG, "onCreate: current version " + Utils.getAppVersionCode(getApplicationContext()));
 
             editor.putInt(getString(R.string.shared_pref_key_version_code), Utils.getAppVersionCode(getApplicationContext()));
             editor.apply();
 
-            if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))){
+            if (!sharedPreferencesPackageNames.contains(getString(R.string.shared_pref_key_package_name_selected))) {
                 List<String> list = new ArrayList<>();
                 list.add(getString(R.string.string_all_key));
                 editorP.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<String>(list));
             }
+
             editorP.apply();
 
-            new Runnable(){
+            new Runnable() {
                 @Override
                 public void run() {
                     Log.d("NL runnable", "will run in 1 second");
@@ -77,8 +75,7 @@ public class NotificationListener extends NotificationListenerService {
                         Intent intent = new Intent(getString(R.string.string_filter_intent));
                         intent.putExtra("command", "hide");
                         sendBroadcast(intent);
-                        //Log.d("NL runnable","1 second is finished, Broadcast \"hide\" send");
-                        Log.i("NL runnable","1 second is finished, Broadcast \"hide\" send");
+                        Log.i("NL runnable", "1 second is finished, Broadcast \"hide\" send");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -86,7 +83,7 @@ public class NotificationListener extends NotificationListenerService {
                 }
             }.run();
 
-        }else{
+        } else {
             Log.d(TAG, "onCreate: not updated. version: " + Utils.getAppVersionCode(getApplicationContext()));
             Log.i(TAG, "onCreate: not updated. version: " + Utils.getAppVersionCode(getApplicationContext()));
         }
@@ -100,7 +97,7 @@ public class NotificationListener extends NotificationListenerService {
         }
     }
 
-    private void snoozeSystemNotification(StatusBarNotification sbn){
+    private void snoozeSystemNotification(StatusBarNotification sbn) {
         Log.d(TAG, "in snoozeNotification");
         if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
             Log.d(TAG, "found the notification");
@@ -113,10 +110,10 @@ public class NotificationListener extends NotificationListenerService {
             boolean areAllSelected = false;
 
             Set<String> selected = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_selected), null);
-            if (selected != null && svcs != null){
-                if (selected.contains(getString(R.string.string_all_key))){
+            if (selected != null && svcs != null) {
+                if (selected.contains(getString(R.string.string_all_key))) {
                     areAllSelected = true;
-                }else {
+                } else {
                     for (String s : svcs) {
                         if (selected.contains(s)) {
                             areAllSelected = true;
@@ -127,7 +124,7 @@ public class NotificationListener extends NotificationListenerService {
                     }
                 }
 
-                if (areAllSelected){
+                if (areAllSelected) {
                     // TODO: test for the best combination of duration and battery life
                     snoozeNotification(sbn.getKey(), snoozeDurationMs);
 
@@ -139,32 +136,7 @@ public class NotificationListener extends NotificationListenerService {
         }
     }
 
-    /*
-    private void unSnoozeSystemNotification(){
-        try {
-            for (StatusBarNotification sbn: NotificationListener.this.getSnoozedNotifications()){
-                if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)){
-                    Class c = Class.forName("android.service.notification.NotificationAssistantService").getClass();
-                    Method m = Class.forName("android.service.notification.NotificationAssistantService").getDeclaredMethod("unsnoozeNotification", String.class);
-                    m.invoke(c, sbn.getKey());
-                    Log.d(TAG, sbn.getPackageName() + " with key: " +sbn.getKey() + ": un-snoozed");
-
-                }
-            }
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-    */
-
-    private void checkForSystemNotification(StatusBarNotification sbn){
+    private void checkForSystemNotification(StatusBarNotification sbn) {
         Log.d(TAG, "in checkForSystemNotification");
 
         if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
@@ -177,14 +149,14 @@ public class NotificationListener extends NotificationListenerService {
             String[] svcs = sbn.getNotification().extras.getStringArray(EXTRA_FOREGROUND_APPS);
 
             // checking for null, just to avoid a potential null exception
-            if (svcs != null){
+            if (svcs != null) {
                 // if key exist, add new package names to the list and put in shared preferences
                 Set<String> pns = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
-                if (pns != null){
+                if (pns != null) {
                     List<String> newList = new ArrayList<>(pns);
                     for (String s : svcs) {
                         Log.d(TAG, "EXTRA_FOREGROUND_APPS: " + s);
-                        if(!pns.contains(s)){
+                        if (!pns.contains(s)) {
                             Log.d(TAG, s + " is not on the list. Added it");
                             newList.add(s);
                         }
@@ -195,8 +167,7 @@ public class NotificationListener extends NotificationListenerService {
                     editor.putStringSet(getString(R.string.shared_pref_key_package_name_current), new HashSet<String>(Arrays.asList(svcs)));
                     editor.apply();
 
-                }else{ // if key doesn't exist, just put the whole list in shared preferences
-
+                } else { // if key doesn't exist, just put the whole list in shared preferences
                     Log.d(TAG, "Add all EXTRA_FOREGROUND_APPS to the list");
                     editor = sharedPreferencesPackageNames.edit();
                     editor.putStringSet(getString(R.string.shared_pref_key_package_name_all), new HashSet<>(Arrays.asList(svcs)));
@@ -207,7 +178,7 @@ public class NotificationListener extends NotificationListenerService {
         }
     }
 
-    private void snoozeSystemNotificationTheOldWay(StatusBarNotification sbn){
+    private void snoozeSystemNotificationTheOldWay(StatusBarNotification sbn) {
         if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
             String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
             if (key == null) return;
@@ -225,9 +196,9 @@ public class NotificationListener extends NotificationListenerService {
         if (sbn == null)
             return;
 
-        if(sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false )) {
+        if (sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false)) {
             snoozeSystemNotificationTheOldWay(sbn);
-        }else{
+        } else {
             checkForSystemNotification(sbn);
             snoozeSystemNotification(sbn);
         }
@@ -242,7 +213,7 @@ public class NotificationListener extends NotificationListenerService {
         //snoozeSystemNotification(sbn);
     }
 
-    class NotificationListenerBroadcastReceiver extends BroadcastReceiver{
+    class NotificationListenerBroadcastReceiver extends BroadcastReceiver {
         private static final String TAG = "NL Broadcast Receiver";
 
         @Override
@@ -252,19 +223,18 @@ public class NotificationListener extends NotificationListenerService {
 
             if (intent.getStringExtra("command").equals("hide")) {
                 for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {
-                    if(sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false )) {
+                    if (sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false)) {
                         snoozeSystemNotificationTheOldWay(sbn);
-                    }else{
+                    } else {
                         checkForSystemNotification(sbn);
                         snoozeSystemNotification(sbn);
                     }
                 }
-            }
-            else if(intent.getStringExtra("command").equals("show")){
+            } else if (intent.getStringExtra("command").equals("show")) {
 
             }
             // Debug code, not used in production
-            else if(intent.getStringExtra("command").equals("extra_hide")){
+            else if (intent.getStringExtra("command").equals("extra_hide")) {
                 for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {
                     //checkAndSnoozeNotification(sbn);
                     if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
@@ -276,7 +246,7 @@ public class NotificationListener extends NotificationListenerService {
                 }
             }
             // Debug code, not used in production
-            else if (intent.getStringExtra("command").equals("extra_show")){
+            else if (intent.getStringExtra("command").equals("extra_show")) {
                 for (StatusBarNotification sbn : NotificationListener.this.getSnoozedNotifications()) {
                     if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
                         NotificationListener.this.snoozeNotification(sbn.getKey(), -100000000000000L);
@@ -287,9 +257,6 @@ public class NotificationListener extends NotificationListenerService {
                     }
                 }
             }
-
-
-
         }
     }
 }
