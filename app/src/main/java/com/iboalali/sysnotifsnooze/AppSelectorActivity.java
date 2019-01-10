@@ -137,7 +137,7 @@ public class AppSelectorActivity extends AppCompatActivity {
                         }
                     }
                 }
-                
+
                 editor.putStringSet(getString(R.string.shared_pref_key_package_name_selected), new HashSet<>(list));
                 editor.apply();
             } else {

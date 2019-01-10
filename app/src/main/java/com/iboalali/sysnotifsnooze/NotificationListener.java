@@ -81,7 +81,6 @@ public class NotificationListener extends NotificationListenerService {
             }).run();
 
         } else {
-            Log.d(TAG, "onCreate: not updated. version: " + Utils.getAppVersionCode(getApplicationContext()));
             Log.i(TAG, "onCreate: not updated. version: " + Utils.getAppVersionCode(getApplicationContext()));
         }
     }
@@ -135,7 +134,6 @@ public class NotificationListener extends NotificationListenerService {
 
         if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
             Log.d(TAG, "found the notification");
-            //Log.d(TAG, "checkForSystemNotification: " + sbn.getNotification().getChannelId());
 
             String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
             if (key == null) return;
@@ -211,7 +209,6 @@ public class NotificationListener extends NotificationListenerService {
             return;
 
         checkForSystemNotification(sbn);
-        //snoozeSystemNotification(sbn);
     }
 
     class NotificationListenerBroadcastReceiver extends BroadcastReceiver {
@@ -228,32 +225,6 @@ public class NotificationListener extends NotificationListenerService {
                     } else {
                         checkForSystemNotification(sbn);
                         snoozeSystemNotification(sbn);
-                    }
-                }
-            } else if (intent.getStringExtra("command").equals("show")) {
-
-            }
-            // Debug code, not used in production
-            else if (intent.getStringExtra("command").equals("extra_hide")) {
-                for (StatusBarNotification sbn : NotificationListener.this.getActiveNotifications()) {
-                    //checkAndSnoozeNotification(sbn);
-                    if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
-                        NotificationListener.this.snoozeNotification(sbn.getKey(), snoozeDurationMs);
-
-                        String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
-                        Log.d(TAG, sbn.getPackageName() + ": snoozed");
-                    }
-                }
-            }
-            // Debug code, not used in production
-            else if (intent.getStringExtra("command").equals("extra_show")) {
-                for (StatusBarNotification sbn : NotificationListener.this.getSnoozedNotifications()) {
-                    if (sbn.getPackageName().equals("android") && sbn.getNotification().extras.containsKey(EXTRA_FOREGROUND_APPS)) {
-                        NotificationListener.this.snoozeNotification(sbn.getKey(), -100000000000000L);
-                        NotificationListener.this.cancelNotification(sbn.getKey());
-
-                        String key = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
-                        Log.d(TAG, sbn.getPackageName() + ": un-snoozed");
                     }
                 }
             }
