@@ -23,8 +23,6 @@ import com.iboalali.sysnotifsnooze.util.Inventory;
 import com.iboalali.sysnotifsnooze.util.Purchase;
 import com.iboalali.sysnotifsnooze.util.SkuDetails;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

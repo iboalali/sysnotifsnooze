@@ -24,36 +24,42 @@ public class Utils {
         return !(enabledNotificationListeners == null || !enabledNotificationListeners.contains(packageName));
     }
 
-    public static String getAppName(Context context, String packageName){
+    public static String getAppName(Context context, String packageName) {
         PackageManager pm = context.getPackageManager();
         ApplicationInfo ai;
+
         try {
             ai = pm.getApplicationInfo(packageName, 0);
         } catch (final PackageManager.NameNotFoundException e) {
             ai = null;
         }
-        return (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+
+        return ai != null ? (String) pm.getApplicationLabel(ai) : null;
     }
 
-    public static String getAppVersionName(Context context){
+    public static String getAppVersionName(Context context) {
         PackageManager manager = context.getPackageManager();
+
         try {
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
             return info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
         return "";
     }
 
-    public static int getAppVersionCode(Context context){
+    public static int getAppVersionCode(Context context) {
         PackageManager manager = context.getPackageManager();
+
         try {
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
             return info.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
         return -1;
     }
 
