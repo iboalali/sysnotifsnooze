@@ -66,22 +66,19 @@ public class NotificationListener extends NotificationListenerService {
 
             editorP.apply();
 
-            new Runnable() {
-                @Override
-                public void run() {
-                    Log.d("NL runnable", "will run in 1 second");
-                    try {
-                        Thread.sleep(1000);
-                        Intent intent = new Intent(getString(R.string.string_filter_intent));
-                        intent.putExtra("command", "hide");
-                        sendBroadcast(intent);
-                        Log.i("NL runnable", "1 second is finished, Broadcast \"hide\" send");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
+            ((Runnable) () -> {
+                Log.d("NL runnable", "will run in 1 second");
+                try {
+                    Thread.sleep(1000);
+                    Intent intent = new Intent(getString(R.string.string_filter_intent));
+                    intent.putExtra("command", "hide");
+                    sendBroadcast(intent);
+                    Log.i("NL runnable", "1 second is finished, Broadcast \"hide\" send");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            }.run();
+
+            }).run();
 
         } else {
             Log.d(TAG, "onCreate: not updated. version: " + Utils.getAppVersionCode(getApplicationContext()));
@@ -110,6 +107,7 @@ public class NotificationListener extends NotificationListenerService {
             boolean areAllSelected = false;
 
             Set<String> selected = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_selected), null);
+
             if (selected != null && svcs != null) {
                 if (selected.contains(getString(R.string.string_all_key))) {
                     areAllSelected = true;
@@ -125,12 +123,8 @@ public class NotificationListener extends NotificationListenerService {
                 }
 
                 if (areAllSelected) {
-                    // TODO: test for the best combination of duration and battery life
                     snoozeNotification(sbn.getKey(), snoozeDurationMs);
-
                     Log.d(TAG, sbn.getPackageName() + ": " + key + ", snoozed for " + snoozeDurationMs);
-                } else {
-                    //unSnoozeSystemNotification();
                 }
             }
         }
@@ -153,7 +147,14 @@ public class NotificationListener extends NotificationListenerService {
                 // if key exist, add new package names to the list and put in shared preferences
                 Set<String> pns = sharedPreferencesPackageNames.getStringSet(getString(R.string.shared_pref_key_package_name_all), null);
                 if (pns != null) {
-                    List<String> newList = new ArrayList<>(pns);
+                    List<String> newList = new ArrayList<>();
+
+                    for (String l : pns) {
+                        if (Utils.getAppName(getApplicationContext(), l) != null) {
+                            newList.add(l);
+                        }
+                    }
+
                     for (String s : svcs) {
                         Log.d(TAG, "EXTRA_FOREGROUND_APPS: " + s);
                         if (!pns.contains(s)) {
@@ -218,7 +219,6 @@ public class NotificationListener extends NotificationListenerService {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG, "Received Broadcast");
             Log.i(TAG, "Received Broadcast");
 
             if (intent.getStringExtra("command").equals("hide")) {

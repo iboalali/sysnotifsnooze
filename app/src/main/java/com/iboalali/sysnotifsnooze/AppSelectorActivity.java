@@ -77,7 +77,6 @@ public class AppSelectorActivity extends AppCompatActivity {
                     String appName = Utils.getAppName(getContext(), s);
 
                     if (appName == null) {
-
                         continue;
                     }
 
