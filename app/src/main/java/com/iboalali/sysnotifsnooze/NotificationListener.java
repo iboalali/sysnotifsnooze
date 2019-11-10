@@ -30,11 +30,10 @@ public class NotificationListener extends NotificationListenerService {
     long snoozeDurationMs = 5000L;
 
     /**
-     * This is set on the notification shown by the activity manager about all apps
-     * running in the background.  It indicates that the notification should be shown
-     * only if any of the given apps do not already have a {@link Notification#FLAG_FOREGROUND_SERVICE}
-     * notification currently visible to the user.  This is a string array of all
-     * package names of the apps.
+     * This is set on the notification shown by the activity manager about all apps running in the
+     * background.  It indicates that the notification should be shown only if any of the given apps
+     * do not already have a {@link Notification#FLAG_FOREGROUND_SERVICE} notification currently
+     * visible to the user.  This is a string array of all package names of the apps.
      */
     public static final String EXTRA_FOREGROUND_APPS = "android.foregroundApps";
 
