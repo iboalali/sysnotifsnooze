@@ -13,8 +13,6 @@ import android.provider.Settings;
 
 public class Utils {
 
-    private static final String TAG = "Utils";
-
     public static boolean hasAccessGranted(Context CONTEXT) {
         ContentResolver contentResolver = CONTEXT.getContentResolver();
         String enabledNotificationListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
@@ -35,19 +33,6 @@ public class Utils {
         }
 
         return ai != null ? (String) pm.getApplicationLabel(ai) : null;
-    }
-
-    public static String getAppVersionName(Context context) {
-        PackageManager manager = context.getPackageManager();
-
-        try {
-            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-            return info.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return "";
     }
 
     public static int getAppVersionCode(Context context) {
