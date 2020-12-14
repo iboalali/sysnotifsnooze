@@ -344,6 +344,10 @@ public class MainActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                     break;
+                case KEY_BACKGROUND_APPS:
+                    Intent i = new Intent(getContext(), AppSelectorActivity.class);
+                    startActivity(i);
+                    break;
             }
             return false;
         }
