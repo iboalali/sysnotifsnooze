@@ -11,4 +11,4 @@ in-app billing public key.txt
 app/app-release.apk
 app/src/main/res/values/publickey.xml
 app/release/*
-.idea/caches/build_file_checksums.ser
+.idea/*
