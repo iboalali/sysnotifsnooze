@@ -1,41 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Allow">允许</string>
-    <string name="OK">确定</string>
-    <string name="app_name">隐藏 \"正在后台运行\" 通知</string>
+    <string name="app_name">隐藏 \"在后台运行\" 通知</string>
     <string name="app_name_2">隐藏 %s 通知</string>
-    <string name="string_settings_running_in_the_background">当前正在后台运行的应用程序</string>
-    <string name="string_title_select_apps_screen">选择用于隐藏 %s 通知的应用程序</string>
-    <string name="string_title_select_apps">请选择应用程序</string>
-    <string name="string_settings_select_apps">轻触选择应用程序</string>
-    <string name="string_settings_source_code">源码</string>
-    <string name="string_all_apps">所有应用</string>
-    <string name="granted">已允许</string>
-    <string name="not_granted">未允许</string>
-    <string name="permission_request_msg">"这个应用程序能去掉那些烦人的 %s 通知，你必须让这个应用程序获取你的通知使用权。\n\n请点击“确定”，然后在下一个屏幕中，将此应用程序的权限打开，然后点“允许”"</string>
-    <string name="permission_request_title">获取通知使用权</string>
-    <string name="string_settings_follow_me">联系我</string>
-    <string name="string_settings_large_donation">捐大款</string>
-    <string name="string_settings_notification_access_permission">通知使用权</string>
-    <string name="string_settings_permission">许可</string>
-    <string name="string_settings_small_donation">捐小款</string>
-    <string name="string_settings_support_me_with">支持我…</string>
-    <string name="string_settings_use_old_hiding_method">使用旧的隐藏方法</string>
-    <string name="string_settings_old_way_summary">如果您有出现呼吸灯异常显示的“一加手机”等设备或无法隐藏通知等其他问题，请尝试使用此选项</string>
-    <string name="string_hide_icon_alert_dialog_msg">"这个开关将隐藏此应用程序在桌面上的图标。\n\n警告！！隐藏之后你必须重新安装此应用才能将其打开！"</string>
-    <string name="string_hide_icon_alert_dialog_title">在桌面上隐藏应用图标?</string>
-    <string name="string_settings_hide_app_icon_from_launcher">在桌面上隐藏应用图标</string>
-    <string name="string_settings_settings">设置</string>
-    <string name="string_old_way_alert_dialog_msg">此设置将切换此程序旧的隐藏方法， 它将禁用选择应用程序的选项</string>
-    <string name="string_new_way_alert_dialog_msg">请重启手机让此选项生效，选择的应用程序将被启用</string>
-    <string name="string_old_way_alert_dialog_title">你确定?</string>
-    <string name="string_new_way_alert_dialog_title">重启!</string>
+    <string name="service_name" translatable="false">@string/app_name</string>
+    <string name="permission_request_msg">要让这个应用程序删除烦人的 %s 通知，你必须允许这个应用程序访问你的通知。\n\n按下“好”，在下一个屏幕上，切换这个应用程序的权限到打开，然后按 \"允许\"</string>
+    <string name="permission_request_title">访问通知权限</string>
+    <string name="Allow">允许</string>
+    <string name="OK">好</string>
+    <string name="granted">已授权</string>
+    <string name="not_granted">未授权</string>
+    <string name="string_hide_icon_alert_dialog_title">从启动器隐藏应用程序图标？</string>
+    <string name="string_hide_icon_alert_dialog_msg">这个开关将从启动程序隐藏应用程序图标。\n\n小心！\n你必须从 Play Store 重新卸载和安装这个应用程序才能打开它</string>
+    <string name="string_old_way_alert_dialog_msg">此设置将切换应用程序使用旧方法。它将禁用选择应用程序的选项。</string>
+    <string name="string_new_way_alert_dialog_msg">重新启动手机使此选项生效。选择应用将被启用。</string>
+    <string name="string_old_way_alert_dialog_title">你确定吗？</string>
+    <string name="string_new_way_alert_dialog_title">重启！</string>
     <string name="string_yes">是</string>
     <string name="string_no">否</string>
+    <string name="string_title_select_apps">选择应用</string>
+    <string name="string_title_select_apps_screen">选择要隐藏哪些应用的 %s 通知</string>
+    <string name="string_all_apps">所有应用</string>
+    <string name="string_settings_small_donation">小额捐赠</string>
+    <string name="string_settings_large_donation">大额捐赠</string>
+    <string name="string_settings_follow_me">关注我</string>
+    <string name="string_settings_notification_access_permission">通知访问权限</string>
+    <string name="string_settings_permission">权限</string>
+    <string name="string_settings_support_me_with">支持方式 ......</string>
+    <string name="string_settings_running_in_the_background">应用当前在后台运行</string>
+    <string name="string_settings_source_code">源代码</string>
+    <string name="string_settings_twitter">推特</string>
+    <string name="string_settings_hide_app_icon_from_launcher">从启动器隐藏应用程序图标</string>
+    <string name="string_settings_settings">设置</string>
+    <string name="string_settings_select_apps">点按选择应用</string>
+    <string name="string_settings_use_old_hiding_method">使用旧的隐藏方法</string>
+    <string name="string_settings_old_way_summary">如果你有一台带主动显示功能的一加设备或任何其他与隐藏通知相关的问题，请尝试这个选项。</string>
+    <string name="string_settings_hide_persistent_notification">隐藏其他持久通知？</string>
+    <string name="string_settings_hide_persistent_notification_summery">借助我的另一款应用程序“隐藏持久通知”，你可以隐藏任何持久通知。</string>
+
+    <string name="shared_pref_key_package_name_all" translatable="false">packageNamesAll</string>
+    <string name="shared_pref_key_package_name_current" translatable="false">packageNamesCurrent</string>
+    <string name="shared_pref_key_package_name_selected" translatable="false">packageNamesSelected</string>
+    <string name="shared_pref_name" translatable="false">myComPref</string>
+    <string name="shared_pref_key_granted" translatable="false">granted?</string>
+    <string name="shared_pref_key_isOldWay" translatable="false">isOldWay</string>
+    <string name="shared_pref_key_isIconHidden" translatable="false">isIconHidden</string>
+    <string name="string_all_key" translatable="false">all.all.all.all.all</string>
+
+    <string name="string_filter_intent" translatable="false">com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT</string>
+    <string name="shared_pref_key_version_code" translatable="false">version_code</string>
 
     <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
             If there are any questions or change requests about these translations please contact me -->
-    <string name="string_app_name_replace_running_in_the_background">正在后台运行</string>
-    <string name="string_app_name_replace_using_battery">正在消耗电量</string>
+    <string name="string_app_name_replace_using_battery">using battery</string>
+    <string name="string_app_name_replace_running_in_the_background">running in the background</string>
     <!-- *********************************************************************************************** -->
+
 </resources>
