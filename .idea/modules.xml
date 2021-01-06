@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="sysnotifsnooze/app" />
-      <module fileurl="file://$PROJECT_DIR$/sysnotifsnooze.iml" filepath="$PROJECT_DIR$/sysnotifsnooze.iml" group="sysnotifsnooze" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sysnotifsnooze.iml" filepath="$PROJECT_DIR$/.idea/modules/sysnotifsnooze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/sysnotifsnooze.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/sysnotifsnooze.app.iml" />
     </modules>
   </component>
 </project>
