@@ -11,7 +11,7 @@ android {
         versionName "v1.9.1vc" + getVersionCode()
     }
 
-    lintOptions {
+    lint {
         disable 'MissingTranslation'
         abortOnError false
     }
