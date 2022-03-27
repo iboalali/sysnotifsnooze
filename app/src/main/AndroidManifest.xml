@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.iboalali.sysnotifsnooze">
 
-    <uses-permission android:name="com.android.vending.BILLING" />
-
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
