@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -11,6 +12,8 @@ import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -240,6 +243,29 @@ public class MainActivity extends AppCompatActivity {
         public void onResume() {
             super.onResume();
 
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog_skip_message, null, false);
+            View button = view.findViewById(R.id.open_play_store_button);
+            if (button != null) {
+                button.setOnClickListener(v -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.iboalali.hidepersistentnotifications&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"));
+                    intent.setPackage("com.android.vending");
+                    startActivity(intent);
+                });
+            }
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O_MR1) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Warning")
+                        .setView(view)
+                        .setNegativeButton("Continue", (dialogInterface, i) -> checkPermission())
+                        .show();
+            } else {
+                checkPermission();
+            }
+        }
+
+        private void checkPermission() {
             if (!Utils.hasAccessGranted(getContext())) {
                 Log.d(TAG, "No Notification Access");
 

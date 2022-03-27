@@ -48,10 +48,15 @@
     <string name="string_filter_intent" translatable="false">com.iboalali.sysnotifsnooze.NOTIFICATION_LISTENER_SERVICE_INTENT</string>
     <string name="shared_pref_key_version_code" translatable="false">version_code</string>
 
+    <string name="dialog_skip_message_1">This app is made for Android 8.0 and 8.1 Oreo, for all other system versions it is basically useless.\nAnd this app only hides one of two particular notifications depending on the system version:</string>
+    <string name="dialog_skip_message_2">Your device does not meet the criteria mentioned above. But if you want to hide persistent notification, I have another app that does this: \"Hide Persistent Notification\"</string>
+
     <!-- To all contributors, Please do not translate these two. I will use the translation used by AOSP.
             If there are any questions or change requests about these translations please contact me -->
     <string name="string_app_name_replace_using_battery">using battery</string>
     <string name="string_app_name_replace_running_in_the_background">running in the background</string>
+    <string name="dialog_skip_open_button">Open <b>Hide Persistent Notification</b> in Play Store</string>
+    <string name="dialog_skip_continue_button">Continue</string>
     <!-- *********************************************************************************************** -->
 
 </resources>
