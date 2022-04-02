@@ -7,9 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+    public static class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceClickListener {
         private static final String KEY_NOTIFICATION_PERMISSION = "notification_permission";
         private static final String KEY_BACKGROUND_APPS = "background_app";
         private static final String KEY_SETTINGS_HIDE_ICON = "hide_icon";
@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings);
 
             // setup shared preferences
-            sharedPreferences = getActivity().getSharedPreferences("mySettingsPref", MODE_PRIVATE);
-            sharedPreferencesPackageNames = getActivity().getSharedPreferences("myPackageNames", MODE_PRIVATE);
+            sharedPreferences = requireActivity().getSharedPreferences("mySettingsPref", MODE_PRIVATE);
+            sharedPreferencesPackageNames = requireActivity().getSharedPreferences("myPackageNames", MODE_PRIVATE);
 
             sharedPreferencesPackageNames.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
@@ -107,42 +107,42 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "in settings_hide_icon onPreferenceChange");
 
                 if (!settings_hide_icon.isChecked()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
                     builder.setMessage(R.string.string_hide_icon_alert_dialog_msg);
                     builder.setTitle(R.string.string_hide_icon_alert_dialog_title);
                     builder.setCancelable(true);
                     builder.setPositiveButton(R.string.string_yes, (dialogInterface, i) -> {
                         Log.d(TAG, "set switch to TRUE");
 
-                        PackageManager pkg = getContext().getPackageManager();
+                        PackageManager pkg = requireContext().getPackageManager();
                         pkg.setComponentEnabledSetting(new ComponentName(getContext(), MainActivity.class), PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                                 PackageManager.DONT_KILL_APP);
 
                         settings_hide_icon.setChecked(true);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(getContext().getString(R.string.shared_pref_key_isIconHidden), true);
+                        editor.putBoolean(getString(R.string.shared_pref_key_isIconHidden), true);
                         editor.apply();
 
                         Log.d(TAG, "switch is: " + settings_hide_icon.isChecked());
                     });
 
-                    builder.setNegativeButton(getContext().getString(R.string.string_no), (dialogInterface, i) -> {
+                    builder.setNegativeButton(getString(R.string.string_no), (dialogInterface, i) -> {
                         settings_hide_icon.setChecked(false);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(getContext().getString(R.string.shared_pref_key_isIconHidden), false);
+                        editor.putBoolean(getString(R.string.shared_pref_key_isIconHidden), false);
                         editor.apply();
                     });
 
                     builder.setOnCancelListener(dialogInterface -> {
                         Log.d(TAG, "set switch to FALSE (1)");
 
-                        PackageManager pkg = getContext().getPackageManager();
+                        PackageManager pkg = requireContext().getPackageManager();
                         pkg.setComponentEnabledSetting(new ComponentName(getContext(), MainActivity.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                                 PackageManager.DONT_KILL_APP);
 
                         settings_hide_icon.setChecked(false);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(getContext().getString(R.string.shared_pref_key_isIconHidden), false);
+                        editor.putBoolean(getString(R.string.shared_pref_key_isIconHidden), false);
                         editor.apply();
                         Log.d(TAG, "switch is: " + settings_hide_icon.isChecked());
                     });
@@ -153,13 +153,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d(TAG, "set switch to FALSE (2)");
 
-                    PackageManager pkg = getContext().getPackageManager();
+                    PackageManager pkg = requireContext().getPackageManager();
                     pkg.setComponentEnabledSetting(new ComponentName(getContext(), MainActivity.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                             PackageManager.DONT_KILL_APP);
 
                     settings_hide_icon.setChecked(false);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean(getContext().getString(R.string.shared_pref_key_isIconHidden), false);
+                    editor.putBoolean(getString(R.string.shared_pref_key_isIconHidden), false);
                     editor.apply();
                     Log.d(TAG, "switch is: " + settings_hide_icon.isChecked());
                 }
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "in settings_old_way onPreferenceChange");
 
                 if (!settings_old_way.isChecked()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                     builder.setMessage(R.string.string_old_way_alert_dialog_msg);
                     builder.setTitle(R.string.string_old_way_alert_dialog_title);
                     builder.setCancelable(true);
@@ -183,13 +183,13 @@ public class MainActivity extends AppCompatActivity {
 
                         settings_old_way.setChecked(true);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(getContext().getString(R.string.shared_pref_key_isOldWay), true);
+                        editor.putBoolean(getString(R.string.shared_pref_key_isOldWay), true);
                         editor.apply();
                         Log.d(TAG, "switch is: " + settings_old_way.isChecked());
 
                         Intent intent = new Intent(getString(R.string.string_filter_intent));
                         intent.putExtra("command", "hide");
-                        getContext().sendBroadcast(intent);
+                        requireContext().sendBroadcast(intent);
                     });
 
                     builder.setNegativeButton("No", (dialogInterface, i) -> {
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
                         settings_old_way.setChecked(false);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(getContext().getString(R.string.shared_pref_key_isOldWay), false);
+                        editor.putBoolean(getString(R.string.shared_pref_key_isOldWay), false);
                         editor.apply();
                         Log.d(TAG, "switch is: " + settings_old_way.isChecked());
                     });
@@ -209,14 +209,14 @@ public class MainActivity extends AppCompatActivity {
 
                         settings_old_way.setChecked(false);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(getContext().getString(R.string.shared_pref_key_isOldWay), false);
+                        editor.putBoolean(getString(R.string.shared_pref_key_isOldWay), false);
                         editor.apply();
                         Log.d(TAG, "switch is: " + settings_old_way.isChecked());
                     });
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                     builder.setMessage(R.string.string_new_way_alert_dialog_msg);
                     builder.setTitle(R.string.string_new_way_alert_dialog_title);
                     builder.setPositiveButton("OK", null);
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
                     settings_old_way.setChecked(false);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean(getContext().getString(R.string.shared_pref_key_isOldWay), false);
+                    editor.putBoolean(getString(R.string.shared_pref_key_isOldWay), false);
                     editor.apply();
                     Log.d(TAG, "switch is: " + settings_old_way.isChecked());
 
@@ -238,6 +238,11 @@ public class MainActivity extends AppCompatActivity {
             });
 
         } // end of onCreate
+
+        @Override
+        public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+
+        }
 
         @Override
         public void onResume() {
@@ -255,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
 
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder(requireActivity())
                         .setTitle("Warning")
                         .setView(view)
                         .setCancelable(false)
@@ -267,14 +272,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void checkPermission() {
-            if (!Utils.hasAccessGranted(getContext())) {
+            if (!Utils.hasAccessGranted(requireActivity())) {
                 Log.d(TAG, "No Notification Access");
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean(getContext().getString(R.string.shared_pref_key_granted), false);
+                editor.putBoolean(getString(R.string.shared_pref_key_granted), false);
                 editor.apply();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 
                 String msg = getString(R.string.permission_request_msg);
                 if (Build.VERSION.SDK_INT >= 27 || Build.MODEL.equals("Pixel 2") || Build.MODEL.equals("Pixel 2 XL")) {
@@ -300,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
                 if (l != null) {
                     stringBuilder.append(getString(R.string.string_settings_running_in_the_background)).append(":").append("\n");
                     for (String str : l) {
-                        stringBuilder.append("- ").append(Utils.getAppName(getContext(), str)).append("\n");
+                        stringBuilder.append("- ").append(Utils.getAppName(requireContext(), str)).append("\n");
                     }
 
                     stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
@@ -310,17 +315,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                if (!sharedPreferences.getBoolean(getContext().getString(R.string.shared_pref_key_granted), false)) {
+                if (!sharedPreferences.getBoolean(getString(R.string.shared_pref_key_granted), false)) {
                     Log.d(TAG, "sending broadcast");
                     Log.i(TAG, "sending broadcast");
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean(getContext().getString(R.string.shared_pref_key_granted), true);
+                    editor.putBoolean(getString(R.string.shared_pref_key_granted), true);
                     editor.apply();
 
                     Intent intent = new Intent(getString(R.string.string_filter_intent));
                     intent.putExtra("command", "hide");
-                    getContext().sendBroadcast(intent);
+                    requireContext().sendBroadcast(intent);
                 }
             }
         }
@@ -340,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                     if (l != null) {
                         stringBuilder.append(getString(R.string.string_settings_running_in_the_background)).append(":").append("\n");
                         for (String str : l) {
-                            stringBuilder.append("- ").append(Utils.getAppName(getContext(), str)).append("\n");
+                            stringBuilder.append("- ").append(Utils.getAppName(requireContext(), str)).append("\n");
                         }
 
                         stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
@@ -361,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
                     if (isNotificationAccessPermissionGranted) {
                         startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                     } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                         builder.setMessage(R.string.permission_request_msg);
                         builder.setTitle(R.string.permission_request_title);
                         builder.setCancelable(true);
@@ -383,11 +388,11 @@ public class MainActivity extends AppCompatActivity {
         public void onStart() {
             super.onStart();
 
-            isNotificationAccessPermissionGranted = Utils.hasAccessGranted(getContext());
+            isNotificationAccessPermissionGranted = Utils.hasAccessGranted(requireContext());
             notification_permission.setSummary(isNotificationAccessPermissionGranted ? getString(R.string.granted) : getString(R.string.not_granted));
 
-            isSwitchSet_isIconHidden = sharedPreferences.getBoolean(getContext().getString(R.string.shared_pref_key_isIconHidden), false);
-            isSwitchSet_isOldWay = sharedPreferences.getBoolean(getContext().getString(R.string.shared_pref_key_isOldWay), false);
+            isSwitchSet_isIconHidden = sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isIconHidden), false);
+            isSwitchSet_isOldWay = sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false);
             settings_hide_icon.setChecked(isSwitchSet_isIconHidden);
             settings_old_way.setChecked(isSwitchSet_isOldWay);
             background_app.setEnabled(!isSwitchSet_isOldWay);
