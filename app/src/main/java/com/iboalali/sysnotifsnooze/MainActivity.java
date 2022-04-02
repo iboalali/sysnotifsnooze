@@ -243,21 +243,22 @@ public class MainActivity extends AppCompatActivity {
         public void onResume() {
             super.onResume();
 
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog_skip_message, null, false);
-            View button = view.findViewById(R.id.open_play_store_button);
-            if (button != null) {
-                button.setOnClickListener(v -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.iboalali.hidepersistentnotifications&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"));
-                    intent.setPackage("com.android.vending");
-                    startActivity(intent);
-                });
-            }
-
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O_MR1) {
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog_skip_message, null, false);
+                View button = view.findViewById(R.id.open_play_store_button);
+                if (button != null) {
+                    button.setOnClickListener(v -> {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.iboalali.hidepersistentnotifications&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"));
+                        intent.setPackage("com.android.vending");
+                        startActivity(intent);
+                    });
+                }
+
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Warning")
                         .setView(view)
+                        .setCancelable(false)
                         .setNegativeButton("Continue", (dialogInterface, i) -> checkPermission())
                         .show();
             } else {
