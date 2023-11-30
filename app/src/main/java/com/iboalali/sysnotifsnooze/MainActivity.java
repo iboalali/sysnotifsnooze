@@ -68,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
         private static final String KEY_SETTINGS_OLD_WAY = "old_way";
         private static final String TAG = "SettingsFragment";
 
-        private boolean isSwitchSet_isIconHidden;
-        private boolean isSwitchSet_isOldWay;
-
         private Preference notification_permission;
         private SwitchPreference settings_hide_icon;
         private SwitchPreference settings_old_way;
@@ -391,8 +388,8 @@ public class MainActivity extends AppCompatActivity {
             isNotificationAccessPermissionGranted = Utils.hasAccessGranted(requireContext());
             notification_permission.setSummary(isNotificationAccessPermissionGranted ? getString(R.string.granted) : getString(R.string.not_granted));
 
-            isSwitchSet_isIconHidden = sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isIconHidden), false);
-            isSwitchSet_isOldWay = sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false);
+            boolean isSwitchSet_isIconHidden = sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isIconHidden), false);
+            boolean isSwitchSet_isOldWay = sharedPreferences.getBoolean(getString(R.string.shared_pref_key_isOldWay), false);
             settings_hide_icon.setChecked(isSwitchSet_isIconHidden);
             settings_old_way.setChecked(isSwitchSet_isOldWay);
             background_app.setEnabled(!isSwitchSet_isOldWay);
