@@ -7,7 +7,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 34
         setBuildToolsVersion "34.0.0"
-        versionCode 118
+        versionCode 119
         versionName "v1.9.3vc" + getVersionCode()
     }
 
@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
